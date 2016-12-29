@@ -1,4 +1,6 @@
-#' @description function for run the sapiens apps
+#' Run Shiny apps
+#'
+#' @description function for run the shiny apps from sapiens package
 #' @family sapiens
 #' @importFrom shiny runApp
 #' @export

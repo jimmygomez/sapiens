@@ -1,14 +1,5 @@
 library(shiny)
 library(shinydashboard)
-library(ggplot2)
-library(gsheet)
-library(dplyr)
-library(tidyr)
-library(DT)
-library(plotly)
-library(zoo)
-library(lubridate)
-
 
 
 shinyServer(function(input, output) {
@@ -18,15 +9,15 @@ shinyServer(function(input, output) {
 
 metdata <-  eventReactive(input$reload, {
 
-  file <-   getData(url = input$wtdt, type = "manually")
+  file <-   sapiens::getData(url = input$wtdt, type = "manually")
 
   file <- file %>%
-    dplyr::mutate(ETo = PenMon(data = file, day = "date", Tmin = "Tmin", Tmax = "Tmax",
+    dplyr::mutate(ETo = sapiens::PenMon(data = file, day = "date", Tmin = "Tmin", Tmax = "Tmax",
                           RHmin = "RHmin", RHmax = "RHmax",
                           n = "sun", v = "wind",
                           lat = "latitude", alt = "altitude", z = "z")) %>%
-    dplyr::mutate(date = as.Date(date)) %>%
-    as.data.frame()
+    dplyr::mutate(date = zoo::as.Date(date)) %>%
+    dplyr::mutate(ETo = round(ETo,2))
 
     }, ignoreNULL = FALSE)
 
@@ -57,7 +48,7 @@ metdata <-  eventReactive(input$reload, {
 
     file <- file %>%
       dplyr::select(-latitude, -altitude, -z) %>%
-      dplyr::mutate(date = as.Date(date))%>%
+      dplyr::mutate(date = zoo::as.Date(date))%>%
       tidyr::gather(key = variable , value = value,  -date)
 
 
@@ -82,7 +73,7 @@ metdata <-  eventReactive(input$reload, {
       )
 
 
-    plot_ly(file, x = ~date, y = ~value,
+    plotly::plot_ly(file, x = ~date, y = ~value,
             color = ~variable, symbol = ~variable) %>%
       add_lines() %>%
       layout(xaxis = ax, yaxis = ay, legend =  lgd)
@@ -150,7 +141,7 @@ cropdt <- reactive({
 
 
   cdt <- rbind(stg1, stg2, stg3, stg4) %>%
-    dplyr::mutate(date = as.Date(date), Da = input$sden, FC = input$fc, WP = input$wp) %>%
+    dplyr::mutate(date = zoo::as.Date(date), Da = input$sden, FC = input$fc, WP = input$wp) %>%
     as.data.frame()
 
 
@@ -168,14 +159,18 @@ cpt <- reactive({
 
   crop <- dplyr::left_join(file1, file2) %>%
     dplyr::mutate(ETc = Kc*ETo) %>%
-    dplyr::mutate(IR = (((FC-WP)/100)*Da*(1-CD/100)*ID*input$area*input$irs)/input$ire) %>%
-    dplyr::select(crop, date, DAP, stage, Kc, ETo, ETc, IR) %>%
+    dplyr::mutate(Ni = ((FC-WP)/100)*Da*(1-CD/100)*ID) %>%
+    dplyr::mutate(Bi =  Ni/(input$ire/100) ) %>%
+    dplyr::select(crop, date, DAP, stage, Kc, ETo, ETc, Ni, Bi) %>%
     dplyr::mutate(
       ETo = round(ETo, 2),
       ETc =  round(ETc, 2),
-      IR = round(IR, 2)
+      Ni = round(Ni, 2),
+      Bi = round(Bi,2)
+
       )
 
+  # input$area  input$irs :: need to use
 
 
 })

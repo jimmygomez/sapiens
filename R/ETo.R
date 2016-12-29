@@ -1,20 +1,21 @@
 #' FAO56 Penman-Monteith method
 #'
-#' @description Function use for calculate the reference evapotranspiration
+#' @description function use for calculate the daily evapotranspiration (ET)
 #' @param data data frame with the metrerological information
 #' @param day  date of the weather measure (yyy-mm-dd)
-#' @param Tmin  Temperatura minima (ºC)
-#' @param Tmax  Temperatura maxima (ºC)
-#' @param RHmin Humedad relativa minima (%)
-#' @param RHmax Humedad relativa maxima (%)
+#' @param Tmin  temperatura minima (ºC)
+#' @param Tmax  temperatura maxima (ºC)
+#' @param RHmin humedad relativa minima (%)
+#' @param RHmax humedad relativa maxima (%)
 #' @param n     sun hours (h)
 #' @param v     wind velocity (m.s-1)
 #' @param lat   latitud en radianes decimales (numeric)
 #' @param alt   altitud (msnm)
-#' @param z     Heigth of data collect for metereological station (m)
-#' @param alb    Albedo
-#' @return evapotranspiration (ET) by days
+#' @param z     heigth of data collect for metereological station (m)
+#' @param alb   albedo
+#' @return data frame with daily evapotranspiration
 #' @importFrom lubridate yday
+#' @importFrom zoo as.Date
 #' @export
 
 
@@ -28,7 +29,7 @@ PenMon <- function(data, day,
 
   data <- as.data.frame(data)
 
-  day <- as.Date(data[, day])
+  day <- zoo::as.Date(data[, day])
   Tmin <- data[, Tmin]
   Tmax <- data[, Tmax]
   RHmin <- data[, RHmin]
