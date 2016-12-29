@@ -2,9 +2,18 @@ Package: sapiens
 Type: Package
 Title: interactive app for science research
 Version: 1.0
-Author: Flavio Lozano Isla
-Maintainer: Flavio Lozano Isla <flavjack@gmail.com>
-Description: Sapiens is package develop to deploy interactive applicaction based in shiny for scientific research.  
+Authors@R: person("Flavio", "Lozano", email = "flavjack@gmail.com",role = c("aut", "cre"))
+BugReports: https://github.com/flavjack/sapiens/issues
+Description: Sapiens is package develop to deploy interactive applicaction
+    based in shiny for scientific research.  
 License: MIT
 Encoding: UTF-8
 LazyData: true
+Imports:
+    dplyr,
+    tidyr,
+    gsheet,
+    readxl,
+    plotly,
+    lubridate,
+    zoo
