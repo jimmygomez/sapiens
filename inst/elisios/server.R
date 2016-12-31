@@ -1,6 +1,9 @@
 library(shiny)
 library(shinydashboard)
-
+library(sapiens)
+library(dplyr)
+library(plotly)
+library(DT)
 
 shinyServer(function(input, output) {
 
@@ -9,45 +12,29 @@ shinyServer(function(input, output) {
 
 metdata <-  eventReactive(input$reload, {
 
-  file <-   sapiens::getData(url = input$wtdt, type = "manually")
+  file <-   sapiens::getData(dir = input$wtdt)
 
   file <- file %>%
-    dplyr::mutate(ETo = sapiens::PenMon(data = file, day = "date", Tmin = "Tmin", Tmax = "Tmax",
-                          RHmin = "RHmin", RHmax = "RHmax",
-                          n = "sun", v = "wind",
-                          lat = "latitude", alt = "altitude", z = "z")) %>%
+    dplyr::mutate(ETo = sapiens::PenMon(data = file, date = "date",
+      Tmin = "Tmin", Tmax = "Tmax",
+      RHmin = "RHmin", RHmax = "RHmax",
+      sunshine = "sunshine", wind = "wind",
+      lat = "latitude", alt = "altitude", Hws = "Hws")) %>%
     dplyr::mutate(date = zoo::as.Date(date)) %>%
     dplyr::mutate(ETo = round(ETo,2))
 
     }, ignoreNULL = FALSE)
 
 
-# automatic update -----------------------------------------------------------
-
-# metdata <-  reactive({
-#
-#   file <-   getData(url = input$wtdt, type = "automatic")
-#
-#   file <- file %>%
-#     dplyr::mutate(ETo = PenMon(data = file, day = "date", Tmin = "Tmin", Tmax = "Tmax",
-#                                RHmin = "RHmin", RHmax = "RHmax",
-#                                n = "sun", v = "wind",
-#                                lat = "latitude", alt = "altitude", z = "z")) %>%
-#     dplyr::mutate(date = as.Date(date)) %>%
-#     as.data.frame()
-#
-# })
-
-
 # Plot metdata ------------------------------------------------------------
 
 
-  output$wtplot <- renderPlotly({
+  output$wtplot <- plotly::renderPlotly({
 
     file <- metdata()
 
     file <- file %>%
-      dplyr::select(-latitude, -altitude, -z) %>%
+      dplyr::select(-latitude, -altitude, -Hws) %>%
       dplyr::mutate(date = zoo::as.Date(date))%>%
       tidyr::gather(key = variable , value = value,  -date)
 
@@ -196,7 +183,7 @@ cpt <- reactive({
                     deferRender=TRUE,
                     scrollY = 500,
                     scroller = TRUE,
-                    initComplete = JS(
+                    initComplete = DT::JS(
                       "function(settings, json) {",
                       "$(this.api().table().header()).css({'background-color': '#000', 'color': '#fff'});",
                       "}")

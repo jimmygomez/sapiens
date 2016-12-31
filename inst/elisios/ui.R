@@ -1,5 +1,9 @@
 library(shiny)
 library(shinydashboard)
+library(sapiens)
+library(dplyr)
+library(plotly)
+library(DT)
 
 
 shinyUI(dashboardPage(skin = "green",
@@ -512,7 +516,7 @@ shinyUI(dashboardPage(skin = "green",
           solidHeader = T,
           width = 12,
 
-          plotlyOutput("wtplot", height = "auto")
+          plotly::plotlyOutput("wtplot", height = "auto")
 
         )
 
@@ -542,7 +546,7 @@ shinyUI(dashboardPage(skin = "green",
 
                 hr(),
 
-                p(strong("if you have any question, suggestion or commment you can write a email for us, enjoy ELISIOS!!")),
+                p(strong("if you have any question, sugestion or commment you can write a email for us, enjoy ELISIOS!!")),
 
                 hr(),
 

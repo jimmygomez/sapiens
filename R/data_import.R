@@ -1,52 +1,31 @@
 #' Import google spreadsheet or xlsx file
 #'
 #' @description function to import information from google spreadsheet or xlsx file.
-#' @param url local file directory for xlsx document or url from google spreadsheet
-#' @param type  type of update: manually or automatic. use automatic only in shiny inviroment
-#' @param time time to automatic reload of the information
+#' @param dir local file directory for xlsx document or url from google spreadsheet
+#' @param sheet if an xlsx file, you can choose the sheet number
 #' @return data frame
 #' @importFrom gsheet gsheet2tbl
 #' @importFrom readxl read_excel
-#' @importFrom shiny invalidateLater
+#' @importFrom dplyr  '%>%'
 #' @export
 
-getData <- function(url, type = "manually", time = 60000) {
-    
-    if (type == "manually") {
-        
-        
-        if (file.exists(url) == TRUE) {
-            
-            readxl::read_excel(path = url) %>% as.data.frame()
-            
-        } else {
-            
-            data <- gsheet::gsheet2tbl(url) %>% as.data.frame()
-            
-        }
-        
-        
-    } else if (type == "automatic") {
-        
-        
-        if (file.exists(url) == TRUE) {
-            
-            shiny::invalidateLater(60000)  # 1 min = 60000 msec
-            readxl::read_excel(path = url) %>% as.data.frame()
-            
-        } else {
-            
-            shiny::invalidateLater(60000)  # 1 min = 60000 msec
-            data <- gsheet::gsheet2tbl(url) %>% as.data.frame()
-            
-        }
-        
-        
-    }
-    
+getData <- function(dir, sheet = 1) {
+
+
+  if (file.exists(dir) == TRUE) {
+
+    readxl::read_excel(path = dir, sheet = sheet) %>% as.data.frame()
+
+  } else{
+
+    gsheet::gsheet2tbl(url = dir) %>% as.data.frame()
+
+  }
+
+
 }
 
-
+# C:\Users\Flavio\Documents\sapiens\inst\elisios\metdata.xlsx
 
 
 
