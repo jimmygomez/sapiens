@@ -1,2 +1,3 @@
 # sapiens
-interactive application for scientific research
+
+Interactive apps for science research

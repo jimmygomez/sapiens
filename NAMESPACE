@@ -3,6 +3,7 @@
 export(PenMon)
 export(elisios)
 export(getData)
+export(wanuy)
 importFrom(dplyr,'%>%')
 importFrom(gsheet,gsheet2tbl)
 importFrom(lubridate,yday)

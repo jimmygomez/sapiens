@@ -49,28 +49,67 @@ shinyUI(dashboardPage(skin = "green",
         tabItem(tabName = "intro",
 
 
-                box(title = "Presentacion", height = 150, status = "primary", solidHeader = T,
+                box(
+                  title = "Presentacion",
+                  width = 6,
+                  status = "primary",
+                  solidHeader = T,
 
-                p( strong(em("ELISIOS")),"is a interactive application for calculte the irrigation requirements based in the metereological data information")
+                p( strong(em("ELISIOS")),"is a interactive application for calculte the irrigation requirements based in the metereological data information"),
+
+                  img(src = "agrinka.jpg",  width = "100%")
 
                 ),
 
 
-                box(title = "Charateristics", status = "danger", solidHeader = T,
+                box(
+                  title = "Charateristics",
+                  width = 6,
+                  status = "danger",
+                  solidHeader = T,
 
-                    p("- Calculate the irrigation schedule"),
+                    p("- Calculate the dialy evapotranspiration"),
+
+                    p("- Calculate the crop irrigation schedule"),
 
                     p("- Optimized for arduino metereological estation"),
 
-                    p("- Remote sensing app")
+                    p("- Remote sensing app"),
+
+                    p("- Free open source software")
 
 
                 ),
 
+                box(
+                  title = "Contributors",
+                  width = 6,
+                  status = "success",
+                  solidHeader = T,
 
-                box(width = 6,
 
-                  img(src = "agrinka.jpg",  width = "100%")
+                  p(
+                    strong("Jimmy R. Gomez Carrion"),
+                    br(),
+                    a("< purmacana@gmail.com >"),
+                    br(),
+                    code("Universidad Nacional Agraria la Molina, Lima, Perú")
+                    ),
+
+                  p(
+                    strong("Flavio Lozano Isla "),
+                    br(),
+                    a("< flavjack@gmail.com >"),
+                    br(),
+                    code("Universidad Nacional Agraria la Molina, Lima, Perú")
+                    ),
+
+
+                  hr(),
+
+                  p(strong("If you have any question, commment or sugestion you can write a email for us, enjoy ELISIOS!!"))
+
+
 
                 )
 
@@ -242,7 +281,7 @@ shinyUI(dashboardPage(skin = "green",
 
                           numericInput("cd1",
                                        label = ("Initial"),
-                                       min = 0, max = 100, step = 10,
+                                       min = 0, max = 100, step = 5,
                                        value = "10")
 
                    ),
@@ -252,7 +291,7 @@ shinyUI(dashboardPage(skin = "green",
 
                           numericInput("cd2",
                                        label = ("Develop"),
-                                       min = 0, max = 100, step = 10,
+                                       min = 0, max = 100, step = 5,
                                        value = "5")
 
                    ),
@@ -261,7 +300,7 @@ shinyUI(dashboardPage(skin = "green",
 
                           numericInput("cd3",
                                        label = ("Mid"),
-                                       min = 0, max = 100, step = 10,
+                                       min = 0, max = 100, step = 5,
                                        value = "10")
 
                    ),
@@ -270,7 +309,7 @@ shinyUI(dashboardPage(skin = "green",
 
                           numericInput("cd4",
                                        label = ("End"),
-                                       min = 0, max = 100, step = 10,
+                                       min = 0, max = 100, step = 5,
                                        value = "30")
 
                    )
@@ -544,17 +583,6 @@ shinyUI(dashboardPage(skin = "green",
                 p("Elisios, is a free application for calculete que irrigation requirments accodirng the weather conditions, It allows to
                   connect at remote arduino divices"),
 
-                hr(),
-
-                p(strong("if you have any question, sugestion or commment you can write a email for us, enjoy ELISIOS!!")),
-
-                hr(),
-
-                h4(strong("Autores")),
-
-                p(strong("Jimmy R. Gomez Carrion "), "(",a("purmacana@gmail.com"), "). Universidad Nacional Agraria la Molina, Lima, Perú"),
-
-                p(strong("Flavio Lozano Isla "), "(", a("flavjack@gmail.com"), "). Universidad Nacional Agraria la Molina, Lima, Perú"),
 
 
                 br(),
