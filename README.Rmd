@@ -1,0 +1,34 @@
+---
+output: github_document
+---
+
+
+```{r, echo = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "README-"
+)
+```
+
+# sapiens
+
+The sapiens package was develop with the propouse to deploy diffrent interactive apps based in diferents realeased packages for resolve especifics problems in the scientific research. 
+
+## Installation
+
+You can install sapiens from github with:
+
+```{r gh-installation, eval = FALSE}
+
+devtools::install_github("Flavjack/sapiens")
+
+```
+
+## Example
+
+This is a basic example which shows you how to solve a common problem:
+
+```{r example}
+elisios()
+```
