@@ -13,7 +13,7 @@ knitr::opts_chunk$set(
 
 # sapiens
 
-The sapiens package was develop with the propouse to deploy diffrent interactive apps based in diferents realeased packages for resolve especifics problems in the scientific research. 
+The sapiens package was develop with the purpose to deploy different interactive apps based in different released packages for resolve specifics problems in the scientific research. 
 
 ## Installation
 
@@ -21,14 +21,18 @@ You can install sapiens from github with:
 
 ```{r gh-installation, eval = FALSE}
 
+install.packages(devtools)
+
 devtools::install_github("Flavjack/sapiens")
 
 ```
 
 ## Example
 
-This is a basic example which shows you how to solve a common problem:
+Elisios is a app for calculate the irrigation requirements according the meteorological conditions:
 
 ```{r example}
+
 elisios()
+
 ```

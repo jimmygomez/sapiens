@@ -2,7 +2,7 @@ Package: sapiens
 Type: Package
 Title: Interactive apps for science research
 Version: 1.0
-Authors@R: person("Flavio", "Lozano", email = "flavjack@gmail.com", role = c("aut", "cre"))
+Authors@R: person("Flavio", "Lozano-Isla", email = "flavjack@gmail.com", role = c("aut", "cre"))
 BugReports: https://github.com/flavjack/sapiens/issues
 Description: sapiens is package develop to deploy interactive applicaction based in shiny for scientific research.
 Imports:
@@ -14,6 +14,7 @@ Imports:
     plotly,
     readxl,
     shiny,
+    shinydashboard,
     tibble,
     tidyr,
     zoo
