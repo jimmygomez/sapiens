@@ -9,7 +9,7 @@ getData(dir, sheet = 1)
 \arguments{
 \item{dir}{local file directory for xlsx document or url from google spreadsheet}
 
-\item{sheet}{if an xlsx file, you can choose the sheet number}
+\item{sheet}{if is a xlsx file, you can choose the sheet number}
 }
 \value{
 data frame

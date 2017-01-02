@@ -2,7 +2,7 @@
 #'
 #' @description function to import information from google spreadsheet or xlsx file.
 #' @param dir local file directory for xlsx document or url from google spreadsheet
-#' @param sheet if an xlsx file, you can choose the sheet number
+#' @param sheet if is a xlsx file, you can choose the sheet number
 #' @return data frame
 #' @importFrom gsheet gsheet2tbl
 #' @importFrom readxl read_excel
@@ -25,8 +25,9 @@ getData <- function(dir, sheet = 1) {
 
 }
 
-# C:\Users\Flavio\Documents\sapiens\inst\elisios\metdata.xlsx
+# C:\Users\Flavio\Documents\sapiens\exdata\metdata.xlsx
 
+# C:\Users\Flavio\Documents\sapiens\exdata\germination.xlsx
 
 
 

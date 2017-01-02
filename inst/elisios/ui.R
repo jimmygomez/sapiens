@@ -1,19 +1,21 @@
-# sapiens -----------------------------------------------------------------
+# elisios -----------------------------------------------------------------
 
 library(shiny)
 library(shinydashboard)
 library(sapiens)
 library(dplyr)
 library(plotly)
+library(tibble)
 library(DT)
+
 
 shinyUI(dashboardPage(skin = "green",
 
 
 # Head --------------------------------------------------------------------
 
-    dashboardHeader(title = "ELISIOS"),
 
+    dashboardHeader(title = "ELISIOS"),
 
 
 # Sider -------------------------------------------------------------------
@@ -45,7 +47,9 @@ shinyUI(dashboardPage(skin = "green",
 
       tabItems(
 
-        # presentacion
+
+# presentacion ------------------------------------------------------------
+
 
         tabItem(tabName = "intro",
 
@@ -119,7 +123,8 @@ shinyUI(dashboardPage(skin = "green",
         ),
 
 
-        # crop
+# crop --------------------------------------------------------------------
+
 
         tabItem(tabName = "crop",
 
@@ -373,8 +378,8 @@ shinyUI(dashboardPage(skin = "green",
 
 
 
+# soil --------------------------------------------------------------------
 
-        # soil
 
         tabItem(tabName = "soil",
 
@@ -494,7 +499,9 @@ shinyUI(dashboardPage(skin = "green",
         ),
 
 
-        # clima
+
+# soil --------------------------------------------------------------------
+
 
         tabItem(tabName = "clima",
 
@@ -545,7 +552,9 @@ shinyUI(dashboardPage(skin = "green",
         ),
 
 
-        # Graphics
+
+# Graphics ----------------------------------------------------------------
+
 
         tabItem(tabName = "graph",
 
@@ -565,7 +574,9 @@ shinyUI(dashboardPage(skin = "green",
 
 
 
-        # resumen
+
+# irrigation -----------------------------------------------------------------
+
 
         tabItem(tabName = "riego",
 
@@ -575,7 +586,9 @@ shinyUI(dashboardPage(skin = "green",
 
         ),
 
-        # informacion
+
+# informacion -------------------------------------------------------------
+
 
         tabItem(tabName = "info",
 
@@ -602,6 +615,4 @@ shinyUI(dashboardPage(skin = "green",
 
   )
 )
-
-
 

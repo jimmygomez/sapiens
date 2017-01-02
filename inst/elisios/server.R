@@ -1,11 +1,13 @@
-# sapiens -----------------------------------------------------------------
+# elisios -----------------------------------------------------------------
 
 library(shiny)
 library(shinydashboard)
 library(sapiens)
 library(dplyr)
 library(plotly)
+library(tibble)
 library(DT)
+
 
 shinyServer(function(input, output) {
 
@@ -64,8 +66,8 @@ metdata <-  eventReactive(input$reload, {
 
     plotly::plot_ly(file, x = ~date, y = ~value,
             color = ~variable, symbol = ~variable) %>%
-      add_lines() %>%
-      layout(xaxis = ax, yaxis = ay, legend =  lgd)
+      plotly::add_lines() %>%
+      plotly::layout(xaxis = ax, yaxis = ay, legend =  lgd)
 
   })
 
@@ -81,8 +83,6 @@ metdata <-  eventReactive(input$reload, {
     print(gss)
 
   })
-
-
 
 
 # Crop dataframe ----------------------------------------------------------
@@ -137,8 +137,7 @@ cropdt <- reactive({
   })
 
 
-
-  # merge table --------------------------------------------------------------
+# merge table --------------------------------------------------------------
 
 
 cpt <- reactive({
@@ -159,16 +158,16 @@ cpt <- reactive({
 
       )
 
-  # input$area  input$irs :: need to use
+# input$area  input$irs :: need to use
 
 
 })
 
 
-# Table formated ----------------------------------------------------------    file1 <- metdata()
+# Table formated ----------------------------------------------------------
 
 
-  output$crop <- renderDataTable({
+  output$crop <- DT::renderDataTable({
 
 
     file <- cpt()
