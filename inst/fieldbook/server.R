@@ -31,7 +31,6 @@ output$fbook <- DT::renderDataTable({
 
   file <- fb()
 
-
   DT::datatable(file,
     #filter = list(position = 'top', clear = FALSE),
     extensions = 'Scroller',
@@ -86,7 +85,7 @@ output$bpy <- renderUI({
 
   selectInput(
     inputId = "ybp",
-    label = "Axis Y",
+    label = "Response",
     choices = c("choose" = "", fbn)
   )
 
@@ -111,7 +110,7 @@ output$boxplot <- renderPlot({
 
   file <- fb()
 
-  boxp <- sapiens::bplot(
+  boxp <- sapiens::plot_box(
 
     data = file,
     x = input$xbp,
@@ -135,17 +134,8 @@ output$boxplot <- renderPlot({
 output$crpt <- renderPlot({
 
   file <- fb()
-  file <- file %>% select_if(is.numeric) %>% as.data.frame()
 
-  crd <- agricolae::correlation(file, method = "pearson")
-
-  col3 <- colorRampPalette(c("red", "white", "blue"))
-
-  crp <- corrplot::corrplot(
-    corr = crd$correlation,
-    method="color",
-    col=col3(20))
-
+  sapiens::plot_correlation(file)
 
 })
 
@@ -153,9 +143,9 @@ output$crpt <- renderPlot({
 output$pca <- renderPlot({
 
   file <- fb()
-  file <- file %>% select_if(is.numeric) %>% as.data.frame()
 
-  FactoMineR::PCA(file)
+  sapiens::plot_PCA(data = file)
+
 
 })
 
@@ -225,39 +215,68 @@ av <- reactive({
 
   file <- fb()
 
+  fac1 <- input$fac1
+  fac2 <- input$fac2
+  blk <-  input$blk
+  rsp <-  input$rsp
+
+
+  if(fac1 != ""){
+
+    file[, fac1 ] <- file[,fac1] %>% as.factor()
+
+  }
+
+  if(fac2 != ""){
+
+    file[, fac2] <- file[, fac2] %>% as.factor()
+
+  }
+
+  if(blk != ""){
+
+    file[,blk] <- file[,blk] %>% as.factor()
+
+  }
+
+
+
+
+
+
   if (is.null(file)){return(NULL)}
 
-  else if(input$fac1 == '' && input$fac2 == '' && input$blk == '' && input$rsp == '')
+  else if(fac1 == '' && fac2 == '' && blk == '' && rsp == '')
 
   {return(NULL)}
 
-  else if( !(input$fac1 == '') && !(input$fac2 == '') && !(input$blk == '') && !(input$rsp == ''))
+  else if( !(fac1 == '') && !(fac2 == '') && !(blk == '') && !(rsp == ''))
 
   {
-    formula <- as.formula( paste(input$rsp, paste(input$blk, paste(input$fac1, input$fac2, sep = "*"), sep = " + ") , sep = " ~ ") )
+    formula <- as.formula( paste(rsp, paste(blk, paste(fac1, fac2, sep = "*"), sep = " + ") , sep = " ~ ") )
     modelo <- aov(formula, data = file)
   }
 
 
-  else if( !(input$fac1 == '') && !(input$fac2 == '') && !(input$rsp == ''))
+  else if( !(fac1 == '') && !(fac2 == '') && !(rsp == ''))
 
   {
-    formula <- as.formula( paste(input$rsp, paste(input$fac1, input$fac2, sep = "*") , sep = " ~ ") )
+    formula <- as.formula( paste(rsp, paste(fac1, fac2, sep = "*") , sep = " ~ ") )
     modelo <- aov(formula, data = file)
   }
 
-  else if( !(input$fac1 == '') && !(input$blk == '') && !(input$rsp == ''))
+  else if( !(fac1 == '') && !(blk == '') && !(rsp == ''))
 
   {
-    formula <- as.formula( paste(input$rsp, paste(input$blk, input$fac1, sep = " + ") , sep = " ~ ") )
+    formula <- as.formula( paste(rsp, paste(blk, fac1, sep = " + ") , sep = " ~ ") )
     modelo <- aov(formula, data = file)
   }
 
 
-  else if( !(input$fac1 == '') && !(input$rsp == ''))
+  else if( !(fac1 == '') && !(rsp == ''))
 
   {
-    formula <- as.formula(paste(input$rsp, input$fac1, sep = " ~ "))
+    formula <- as.formula(paste(rsp, fac1, sep = " ~ "))
     modelo <- aov(formula, data = file)
   }
 
@@ -341,53 +360,134 @@ output$mnc = DT::renderDataTable({
 # graphics ----------------------------------------------------------------
 
 
-output$grplot <- renderPlot({
+output$stplot <- renderPlot({
 
 
 df <- mcomp()
+fac1 <- input$fac1
+fac2 <- input$fac2
+rsp <- input$rsp
+gtype <- input$gtype
+gcolor <- input$gcolor
+gply <- input$gply
+gplx <- input$gplx
+gplz <- input$gplz
+gerbr <- input$gerbr
+gsig <- input$gsig
+gfont <- input$gfont
+
+
+
+
+
+# limits ------------------------------------------------------------------
+
+
+# if (input$glmti == "" && input$glmtf == "" && input$gbrake == ""){
+
+  glimits <-  c(input$glmti,input$glmtf)
+  gbrake <- input$glmti:input$glmtf * input$gbrake
+
+# }
+
+
+# Error & significance ----------------------------------------------------
+
+if(gerbr == "yes"){
+
+  gerbr <- TRUE
+
+}
+
+if (gerbr == "no"){
+
+  gerbr <-  FALSE
+
+  }
+
+
+if(gsig == "yes"){
+
+  gsig <- "sg"
+
+}
+
+if (gsig == "no"){
+
+  gsig <-  NULL
+
+  }
+
+
+# body graph --------------------------------------------------------------
 
 
 if (is.null(df)) return(NULL)
 
-else if( !(input$fac1 == '') && !(input$fac2 == '') && !(input$rsp == ''))
+else if( !(fac1 == '') && !(fac2 == '') && !(rsp == ''))
 
 {
 
-sapiens::fplot(data = df, type = "bar",
+pt <- sapiens::plot_brln(data = df, type = gtype,
   x = input$fac1,
   y = "mean",
   z = input$fac2,
-  ylab = input$gply,
-  xlab = input$gplx,
-  lgl = input$gplz,
+  ylab = gply,
+  xlab = gplx,
+  lgl = gplz,
   lgd = "top",
-  erb = T,
-  sig = "sg"
+  erb = gerbr,
+  sig = gsig,
+  font = gfont,
+  lmt = glimits,
+  brk = gbrake
   )
 
 
 }
 
 
-else if( !(input$fac1 == '') && !(input$rsp == ''))
+else if( !(fac1 == '') && !(rsp == ''))
 
 {
 
-  sapiens::fplot(data = df, type = "bar",
+pt <- sapiens::plot_brln(data = df, type = gtype,
     x = input$fac1,
     y = "mean",
     z = input$fac1,
-    ylab = input$gply,
-    xlab = input$gplx,
-    lgl = input$gplz,
+    ylab = gply,
+    xlab = gplx,
+    lgl = gplz,
     lgd = "top",
-    erb = T,
-    sig = "sg"
+    erb = gerbr,
+    sig = gsig,
+    font = gfont,
+    lmt = glimits,
+    brk = gbrake
     )
 
   }
 
 
+if(gtype == "bar" && gcolor == "color" ){
+
+  pt
+
+} else if (gtype == "bar" && gcolor == "gray"){
+
+  pt + scale_fill_grey(gplz, start = 1, end = 0)
+
+} else if (gtype == "line" && gcolor == "color"){
+
+  pt
+
+} else if (gtype == "line" && gcolor == "gray"){
+
+  pt +
+    scale_color_grey(gplz, start = 0, end = 0) +
+    scale_shape_discrete(gplz)
+
+}
 
 
 })

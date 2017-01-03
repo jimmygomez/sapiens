@@ -19,15 +19,16 @@ getData <- function(dir, sheet = 1) {
   } else{
 
     gsheet::gsheet2tbl(url = dir) %>% as.data.frame()
+    #readr::read_csv(file = dir) %>% as.data.frame()
 
   }
 
 
 }
 
-# C:\Users\Flavio\Documents\sapiens\exdata\metdata.xlsx
+# C:\Users\Flavio\Documents\sapiens\inst\exdata\metdata.xlsx
 
-# C:\Users\Flavio\Documents\sapiens\exdata\germination.xlsx
+# C:\Users\Flavio\Documents\sapiens\inst\exdata\germination.xlsx
 
 
 

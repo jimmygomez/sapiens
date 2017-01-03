@@ -16,7 +16,7 @@
 #' @export
 
 
-bplot <- function(data, x, y, z, ylab = "", xlab = "", lgl = "",lgd = "right"){
+plot_box <- function(data, x, y, z, ylab = "", xlab = "", lgl = "",lgd = "right"){
 
 
   data[,x] <- factor(data[,x], levels = gtools::mixedsort(data[,x]))
@@ -77,9 +77,11 @@ bplot <- function(data, x, y, z, ylab = "", xlab = "", lgl = "",lgd = "right"){
 #' @importFrom gtools mixedsort
 #' @export
 
-fplot <- function(data, type= "line", x, y, z, ylab = "", xlab = "", lgl = "",lgd = "right", sig = NULL, erb = FALSE, lmt = NULL, brk = ggplot2::waiver()){
+plot_brln <- function(data, type= "bar", x, y, z, ylab = "", xlab = "", lgl = "",lgd = "right", sig = NULL, erb = FALSE, lmt = NULL, brk = NULL, font = 1){
 
   ste <- NULL #To avoid this NOTE: fplot: no visible binding for global variable 'ste'
+
+  if(is.null(brk)){ brk <- ggplot2::waiver() }
 
   data[,x] <- factor(data[,x], levels = gtools::mixedsort(data[,x]))
   data[,z] <- factor(data[,z], levels = gtools::mixedsort(data[,z]))
@@ -123,7 +125,7 @@ fplot <- function(data, type= "line", x, y, z, ylab = "", xlab = "", lgl = "",lg
 
       p <-   gr +
         geom_errorbar(aes(ymin= mean - ste , ymax= mean + ste), size=.2, width=.2, position=position_dodge(.9)) +
-        geom_text(aes_string(label= sig, y = "ymax"), colour="black", size= 2, vjust=-.5, angle = 0, position=position_dodge(.9))
+        geom_text(aes_string(label= sig, y = "ymax"), colour="black", size= 2*font, vjust=-.5, angle = 0, position=position_dodge(.9))
 
 
       }
@@ -139,7 +141,7 @@ fplot <- function(data, type= "line", x, y, z, ylab = "", xlab = "", lgl = "",lg
       if ( erb == FALSE && !(is.null(sig)) ){
 
         p <- gr +
-          geom_text(aes_string(label= sig, y = "mean"), colour="black", size= 2, vjust=-.5, angle = 0, position=position_dodge(.9))
+          geom_text(aes_string(label= sig, y = "mean"), colour="black", size= 2*font, vjust=-.5, angle = 0, position=position_dodge(.9))
 
       }
 
@@ -177,7 +179,7 @@ fplot <- function(data, type= "line", x, y, z, ylab = "", xlab = "", lgl = "",lg
 
       p <-   gr +
         geom_errorbar(aes(ymin= mean - ste , ymax= mean + ste), size=.2, width=.2)+
-        geom_text(aes_string(label= sig, y = "mean"), colour="black", size= 2, vjust=-.5, hjust = -.5,angle = 0)
+        geom_text(aes_string(label= sig, y = "mean"), colour="black", size= 2*font, vjust=-.5, hjust = -.5,angle = 0)
 
     }
 
@@ -192,7 +194,7 @@ fplot <- function(data, type= "line", x, y, z, ylab = "", xlab = "", lgl = "",lg
     if ( erb == FALSE && !(is.null(sig)) ){
 
       p <- gr +
-        geom_text(aes_string(label= sig, y = "mean"), colour="black", size= 2, vjust=-.5, hjust = -.5,angle = 0)
+        geom_text(aes_string(label= sig, y = "mean"), colour="black", size= 2*font, vjust=-.5, hjust = -.5,angle = 0)
 
     }
 
@@ -209,21 +211,137 @@ fplot <- function(data, type= "line", x, y, z, ylab = "", xlab = "", lgl = "",lg
 
   p + theme_bw()+
     theme(
-      axis.title.x = element_text(size= 8),
-      axis.title.y = element_text(size= 8, angle=90),
+      axis.title.x = element_text(size= 8*font),
+      axis.title.y = element_text(size= 8*font, angle=90),
       panel.grid.major = element_blank(),
       panel.grid.minor = element_blank(),
       legend.position = lgd,
-      legend.title = element_text(size= 8),
-      legend.text = element_text(size= 8),
-      legend.key.size = unit(0.8, "lines"),
+      legend.title = element_text(size= 8*font),
+      legend.text = element_text(size= 8*font),
+      legend.key.size = unit(0.8*font, "lines"),
       legend.key = element_blank(),
       legend.background = element_rect(fill= "transparent"),
-      text = element_text(size = 8)
+      text = element_text(size = 8*font)
     )
 
 
 }
+
+
+#' Correlation graphic
+#'
+#' @description Function use to plot correlation matrix
+#' @param data matrix with numeric data
+#' @param method method of the correlation analisis: c("pearson", "kendall", "spearman", "lin")
+#' @param sig level of significance
+#' @return correlation plot
+#' @importFrom agricolae correlation
+#' @importFrom corrplot corrplot
+#' @export
+
+plot_correlation <- function(data, method = "pearson", sig = 0.05){
+
+  data <-  data %>% dplyr::select_if(is.numeric) %>% as.data.frame()
+  sig <- as.numeric(sig)
+
+  cor <- agricolae::correlation(x = data, method = "pearson")
+
+  #write.csv(cor$pvalue, "pvalues.csv")
+
+  col <- colorRampPalette(c("#DD5143", "#F38A78","#FEC9B8", "#FFFFFF", "#FFFFFF","#CFEDFB", "#68C7EC", "#00A0DC"))
+
+  crp <- corrplot::corrplot(
+
+    corr = cor$correlation,
+    method = "color",
+    type = "upper",
+    tl.col="black",
+    insig = "blank",
+    tl.srt=30,
+    addCoef.col = "black",
+    addgrid.col = "black",
+    col=col(8),
+    p.mat = cor$pvalue,
+    sig.level = sig
+
+    )
+
+
+
+}
+
+
+#' Principal component analisys graphic
+#'
+#' @description Function use to plot biplot principal component analisys
+#' @param data matrix with numeric data
+#' @param habillage
+#' @param quali.sup
+#' @param quanti.sup
+#' @return PCA biplot graph
+#' @importFrom FactoMineR PCA
+#' @importFrom factoextra fviz_pca_biplot
+#' @export
+
+plot_PCA <- function(data, habillage, quali.sup, quanti.sup){
+
+
+  data <- data %>% dplyr::select_if(is.numeric) %>% as.data.frame()
+
+
+  pca <- FactoMineR::PCA(
+    data,
+    # quali.sup = quali.sup,
+    # quanti.sup = quanti.sup,
+    scale.unit = TRUE, ncp = 5,
+    graph = FALSE
+    )
+
+
+  bp <- factoextra::fviz_pca_biplot(
+    pca,
+    #habillage = habillage ,
+    cex = 1,
+    autoLab = "auto",
+    col.var = "black",
+    addEllipses = FALSE,
+    title = "") +
+    # scale_x_continuous( limits = c(-5.5,5.5), breaks= -10:10*1) +
+    # scale_y_continuous( limits = c(-3.7,3.7), breaks= -10:10*1) +
+    # scale_shape("Genotipo") +
+    # scale_color_discrete("Genotipo")+
+    theme_bw() +
+    theme(
+      axis.title.x = element_text(size = 12),
+      axis.title.y = element_text(size = 12, angle = 90), panel.grid.major = element_blank(),
+      panel.grid.minor = element_blank(),
+      legend.title = element_text(size = 12), legend.text = element_text(size = 12),
+      legend.key.size = unit(2, "lines"), legend.key = element_blank(),
+      legend.background = element_rect(fill = "transparent"),
+      text = element_text(size = 12)
+      )
+
+  bp
+
+
+  # summary(pca, nbelements = Inf, file="PCA.txt")
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
 
 
 

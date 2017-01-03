@@ -174,14 +174,14 @@ shinyUI(dashboardPage(skin = "green",
 
                     column(width = 4,
 
-                      uiOutput("bpx")
+                      uiOutput("bpy")
 
                     ),
 
 
                     column(width = 4,
 
-                      uiOutput("bpy")
+                      uiOutput("bpx")
 
                     ),
 
@@ -197,14 +197,17 @@ shinyUI(dashboardPage(skin = "green",
 
                     column(width = 4,
 
-                      textInput(inputId ="bplx", label = "X label", value = "")
+                      textInput(inputId ="bply", label = "Y label", value = "")
+
 
                     ),
 
 
                     column(width = 4,
 
-                      textInput(inputId ="bply", label = "Y label", value = "")
+
+                      textInput(inputId ="bplx", label = "X label", value = "")
+
 
                     ),
 
@@ -237,14 +240,14 @@ shinyUI(dashboardPage(skin = "green",
 
           column(width = 6,
 
-            plotOutput("crpt")
+            plotOutput("crpt", width = "500px", height = "500px")
 
           ),
 
           column(width = 6,
 
 
-            plotOutput("pca")
+            plotOutput("pca", width = "500px", height = "500px")
 
 
           )
@@ -320,33 +323,147 @@ shinyUI(dashboardPage(skin = "green",
         box(width = 12,
 
 
-          column(width = 4,
+            box(width = 8, title = "Labels",
 
-            textInput(inputId ="gplx", label = "X label", value = "")
 
+                      column(width = 4,
+
+                        textInput(inputId ="gply", label = "Y", value = "")
+
+
+                      ),
+
+
+                      column(width = 4,
+
+                        textInput(inputId ="gplx", label = "X", value = "")
+
+
+                      ),
+
+
+                      column(width = 2,
+
+                        textInput(inputId ="gplz", label = "Legend", value = "")
+
+
+                      ),
+
+                      column(width = 2,
+
+
+                        numericInput(
+                          inputId ="gfont",
+                          label = "Size",
+                          value = 2,
+                          min = 1,
+                          step = 0.1
+                        )
+
+                      )
+
+
+              ),
+
+
+
+            box(width = 4, title = "limits",
+
+                      column(width = 4,
+
+
+                        numericInput(
+                          inputId ="glmti",
+                          label = "Initial",
+                          value = NULL
+                        )
+
+                      ),
+
+                      column(width = 4,
+
+
+                        numericInput(
+                          inputId ="glmtf",
+                          label = "Final",
+                          value = NULL
+                        )
+
+                      ),
+
+
+                      column(width = 4,
+
+
+                        numericInput(
+                          inputId ="gbrake",
+                          label = "Brakes",
+                          value = NULL
+                        )
+
+                      )
+
+            ),
+
+
+
+          column(width = 2,
+
+
+          radioButtons(
+            inputId ="gtype",
+            label = "Type",
+            choices = c("bar", "line"),
+            selected = "bar",
+            inline = TRUE)
           ),
 
 
-          column(width = 4,
+          column(width = 2,
 
-            textInput(inputId ="gply", label = "Y label", value = "")
 
+            radioButtons(
+              inputId ="gcolor",
+              label = "Color",
+              choices = c("color", "gray"),
+              selected = "color",
+              inline = TRUE)
+          ),
+
+          column(width = 2,
+
+
+            radioButtons(
+              inputId ="gerbr",
+              label = "Error",
+              choices = c("yes", "no"),
+              selected = "yes",
+              inline = TRUE)
           ),
 
 
-          column(width = 4,
-
-            textInput(inputId ="gplz", label = "Legend label", value = "")
+          column(width = 2,
 
 
+            radioButtons(
+              inputId ="gsig",
+              label = "Significance",
+              choices = c("yes", "no"),
+              selected = "yes",
+              inline = TRUE)
           )
+
+
 
         ),
 
 
         box(width = 12,
 
-            plotOutput("grplot")
+
+            plotOutput("stplot")
+
+
 
         )
 
