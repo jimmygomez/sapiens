@@ -132,9 +132,9 @@ shinyUI(dashboardPage(skin = "green",
 
           column(width = 7,
 
-                 textInput("wtdt", label = NULL, width = "100%",
-                           value = "")
-            # C:\Users\Flavio\Documents\sapiens\exdata\germination.xlsx
+                 textInput("fbdt", label = NULL, width = "100%",
+                           value = "https://docs.google.com/spreadsheets/d/14sO81N50Zx1al5O3Iu3IPaz1_5CVncvtsx-_JRqJ_qE/edit#gid=172957346")
+
 
           ),
 
@@ -154,8 +154,8 @@ shinyUI(dashboardPage(skin = "green",
           solidHeader = T,
           width = 12,
 
-        DT::dataTableOutput('fbook')
-        # htmlOutput("gss")
+        # DT::dataTableOutput('fbook')
+        htmlOutput("fbook")
 
 
         )

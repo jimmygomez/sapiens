@@ -18,7 +18,7 @@ shinyServer(function(input, output) {
 
 fb <-  eventReactive(input$reload, {
 
-  file <- sapiens::getData(dir = input$wtdt)
+  file <- sapiens::getData(dir = input$fbdt)
 
     }, ignoreNULL = FALSE)
 
@@ -53,14 +53,14 @@ output$fbook <- DT::renderDataTable({
 })
 
 
-# output$gss <- renderUI({
-#
-#   gss <- tags$iframe(src = input$wtdt ,
-#     style="height:450px; width:100%; scrolling=no")
-#
-#   print(gss)
-#
-# })
+output$fbook <- renderUI({
+
+  gss <- tags$iframe(src = input$fbdt,
+    style="height:450px; width:100%; scrolling=no")
+
+  print(gss)
+
+})
 
 
 # boxplot -----------------------------------------------------------------
@@ -385,8 +385,8 @@ gfont <- input$gfont
 
 # if (input$glmti == "" && input$glmtf == "" && input$gbrake == ""){
 
-  glimits <-  c(input$glmti,input$glmtf)
-  gbrake <- input$glmti:input$glmtf * input$gbrake
+  # glimits <-  c(input$glmti,input$glmtf)
+  # gbrake <- input$glmti:input$glmtf * input$gbrake
 
 # }
 
@@ -438,9 +438,9 @@ pt <- sapiens::plot_brln(data = df, type = gtype,
   lgd = "top",
   erb = gerbr,
   sig = gsig,
-  font = gfont,
-  lmt = glimits,
-  brk = gbrake
+  font = gfont
+  # lmt = glimits,
+  # brk = gbrake
   )
 
 
@@ -461,9 +461,9 @@ pt <- sapiens::plot_brln(data = df, type = gtype,
     lgd = "top",
     erb = gerbr,
     sig = gsig,
-    font = gfont,
-    lmt = glimits,
-    brk = gbrake
+    font = gfont
+    # lmt = glimits,
+    # brk = gbrake
     )
 
   }

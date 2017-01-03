@@ -19,7 +19,6 @@ getData <- function(dir, sheet = 1) {
   } else{
 
     gsheet::gsheet2tbl(url = dir) %>% as.data.frame()
-    #readr::read_csv(file = dir) %>% as.data.frame()
 
   }
 
