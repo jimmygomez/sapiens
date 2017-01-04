@@ -5,8 +5,8 @@
 \title{Plot line or bar graphic}
 \usage{
 plot_brln(data, type = "bar", x, y, z, ylab = "", xlab = "", lgl = "",
-  lgd = "right", sig = NULL, erb = FALSE, lmt = NULL,
-  brk = ggplot2::waiver())
+  lgd = "right", sig = NULL, erb = FALSE, lmt = NULL, brk = NULL,
+  font = 1)
 }
 \arguments{
 \item{data}{Output dtsm fuction}

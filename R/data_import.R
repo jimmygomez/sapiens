@@ -25,9 +25,7 @@ getData <- function(dir, sheet = 1) {
 
 }
 
-# C:\Users\Flavio\Documents\sapiens\inst\exdata\metdata.xlsx
-
-# C:\Users\Flavio\Documents\sapiens\inst\exdata\germination.xlsx
+# C:\Users\Flavio\Documents\sapiens\inst\exdata\sapiens.xlsx
 
 
 

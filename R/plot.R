@@ -81,7 +81,13 @@ plot_brln <- function(data, type= "bar", x, y, z, ylab = "", xlab = "", lgl = ""
 
   ste <- NULL #To avoid this NOTE: fplot: no visible binding for global variable 'ste'
 
-  if(is.null(brk)){ brk <- ggplot2::waiver() }
+  if(is.null(brk)){
+
+    brks <- ggplot2::waiver() } else {
+
+    brks <- (((round(min(data[,y]), 0))*(-20)):((round(min(data[,y]), 0))*(+20))) * brk
+
+    }
 
   data[,x] <- factor(data[,x], levels = gtools::mixedsort(data[,x]))
   data[,z] <- factor(data[,z], levels = gtools::mixedsort(data[,z]))
@@ -109,13 +115,13 @@ plot_brln <- function(data, type= "bar", x, y, z, ylab = "", xlab = "", lgl = ""
 
       if (is.null(lmt)){
 
-       gr <- bsp + scale_y_continuous(ylab, breaks = brk)
+       gr <- bsp + scale_y_continuous(ylab, breaks = brks)
 
       }
 
       if ( !is.null(lmt)){
 
-      gr <- bsp + scale_y_continuous(ylab, expand = c(0,0), limits = lmt, breaks = brk)
+      gr <- bsp + scale_y_continuous(ylab, expand = c(0,0), limits = lmt, breaks = brks)
 
       }
 
@@ -156,7 +162,7 @@ plot_brln <- function(data, type= "bar", x, y, z, ylab = "", xlab = "", lgl = ""
 
     bsp <- ggplot(data, aes_string(x, y, group = z, shape= z, color= z))+
       geom_line(size = 0.3)+
-      geom_point(size = 1.2)+
+      geom_point(size = 1.2*font)+
       scale_x_discrete(xlab)+
       scale_color_discrete(lgl)+
       scale_shape_discrete(lgl)
@@ -164,13 +170,13 @@ plot_brln <- function(data, type= "bar", x, y, z, ylab = "", xlab = "", lgl = ""
 
     if (is.null(lmt)){
 
-      gr <- bsp + scale_y_continuous(ylab, breaks = brk)
+      gr <- bsp + scale_y_continuous(ylab, breaks = brks)
 
     }
 
     if ( !is.null(lmt)){
 
-      gr <- bsp + scale_y_continuous(ylab, expand = c(0,0), limits = lmt, breaks = brk)
+      gr <- bsp + scale_y_continuous(ylab, expand = c(0,0), limits = lmt, breaks = brks)
 
     }
 
@@ -325,9 +331,6 @@ plot_PCA <- function(data, habillage, quali.sup, quanti.sup){
 
 
   # summary(pca, nbelements = Inf, file="PCA.txt")
-
-
-
 
 
 

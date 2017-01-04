@@ -241,9 +241,6 @@ av <- reactive({
 
 
 
-
-
-
   if (is.null(file)){return(NULL)}
 
   else if(fac1 == '' && fac2 == '' && blk == '' && rsp == '')
@@ -283,6 +280,7 @@ av <- reactive({
 
 })
 
+
 # ANOVA table
 
 output$tbav = renderPrint({
@@ -295,45 +293,57 @@ output$tbav = renderPrint({
 
     summary(file)
 
+
   }
 })
 
 
+# comparison test
 
-# Mean comparion test
 
-
-mcomp <- reactive({
+comp <- reactive({
 
   file <- av()
+  test <- input$stmc
+  sig <- input$stsig
 
   if (is.null(file)) return(NULL)
 
   else if( !(input$fac1 == '') && !(input$fac2 == '') && !(input$rsp == ''))
 
   {
-    snk <- agricolae::SNK.test( y = file, trt = c(input$fac1, input$fac2 ))
-    mc <- sapiens::dtsm(snk)
-    mc
+
+  rs <- sapiens::test_comparison(
+      aov = file,
+      comp = c(input$fac1, input$fac2 ),
+      type = test,
+      sig = sig)
+
   }
 
 
   else if( !(input$fac1 == '') && !(input$rsp == ''))
 
   {
-    snk <- agricolae::SNK.test( y = file, trt = c(input$fac1))
-    mc <- sapiens::dtsm(snk)
-    mc
+
+  rs <- sapiens::test_comparison(
+      aov = file,
+      comp = c(input$fac1),
+      type = test,
+      sig = sig)
+
   }
 
 
 })
 
+
+
 # Mean comparison table
 
 output$mnc = DT::renderDataTable({
 
-  file <- mcomp()
+  file <- comp()
 
   DT::datatable(file,
     # filter = list(position = 'top', clear = FALSE),
@@ -363,7 +373,7 @@ output$mnc = DT::renderDataTable({
 output$stplot <- renderPlot({
 
 
-df <- mcomp()
+df <- comp()
 fac1 <- input$fac1
 fac2 <- input$fac2
 rsp <- input$rsp
@@ -375,20 +385,33 @@ gplz <- input$gplz
 gerbr <- input$gerbr
 gsig <- input$gsig
 gfont <- input$gfont
+glabel <- input$glabel
+
+limits <- input$glmti * input$glmtf
+brakes <- input$gbrakes
+
+# limits & brake ----------------------------------------------------------
+
+if(is.na(limits)) {
+
+  glimits <- NULL
+
+} else {
+
+  glimits <- c(input$glmti, input$glmtf)
+
+}
 
 
+if(is.na(brakes)) {
 
+  gbrakes <- NULL
 
+} else {
 
-# limits ------------------------------------------------------------------
+  gbrakes <- brakes
 
-
-# if (input$glmti == "" && input$glmtf == "" && input$gbrake == ""){
-
-  # glimits <-  c(input$glmti,input$glmtf)
-  # gbrake <- input$glmti:input$glmtf * input$gbrake
-
-# }
+  }
 
 
 # Error & significance ----------------------------------------------------
@@ -435,12 +458,12 @@ pt <- sapiens::plot_brln(data = df, type = gtype,
   ylab = gply,
   xlab = gplx,
   lgl = gplz,
-  lgd = "top",
+  lgd = glabel,
   erb = gerbr,
   sig = gsig,
-  font = gfont
-  # lmt = glimits,
-  # brk = gbrake
+  font = gfont,
+  lmt = glimits,
+  brk = gbrakes
   )
 
 
@@ -458,12 +481,12 @@ pt <- sapiens::plot_brln(data = df, type = gtype,
     ylab = gply,
     xlab = gplx,
     lgl = gplz,
-    lgd = "top",
+    lgd = glabel,
     erb = gerbr,
     sig = gsig,
-    font = gfont
-    # lmt = glimits,
-    # brk = gbrake
+    font = gfont,
+    lmt = glimits,
+    brk = gbrakes
     )
 
   }

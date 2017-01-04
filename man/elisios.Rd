@@ -10,6 +10,6 @@ elisios()
 Irrigation management app.
 }
 \seealso{
-Other sapiens: \code{\link{wanuy}}
+Other sapiens: \code{\link{fieldbook}}, \code{\link{wanuy}}
 }
 

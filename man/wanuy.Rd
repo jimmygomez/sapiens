@@ -10,6 +10,7 @@ wanuy()
 Fertilization management app.
 }
 \seealso{
-Other sapiens: \code{\link{elisios}}
+Other sapiens: \code{\link{elisios}},
+  \code{\link{fieldbook}}
 }
 

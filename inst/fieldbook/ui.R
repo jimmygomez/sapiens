@@ -238,16 +238,16 @@ shinyUI(dashboardPage(skin = "green",
 
         tabItem(tabName = "multv",
 
-          column(width = 6,
+          box(width = 6,
 
-            plotOutput("crpt", width = "500px", height = "500px")
+            plotOutput("crpt", width = "580px", height = "580px")
 
           ),
 
-          column(width = 6,
+          box(width = 6,
 
 
-            plotOutput("pca", width = "500px", height = "500px")
+            plotOutput("pca", width = "580px", height = "580px")
 
 
           )
@@ -262,29 +262,52 @@ shinyUI(dashboardPage(skin = "green",
 
           box(width = 12,
 
-            column(width = 3,
+            column(width = 2,
 
               uiOutput("resp")
 
             ),
 
-            column(width = 3,
+            column(width = 2,
 
               uiOutput("stv1")
 
             ),
 
 
-            column(width = 3,
+            column(width = 2,
 
               uiOutput("stv2")
 
             ),
 
 
-            column(width = 3,
+            column(width = 2,
 
               uiOutput("block")
+
+
+            ),
+
+
+            column(width = 2,
+
+              numericInput("stsig",
+                label = "Significance",
+                value = 0.05,
+                min = 0,
+                max = 5,
+                step = 0.01)
+
+
+            ),
+
+            column(width = 2,
+
+              selectInput("stmc",
+                label = "Type",
+                choices = c("tukey", "duncan", "snk"),
+                selected = "snk")
 
 
             ),
@@ -369,39 +392,44 @@ shinyUI(dashboardPage(skin = "green",
 
             box(width = 4, title = "limits",
 
-                      column(width = 4,
+
+                    column(width = 4,
+
+
+                      numericInput(
+                        inputId ="gbrakes",
+                        label = "Brakes",
+                        value = NA
+                      )
+
+                    ),
+
+
+                    column(width = 4,
 
 
                         numericInput(
                           inputId ="glmti",
                           label = "Initial",
-                          value = NULL
-                        )
-
-                      ),
-
-                      column(width = 4,
-
-
-                        numericInput(
-                          inputId ="glmtf",
-                          label = "Final",
-                          value = NULL
+                          value = NA
                         )
 
                       ),
 
 
-                      column(width = 4,
+                    column(width = 4,
 
 
-                        numericInput(
-                          inputId ="gbrake",
-                          label = "Brakes",
-                          value = NULL
-                        )
+                      numericInput(
+                        inputId ="glmtf",
+                        label = "Final",
+                        value = NA
+                      )
 
                       )
+
+
+
 
             ),
 
@@ -450,6 +478,18 @@ shinyUI(dashboardPage(skin = "green",
               label = "Significance",
               choices = c("yes", "no"),
               selected = "yes",
+              inline = TRUE)
+          ),
+
+
+          column(width = 4,
+
+
+            radioButtons(
+              inputId ="glabel",
+              label = "Label",
+              choices = c("none", "left", "right", "bottom", "top"),
+              selected = "top",
               inline = TRUE)
           )
 
