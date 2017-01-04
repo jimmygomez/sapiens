@@ -34,5 +34,21 @@ wanuy <- function() {
 }
 
 
+#' fieldbook
+#'
+#' @description Data analisys app for experiments.
+#' @family sapiens
+#' @importFrom shiny runApp
+#' @export
+
+fieldbook <- function() {
+  appDir <- system.file("fieldbook", package = "sapiens")
+  if (appDir == "") {
+    stop("Could not find example directory. Try re-installing `sapiens`.",
+         call. = FALSE)
+  }
+
+  shiny::runApp(appDir, display.mode = "normal", launch.browser = TRUE)
+}
 
 
