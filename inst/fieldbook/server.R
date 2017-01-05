@@ -18,7 +18,21 @@ shinyServer(function(input, output) {
 
 fb <-  eventReactive(input$reload, {
 
-  file <- sapiens::getData(dir = input$fbdt)
+  xls <- input$impdata
+  url <- input$fbdt
+
+  if( !is.null(xls) ){
+
+    file.rename(xls$datapath, paste(xls$datapath, ".xlsx", sep = ""))
+
+    sapiens::getData(dir = paste(xls$datapath, ".xlsx", sep = ""), sheet = input$sheetdt)
+
+  } else {
+
+    sapiens::getData(dir = url, sheet = input$sheetdt)
+
+  }
+
 
     }, ignoreNULL = FALSE)
 

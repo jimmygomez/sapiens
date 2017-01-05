@@ -120,27 +120,45 @@ shinyUI(dashboardPage(skin = "green",
 
           status = "info",
           width = 12,
-          background = "blue",
-
-          column(width = 3,
+          background = "black",
 
 
-                 h4("Google spreadsheet (URL)", icon("book"), width = "100%")
+          column(width = 6,
 
+           h4(icon("book"), "Google SpreadSheet (URL)", width = "100%"),
 
-          ),
-
-          column(width = 7,
-
-                 textInput("fbdt", label = NULL, width = "100%",
-                           value = "https://docs.google.com/spreadsheets/d/14sO81N50Zx1al5O3Iu3IPaz1_5CVncvtsx-_JRqJ_qE/edit#gid=172957346")
+           textInput("fbdt",
+             label = NULL ,
+             width = "100%",
+             value = "https://docs.google.com/spreadsheets/d/14sO81N50Zx1al5O3Iu3IPaz1_5CVncvtsx-_JRqJ_qE/edit#gid=172957346")
 
 
           ),
 
-          column(width = 2,
 
-                 actionButton(inputId = "reload", label = "update", icon("refresh"), width = "100%")
+          column(width = 4,
+
+            h4(icon("book"), "Excel file (.xlsx)", width = "100%"),
+
+            fileInput('impdata',
+              label = NULL,
+              accept = c(".xlsx"))
+
+          ),
+
+          column(width = 1,
+
+            h4("Sheet", width = "100%"),
+
+            numericInput("sheetdt", label = NULL, value = 1, step = 1, min = 1)
+
+          ),
+
+          column(width = 1,
+
+            h4( "Update", width = "100%"),
+
+            actionButton(inputId = "reload", label = "", icon("refresh"), width = "100%")
 
           )
 
@@ -170,7 +188,7 @@ shinyUI(dashboardPage(skin = "green",
 
           box(
 
-            width = 12,
+            width = 12, background = "black",
 
                     column(width = 4,
 
@@ -260,7 +278,7 @@ shinyUI(dashboardPage(skin = "green",
         tabItem(tabName = "stat",
 
 
-          box(width = 12,
+          box(width = 12, background = "black",
 
             column(width = 2,
 
@@ -310,7 +328,10 @@ shinyUI(dashboardPage(skin = "green",
                 selected = "snk")
 
 
-            ),
+            )
+
+
+          ),
 
 
 
@@ -332,9 +353,6 @@ shinyUI(dashboardPage(skin = "green",
           )
 
 
-          )
-
-
         ),
 
 # graphics ----------------------------------------------------------------
@@ -346,12 +364,12 @@ shinyUI(dashboardPage(skin = "green",
         box(width = 12,
 
 
-            box(width = 8, title = "Labels",
+            box(width = 8, title = NULL, background = "blue",
 
 
                       column(width = 4,
 
-                        textInput(inputId ="gply", label = "Y", value = "")
+                        textInput(inputId ="gply", label = "Y label", value = "")
 
 
                       ),
@@ -359,7 +377,7 @@ shinyUI(dashboardPage(skin = "green",
 
                       column(width = 4,
 
-                        textInput(inputId ="gplx", label = "X", value = "")
+                        textInput(inputId ="gplx", label = "X label", value = "")
 
 
                       ),
@@ -390,7 +408,7 @@ shinyUI(dashboardPage(skin = "green",
 
 
 
-            box(width = 4, title = "limits",
+            box(width = 4, title = NULL, background = "red",
 
 
                     column(width = 4,
@@ -398,7 +416,7 @@ shinyUI(dashboardPage(skin = "green",
 
                       numericInput(
                         inputId ="gbrakes",
-                        label = "Brakes",
+                        label = "Brakes axis",
                         value = NA
                       )
 
@@ -410,7 +428,7 @@ shinyUI(dashboardPage(skin = "green",
 
                         numericInput(
                           inputId ="glmti",
-                          label = "Initial",
+                          label = "Initial limit",
                           value = NA
                         )
 
@@ -422,7 +440,7 @@ shinyUI(dashboardPage(skin = "green",
 
                       numericInput(
                         inputId ="glmtf",
-                        label = "Final",
+                        label = "Final limit",
                         value = NA
                       )
 
@@ -517,10 +535,9 @@ shinyUI(dashboardPage(skin = "green",
 
         tabItem(tabName = "info",
 
-                h4(strong("ELISIOS")),
+                h4(strong("FieldBook")),
 
-                p("Elisios, is a free application for calculete que irrigation requirments accodirng the weather conditions, It allows to
-                  connect at remote arduino divices"),
+                p("User Manual"),
 
 
 
