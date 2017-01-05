@@ -4,10 +4,16 @@
 \alias{plot_PCA}
 \title{Principal component analisys graphic}
 \usage{
-plot_PCA(data, habillage, quali.sup, quanti.sup)
+plot_PCA(data, type = "biplot", quali.sup = NULL, lgl = NULL)
 }
 \arguments{
 \item{data}{matrix with numeric data}
+
+\item{type}{type of plot PCA: c("ind", "var", "biplot")}
+
+\item{quali.sup}{number of colum of qualitative variable}
+
+\item{lgl}{label legend}
 }
 \value{
 PCA biplot graph

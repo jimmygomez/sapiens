@@ -281,41 +281,85 @@ plot_correlation <- function(data, method = "pearson", sig = 0.05){
 #'
 #' @description Function use to plot biplot principal component analisys
 #' @param data matrix with numeric data
-#' @param habillage
-#' @param quali.sup
-#' @param quanti.sup
+#' @param type type of plot PCA: c("ind", "var", "biplot")
+#' @param quali.sup number of colum of qualitative variable
+#' @param lgl label legend
 #' @return PCA biplot graph
 #' @importFrom FactoMineR PCA
 #' @importFrom factoextra fviz_pca_biplot
 #' @export
 
-plot_PCA <- function(data, habillage, quali.sup, quanti.sup){
+plot_PCA <- function(data, type = "biplot", quali.sup = NULL, lgl = NULL){
 
 
-  data <- data %>% dplyr::select_if(is.numeric) %>% as.data.frame()
+  if( is.null(quali.sup) ){
+
+    data  <- data %>%   dplyr::select_if(is.numeric)
+    hab <- "none"
+    qsp <- NULL
+
+  } else {
+
+    fn <- colnames(data[quali.sup])
+    data[ ,fn] <- as.factor(data[ ,fn])
+    tn <- data %>% dplyr::select_if(is.numeric) %>% colnames()
+    data <- data[c(fn,tn)]
+
+    hab <- 1
+    qsp <- 1
+
+  }
+
+
+  if( is.null(lgl) ){
+
+    lgl <- fn
+
+  }
 
 
   pca <- FactoMineR::PCA(
     data,
-    # quali.sup = quali.sup,
-    # quanti.sup = quanti.sup,
-    scale.unit = TRUE, ncp = 5,
+    quali.sup = qsp,
+    scale.unit = TRUE,
+    ncp = 5,
     graph = FALSE
     )
 
+  if(type == "ind"){
 
-  bp <- factoextra::fviz_pca_biplot(
-    pca,
-    #habillage = habillage ,
-    cex = 1,
-    autoLab = "auto",
-    col.var = "black",
-    addEllipses = FALSE,
-    title = "") +
-    # scale_x_continuous( limits = c(-5.5,5.5), breaks= -10:10*1) +
-    # scale_y_continuous( limits = c(-3.7,3.7), breaks= -10:10*1) +
-    # scale_shape("Genotipo") +
-    # scale_color_discrete("Genotipo")+
+  plot <- factoextra::fviz_pca_ind(pca, habillage = hab,
+      addEllipses =F, ellipse.level = 0.68) +
+      scale_color_brewer(palette="Dark2") +
+      theme_minimal()
+
+  } else if (type == "var") {
+
+
+   plot <- factoextra::fviz_pca_var(pca) +
+      scale_color_brewer(palette="Dark2") +
+      theme_minimal()
+
+  } else if (type == "biplot"){
+
+    plot <- pca <- factoextra::fviz_pca_biplot(
+      pca,
+      habillage = hab,
+      cex = 1,
+      autoLab = "auto",
+      col.var = "black",
+      addEllipses = FALSE,
+      title = "") +
+      scale_shape( lgl ) +
+      scale_color_discrete( lgl )
+
+
+
+  }
+
+
+
+  plot +
     theme_bw() +
     theme(
       axis.title.x = element_text(size = 12),
@@ -325,13 +369,11 @@ plot_PCA <- function(data, habillage, quali.sup, quanti.sup){
       legend.key.size = unit(2, "lines"), legend.key = element_blank(),
       legend.background = element_rect(fill = "transparent"),
       text = element_text(size = 12)
-      )
+    )
 
-  bp
 
 
   # summary(pca, nbelements = Inf, file="PCA.txt")
-
 
 
 }

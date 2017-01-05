@@ -256,16 +256,92 @@ shinyUI(dashboardPage(skin = "green",
 
         tabItem(tabName = "multv",
 
+         box(width = 6,
+
+           column(width = 3,
+
+             h5(icon("book"), "Correlation", width = "100%")
+
+           ),
+
+
+           column(width = 3,
+
+            numericInput("corsig",
+               label = "Significance",
+              value = 0.05,
+              min = 0,
+              max = 5,
+              step = 0.01)
+
+           ),
+
+            column(width = 3,
+
+              selectInput("corcol",
+                label = "Color",
+                choices = c("palet 01", "palet 02", "palet 03"),
+                selected = "palet 03")
+
+            )
+
+
+          ),
+
+
           box(width = 6,
 
-            plotOutput("crpt", width = "580px", height = "580px")
+            column(width = 2,
+
+              h5(icon("book"), "PCA", width = "100%")
+
+            ),
+
+
+            column(width = 3,
+
+              selectInput("pcatype",
+                label = "Type",
+                choices = c("ind", "var", "biplot"),
+                selected = "biplot")
+
+            ),
+
+            column(width = 2,
+
+              numericInput("pcaqs",
+                label = "Variable",
+                value = NA,
+                min = 1,
+                step = 1
+              )
+
+            ),
+
+            column(width = 5,
+
+              textInput("pcalbl",
+                label = "Label",
+                value = ""
+              )
+
+            )
+
+
+
+          ),
+
+
+          box(width = 6,
+
+            plotOutput("crpt", width = "520px", height = "520px")
 
           ),
 
           box(width = 6,
 
 
-            plotOutput("pca", width = "580px", height = "580px")
+            plotOutput("pca", width = "520px", height = "520px")
 
 
           )

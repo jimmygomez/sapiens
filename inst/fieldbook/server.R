@@ -149,7 +149,7 @@ output$crpt <- renderPlot({
 
   file <- fb()
 
-  sapiens::plot_correlation(file)
+  sapiens::plot_correlation(data = file, sig = input$corsig)
 
 })
 
@@ -158,7 +158,33 @@ output$pca <- renderPlot({
 
   file <- fb()
 
-  sapiens::plot_PCA(data = file)
+  if(is.na(input$pcaqs)){
+
+    qs <- NULL
+
+  } else{
+
+    qs <- input$pcaqs
+
+  }
+
+
+  if( input$pcalbl == "" ){
+
+    lbl <- NULL
+
+  } else{
+
+    lbl <- input$pcalbl
+
+  }
+
+  sapiens::plot_PCA(
+    data = file,
+    type = input$pcatype,
+    quali.sup = qs,
+    lgl = lbl
+    )
 
 
 })
@@ -349,6 +375,9 @@ comp <- reactive({
   }
 
 
+  rs
+
+
 })
 
 
@@ -358,6 +387,18 @@ comp <- reactive({
 output$mnc = DT::renderDataTable({
 
   file <- comp()
+
+
+  if( is.null(file) ){
+
+    file <- cat("select your variables")
+
+  } else {
+
+    file <- file %>% format(digits = 3, nsmall = 3) %>% as.data.frame()
+
+  }
+
 
   DT::datatable(file,
     # filter = list(position = 'top', clear = FALSE),
