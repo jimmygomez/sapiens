@@ -186,9 +186,7 @@ shinyUI(dashboardPage(skin = "green",
 
         tabItem(tabName = "outlier",
 
-          box(
-
-            width = 12, background = "black",
+          box(width = 10, background = "black",
 
                     column(width = 4,
 
@@ -232,12 +230,44 @@ shinyUI(dashboardPage(skin = "green",
 
                     column(width = 4,
 
-                      textInput(inputId ="bplz", label = "Legend label", value = "")
+                      textInput(
+                        inputId ="bplz",
+                        label = "Legend label",
+                        value = "")
 
 
                     )
 
           ),
+
+
+          box(width = 2, background = "black",
+
+
+            column(width = 12,
+
+              numericInput(
+                inputId ="bpbrk",
+                label = "Axis brake",
+                value = NA)
+
+            ),
+
+
+            column(width = 12,
+
+              numericInput(
+                inputId ="bpsize",
+                label = "Size",
+                value = 2,
+                min = 0,
+                step = 0.1)
+
+
+            )
+
+
+            ),
 
 
           box(width = 12,

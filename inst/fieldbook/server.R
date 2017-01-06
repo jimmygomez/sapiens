@@ -124,6 +124,16 @@ output$boxplot <- renderPlot({
 
   file <- fb()
 
+  if(is.na(input$bpbrk)){
+
+    brks <- NULL
+
+  } else {
+
+    brks <- input$bpbrk
+
+  }
+
   boxp <- sapiens::plot_box(
 
     data = file,
@@ -133,7 +143,9 @@ output$boxplot <- renderPlot({
     xlab = input$bplx,
     ylab = input$bply,
     lgl =  input$bplz,
-    lgd = "top"
+    lgd = "top",
+    font = input$bpsize,
+    brk = brks
 
   )
 

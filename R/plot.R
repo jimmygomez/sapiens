@@ -9,6 +9,7 @@
 #' @param xlab Title for the axis x
 #' @param lgl Title for the legend
 #' @param lgd the position of legends ("none", "left", "right", "bottom", "top", or two-element numeric vector)
+#' @param font letter size in plot
 #' @return boxplot
 #' @importFrom dplyr mutate
 #' @importFrom ggplot2 aes aes_string element_blank element_rect element_text geom_bar geom_boxplot geom_errorbar geom_line geom_point geom_text ggplot position_dodge position_jitterdodge scale_color_discrete scale_fill_hue scale_shape_discrete scale_x_discrete scale_y_continuous theme theme_bw unit scale_fill_discrete
@@ -16,7 +17,7 @@
 #' @export
 
 
-plot_box <- function(data, x, y, z, ylab = "", xlab = "", lgl = "",lgd = "right"){
+plot_box <- function(data, x, y, z, ylab = "", xlab = "", lgl = "",lgd = "right", brk = NULL, font = 1){
 
 
   data[,x] <- factor(data[,x], levels = gtools::mixedsort(data[,x]))
@@ -33,23 +34,36 @@ plot_box <- function(data, x, y, z, ylab = "", xlab = "", lgl = "",lgd = "right"
   lgl  <- eval(expression(parse(text = ll)))
 
 
+
+  if(is.null(brk)){
+
+    brks <- ggplot2::waiver() } else {
+
+      brks <- (((round(min(data[,y]), 0))*(-20)):((round(min(data[,y]), 0))*(+20))) * brk
+
+      # brks <-  scales::pretty_breaks(n = brk)
+
+    }
+
   ggplot(data, aes_string( x = x , y = y, fill = z))+
-    geom_boxplot(outlier.colour = "red", outlier.size = 3)+
+    geom_boxplot(outlier.colour = "red", outlier.size = 2.5)+
     geom_point(position = position_jitterdodge())+
-    ylab( ylab )+
-    xlab( xlab )+
+    scale_x_discrete( xlab )+
+    scale_y_continuous( ylab, breaks = brks)+
     scale_fill_discrete( lgl )+
     theme_bw()+
     theme(
-      axis.title.x = element_text(face="bold", size=15),
-      axis.title.y = element_text(face="bold", size=15, angle=90),
+      axis.title.x = element_text(size= 8*font),
+      axis.title.y = element_text(size= 8*font, angle=90),
       panel.grid.major = element_blank(),
       panel.grid.minor = element_blank(),
       legend.position = lgd,
-      legend.title = element_text(face="bold", size=12),
-      legend.text = element_text(size=11),
-      legend.key.size = unit(1.2, "lines"),
-      legend.key = element_blank()
+      legend.title = element_text(size= 8*font),
+      legend.text = element_text(size= 8*font),
+      legend.key.size = unit(0.8*font, "lines"),
+      legend.key = element_blank(),
+      legend.background = element_rect(fill= "transparent"),
+      text = element_text(size = 8*font)
     )
 }
 
