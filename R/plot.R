@@ -307,15 +307,10 @@ plot_PCA <- function(data, type = "biplot", quali.sup = NULL, lgl = NULL){
 
     hab <- 1
     qsp <- 1
-
-  }
-
-
-  if( is.null(lgl) ){
-
     lgl <- fn
 
   }
+
 
 
   pca <- FactoMineR::PCA(

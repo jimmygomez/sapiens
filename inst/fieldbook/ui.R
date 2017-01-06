@@ -322,7 +322,7 @@ shinyUI(dashboardPage(skin = "green",
 
               textInput("pcalbl",
                 label = "Label",
-                value = ""
+                value = NA
               )
 
             )

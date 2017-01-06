@@ -169,7 +169,7 @@ output$pca <- renderPlot({
   }
 
 
-  if( input$pcalbl == "" ){
+  if( is.na(input$pcalbl) ){
 
     lbl <- NULL
 
