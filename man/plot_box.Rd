@@ -4,7 +4,8 @@
 \alias{plot_box}
 \title{Boxplot graphic}
 \usage{
-plot_box(data, x, y, z, ylab = "", xlab = "", lgl = "", lgd = "right")
+plot_box(data, x, y, z, ylab = "", xlab = "", lgl = "", lgd = "right",
+  brk = NULL, font = 1)
 }
 \arguments{
 \item{data}{raw data}
@@ -22,6 +23,8 @@ plot_box(data, x, y, z, ylab = "", xlab = "", lgl = "", lgd = "right")
 \item{lgl}{Title for the legend}
 
 \item{lgd}{the position of legends ("none", "left", "right", "bottom", "top", or two-element numeric vector)}
+
+\item{font}{letter size in plot}
 }
 \value{
 boxplot

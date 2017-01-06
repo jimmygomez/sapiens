@@ -337,9 +337,6 @@ plot_PCA <- function(data, type = "biplot", quali.sup = NULL, lgl = NULL){
   }
 
 
-
-
-
   pca <- FactoMineR::PCA(
     data,
     quali.sup = qsp,
@@ -350,21 +347,29 @@ plot_PCA <- function(data, type = "biplot", quali.sup = NULL, lgl = NULL){
 
   if(type == "ind"){
 
-  plot <- factoextra::fviz_pca_ind(pca, habillage = hab,
-      addEllipses =F, ellipse.level = 0.68) +
-      scale_color_brewer(palette="Dark2") +
-      theme_minimal()
+  plot <- factoextra::fviz_pca_ind(
+    X = pca,
+    habillage = hab,
+    addEllipses =F,
+    ellipse.level = 0.68,
+    title = "") +
+    scale_color_brewer(palette="Dark2") +
+    theme_minimal()+
+    scale_shape( lgl ) +
+    scale_color_discrete( lgl )
 
   } else if (type == "var") {
 
 
-   plot <- factoextra::fviz_pca_var(pca) +
+   plot <- factoextra::fviz_pca_var(
+     X = pca,
+     title = "") +
       scale_color_brewer(palette="Dark2") +
       theme_minimal()
 
   } else if (type == "biplot"){
 
-    plot <- pca <- factoextra::fviz_pca_biplot(
+    plot <- factoextra::fviz_pca_biplot(
       pca,
       habillage = hab,
       cex = 1,

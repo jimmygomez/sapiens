@@ -364,14 +364,14 @@ shinyUI(dashboardPage(skin = "green",
 
           box(width = 6,
 
-            plotOutput("crpt", width = "520px", height = "520px")
+            plotOutput("crpt", width = "580px", height = "520px")
 
           ),
 
           box(width = 6,
 
 
-            plotOutput("pca", width = "520px", height = "520px")
+            plotOutput("pca", width = "580px", height = "520px")
 
 
           )
