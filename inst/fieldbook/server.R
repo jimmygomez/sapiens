@@ -158,26 +158,30 @@ output$pca <- renderPlot({
 
   file <- fb()
 
-  if(is.na(input$pcaqs)){
+
+  if( is.na(input$pcaqs) ){
 
     qs <- NULL
 
-  } else{
+  } else {
 
     qs <- input$pcaqs
 
   }
 
 
-  if( is.na(input$pcalbl) ){
+  if( input$pcalbl == "" ){
 
     lbl <- NULL
 
-  } else{
+  } else {
 
     lbl <- input$pcalbl
 
   }
+
+
+
 
   sapiens::plot_PCA(
     data = file,

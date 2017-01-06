@@ -87,6 +87,8 @@ plot_brln <- function(data, type= "bar", x, y, z, ylab = "", xlab = "", lgl = ""
 
     brks <- (((round(min(data[,y]), 0))*(-20)):((round(min(data[,y]), 0))*(+20))) * brk
 
+    # brks <-  scales::pretty_breaks(n = brk)
+
     }
 
   data[,x] <- factor(data[,x], levels = gtools::mixedsort(data[,x]))
@@ -307,9 +309,20 @@ plot_PCA <- function(data, type = "biplot", quali.sup = NULL, lgl = NULL){
 
     hab <- 1
     qsp <- 1
-    lgl <- fn
+
+    if( is.null(lgl) ){
+
+      lgl <- fn
+
+    } else {
+
+      lgl <- lgl
+
+    }
 
   }
+
+
 
 
 

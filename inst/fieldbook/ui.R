@@ -322,7 +322,7 @@ shinyUI(dashboardPage(skin = "green",
 
               textInput("pcalbl",
                 label = "Label",
-                value = NA
+                value =  ""
               )
 
             )
@@ -493,7 +493,8 @@ shinyUI(dashboardPage(skin = "green",
                       numericInput(
                         inputId ="gbrakes",
                         label = "Brakes axis",
-                        value = NA
+                        value = NA,
+                        min = 0
                       )
 
                     ),
