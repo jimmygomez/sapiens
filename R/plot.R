@@ -302,7 +302,9 @@ plot_correlation <- function(data, method = "pearson", sig = 0.05){
 #' @param lgl label legend
 #' @return PCA biplot graph
 #' @importFrom FactoMineR PCA
+#' @importFrom ggplot2 theme_minimal scale_shape scale_color_brewer
 #' @importFrom factoextra fviz_pca_biplot
+#' @importFrom grDevices colorRampPalette
 #' @export
 
 plot_PCA <- function(data, type = "biplot", quali.sup = NULL, lgl = NULL){

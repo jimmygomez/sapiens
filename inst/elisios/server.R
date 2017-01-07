@@ -7,6 +7,11 @@ library(dplyr)
 library(plotly)
 library(tibble)
 library(DT)
+library(leaps)
+library(scatterplot3d)
+library(flashClust)
+library(lubridate)
+
 
 
 shinyServer(function(input, output) {

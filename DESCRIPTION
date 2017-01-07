@@ -15,6 +15,7 @@ Imports:
     gtools,
     factoextra,
     FactoMineR,
+    flashClust,
     lubridate,
     plotly,
     readxl,
@@ -22,6 +23,8 @@ Imports:
     shinydashboard,
     tibble,
     tidyr,
+    leaps,
+    scatterplot3d,
     zoo
 Depends:
     R (>= 3.2.3)

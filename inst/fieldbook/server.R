@@ -9,6 +9,11 @@ library(plotly)
 library(tibble)
 library(DT)
 library(ggplot2)
+library(leaps)
+library(scatterplot3d)
+library(flashClust)
+library(lubridate)
+
 
 
 shinyServer(function(input, output) {

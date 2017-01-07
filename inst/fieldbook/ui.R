@@ -9,6 +9,11 @@ library(plotly)
 library(tibble)
 library(DT)
 library(ggplot2)
+library(leaps)
+library(scatterplot3d)
+library(flashClust)
+library(lubridate)
+
 
 
 shinyUI(dashboardPage(skin = "green",
@@ -94,6 +99,14 @@ shinyUI(dashboardPage(skin = "green",
                     br(),
                     code("Universidad Nacional Agraria la Molina, Lima, Perú")
                     ),
+
+                  p(
+                    strong("Oma Benites Alfaro"),
+                    br(),
+                    a("< obacc07@gmail.com >"),
+                    br(),
+                    code("Centro Internacional de la Papa (CIP)")
+                  ),
 
 
                   hr(),

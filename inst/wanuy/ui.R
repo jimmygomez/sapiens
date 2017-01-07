@@ -4,6 +4,11 @@ library(shiny)
 library(shinydashboard)
 library(dplyr)
 library(DT)
+library(leaps)
+library(scatterplot3d)
+library(flashClust)
+library(lubridate)
+
 
 shinyUI(dashboardPage(skin = "green",
 
@@ -435,6 +440,7 @@ shinyUI(dashboardPage(skin = "green",
                 p(strong("Jimmy R. Gomez Carrion "), "(",a("purmacana@gmail.com"), "). Universidad Nacional Agraria la Molina, Lima, Perú"),
 
                 p(strong("Flavio Lozano Isla "), "(", a("flavjack@gmail.com"), "). Universidad Nacional Agraria la Molina, Lima, Perú"),
+                p(strong("Omar Benites Alfaro "), "(", a("obacc07@gmail.com"), "). Centro Internacional de la Papa"),
 
 
                 br(),

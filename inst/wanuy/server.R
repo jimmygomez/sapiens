@@ -4,6 +4,11 @@ library(shiny)
 library(shinydashboard)
 library(dplyr)
 library(DT)
+library(leaps)
+library(scatterplot3d)
+library(flashClust)
+library(lubridate)
+
 
 shinyServer(function(input, output) {
 
