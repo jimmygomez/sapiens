@@ -32,6 +32,7 @@ shinyUI(dashboardPage(skin = "green",
         menuItem("Multivariate", tabName = "multv", icon = icon("edit")),
         menuItem("Statistics", tabName = "stat", icon = icon("cloud")),
         menuItem("Graphics", tabName = "graph", icon = icon("tint")),
+        menuItem("Tools", tabName = "tools", icon = icon("edit")),
         menuItem("About", tabName = "info", icon = icon("book"))
       )
 
@@ -649,6 +650,73 @@ shinyUI(dashboardPage(skin = "green",
         ),
 
 
+# tools -------------------------------------------------------------------
+
+        tabItem(tabName = "tools",
+
+          box(title =  h3(icon("book"), "My FieldBook"),
+            status = "info",
+            width = 12,
+
+                  box(title = "Parameters", width = 7,
+
+                    column(width = 8,
+
+                      textInput("tool_f1", label = "Treatment 1", value = "")
+
+                    ),
+
+                    column(width = 4,
+
+                      textInput("tool_lb1", label = "Label", value = "tratamiento1")
+
+                    ),
+
+
+                    column(width = 8,
+
+                      textInput("tool_f2", label = "Treatment 2", value = "")
+
+                    ),
+
+                    column(width = 4,
+
+                      textInput("tool_lb2", label = "Label", value = "tratamiento2")
+
+                    ),
+
+                    column(width = 5,
+
+                      numericInput("tool_rep",label = "Repetitions", value = 3, min = 1)
+
+                    ),
+
+                    column(width = 5,
+
+                      radioButtons("tool_dsg", label = "Design",
+                        choices = c("crd", "rcbd", "lsd"),selected = "crd", inline = TRUE)
+
+
+                    )
+
+
+                  ),
+
+
+                  box(title = "Table", width = 5
+
+
+
+                  )
+
+
+          )
+
+
+
+
+          ),
+
 
 # information -------------------------------------------------------------
 
@@ -665,8 +733,6 @@ shinyUI(dashboardPage(skin = "green",
                 br()
 
         )
-
-
 
 
       )
