@@ -310,7 +310,7 @@ plot_correlation <- function(data, method = "pearson", sig = 0.05){
 plot_PCA <- function(data, type = "biplot", quali.sup = NULL, lgl = NULL){
 
 
-  if( is.null(quali.sup) ){
+  if( is.null(quali.sup)){
 
     data  <- data %>%   dplyr::select_if(is.numeric)
     hab <- "none"
