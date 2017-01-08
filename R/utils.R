@@ -12,7 +12,7 @@ dplyr::`%>%`
 #' @importFrom tidyr separate
 #' @export
 
-dtsm <- function(meanComp){
+data_summary <- function(meanComp){
 
   #to avoid no bisible global variable function
   std <- r <- trt <- means <- Min <- Max <- ste <- M <- NULL
@@ -68,7 +68,7 @@ test_comparison <- function( aov, comp, type = "snk", sig = 0.05){
 
   }
 
-  sapiens::dtsm(mc)
+  sapiens::data_summary(mc)
 
 }
 
@@ -84,6 +84,7 @@ test_comparison <- function( aov, comp, type = "snk", sig = 0.05){
 #' @param lbl_treat2 col label for treat 2
 #' @return Table with the experimental design
 #' @importFrom agricolae design.ab
+#' @importFrom plyr rename
 #' @export
 
 
@@ -101,32 +102,44 @@ design_fieldbook <- function( treat1 = NULL, treat2 = NULL, rep = NULL, design =
   tr2 <- treat2
   dsg <- design
 
-  if(is.null(lbl_treat1)){
+  if( !is.null(tr1) ) {
 
-    lbt1 <- "treat1"
+    tr1 <- treat1
 
-  } else {
+    if(is.null(lbl_treat1)){
 
-    lbt1 <- lbl_treat1
+      lbt1 <- "treat1"
 
-  }
+    } else {
 
-  if(is.null(lbl_treat2)){
+      lbt1 <- lbl_treat1
 
-    lbt2 <- "treat2"
-
-  } else {
-
-    lbt2 <- lbl_treat2
+    }
 
   }
-
 
   if(is.null(tr2)){
 
     tr2 = as.character("1")
+    lbt2 = "treat2"
+
+  } else if( !is.null(tr2) ) {
+
+      tr2 <- treat2
+
+      if(is.null(lbl_treat2)){
+
+        lbt2 <- "treat2"
+
+      } else {
+
+        lbt2 <- lbl_treat2
+
+      }
 
   }
+
+
 
   vc1 <- unlist(strsplit(tr1, split = " "))
   vc2 <- unlist(strsplit(tr2, split = " "))
@@ -142,8 +155,10 @@ design_fieldbook <- function( treat1 = NULL, treat2 = NULL, rep = NULL, design =
   table <- agricolae::design.ab(
     trt = fact,
     r = rep,
+    design = dsg,
     serie = 0,
-    design = dsg
+    first = TRUE,
+    randomization = TRUE
   )
 
   book <- table$book

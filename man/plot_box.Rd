@@ -24,6 +24,8 @@ plot_box(data, x, y, z, ylab = "", xlab = "", lgl = "", lgd = "right",
 
 \item{lgd}{the position of legends ("none", "left", "right", "bottom", "top", or two-element numeric vector)}
 
+\item{brk}{break of the y axis}
+
 \item{font}{letter size in plot}
 }
 \value{

@@ -592,10 +592,112 @@ if(gtype == "bar" && gcolor == "color" ){
 })
 
 
+# fieldbook design --------------------------------------------------------
 
+fdbk <- reactive({
+
+  trt1 <- input$tool_f1
+  trt2 <- input$tool_f2
+  r <- input$tool_rep
+  dsg <-  input$tool_dsg
+  lbl1 <- input$tool_lb1
+  lbl2 <- input$tool_lb2
+
+  if(trt1 == "" && trt2 == "" && r == ""){
+
+    cat("Select your parameter")
+
+  }
+
+  if( trt2 == "" ){
+
+    trt2 <- NULL
+
+  } else {
+
+    trt2 <- input$tool_f2
+
+  }
+
+  if( trt1 == "" ){
+
+    trt1 <- NULL
+
+  } else {
+
+    trt1 <- input$tool_f1
+
+  }
+
+
+  if( r == "" ){
+
+    r <- NULL
+
+  } else {
+
+    r <- input$tool_rep
+
+  }
+
+
+  book <- sapiens::design_fieldbook(
+    treat1 = trt1,
+    treat2 = trt2,
+    rep = r,
+    design = dsg,
+    lbl_treat1 = lbl1,
+    lbl_treat2 = lbl2)
+
+  book
 
 })
 
 
 
+# Fieldbook table ---------------------------------------------------------
 
+output$fbdsg = DT::renderDataTable({
+
+file <- fdbk()
+
+DT::datatable(file,
+  # filter = list(position = 'top', clear = FALSE),
+  extensions = 'Scroller',
+  rownames=FALSE,
+  options = list(
+    autoWidth = TRUE,
+    columnDefs = list(list(className = 'dt-center', targets ="_all")),
+    searching = FALSE,
+    deferRender=TRUE,
+    scrollY = 380,
+    scroller = TRUE,
+    initComplete = DT::JS(
+      "function(settings, json) {",
+      "$(this.api().table().header()).css({'background-color': '#000', 'color': '#fff'});",
+      "}")
+  ))
+
+
+})
+
+
+# Download fieldbook ------------------------------------------------------
+
+
+
+output$downloadData <- downloadHandler(
+  filename = function() {
+    paste("FieldBook-", Sys.Date(), '.xlsx', sep='')
+  },
+  content = function(file) {
+    fb <- fdbk()
+    #write.csv(fb, file)
+    openxlsx::write.xlsx(x = fb, file = file)
+  }
+)
+
+
+
+
+})

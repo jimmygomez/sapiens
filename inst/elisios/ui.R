@@ -98,14 +98,6 @@ shinyUI(dashboardPage(skin = "green",
 
 
                   p(
-                    strong("Jimmy R. Gomez Carrion"),
-                    br(),
-                    a("< purmacana@gmail.com >"),
-                    br(),
-                    code("Universidad Nacional Agraria la Molina, Lima, Perú")
-                    ),
-
-                  p(
                     strong("Flavio Lozano Isla "),
                     br(),
                     a("< flavjack@gmail.com >"),
@@ -114,7 +106,15 @@ shinyUI(dashboardPage(skin = "green",
                     ),
 
                   p(
-                    strong("Oma Benites Alfaro"),
+                    strong("Jimmy R. Gomez Carrion"),
+                    br(),
+                    a("< purmacana@gmail.com >"),
+                    br(),
+                    code("Universidad Nacional Agraria la Molina, Lima, Perú")
+                  ),
+
+                  p(
+                    strong("Omar Benites Alfaro"),
                     br(),
                     a("< obacc07@gmail.com >"),
                     br(),

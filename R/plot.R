@@ -9,6 +9,7 @@
 #' @param xlab Title for the axis x
 #' @param lgl Title for the legend
 #' @param lgd the position of legends ("none", "left", "right", "bottom", "top", or two-element numeric vector)
+#' @param brk break of the y axis
 #' @param font letter size in plot
 #' @return boxplot
 #' @importFrom dplyr mutate
@@ -85,6 +86,7 @@ plot_box <- function(data, x, y, z, ylab = "", xlab = "", lgl = "",lgd = "right"
 #' @param erb Show the error bar.
 #' @param lmt limits of the y axis
 #' @param brk break of the y axis
+#' @param font letter size in plot
 #' @return Line o bar plot
 #' @importFrom dplyr mutate
 #' @importFrom ggplot2 aes aes_string element_blank element_rect element_text geom_bar geom_errorbar geom_line geom_point geom_text ggplot position_dodge scale_color_discrete scale_fill_hue scale_shape_discrete scale_x_discrete scale_y_continuous theme theme_bw unit scale_fill_discrete

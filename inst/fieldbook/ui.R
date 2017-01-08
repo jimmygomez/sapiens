@@ -74,15 +74,17 @@ shinyUI(dashboardPage(skin = "green",
                   status = "danger",
                   solidHeader = T,
 
-                    p("- Import data from excel files and google spreadsheet documents"),
+                  p("- Import data from excel files and google spreadsheet documents"),
 
-                    p("- Detection of outliers"),
+                  p("- Detection of outliers"),
 
-                    p("- Statistical analisys for experimental designs"),
+                  p("- Statistical analisys for experimental designs"),
 
-                    p("- Colour and black graphics for publication"),
+                  p("- Colored and gray scale graphics for publication"),
 
-                    p("- Multivariate analisys: PCA and correlation")
+                  p("- Multivariate analisys: PCA and correlation"),
+
+                  p("- Field book design generator")
 
 
                 ),
@@ -102,11 +104,19 @@ shinyUI(dashboardPage(skin = "green",
                     ),
 
                   p(
-                    strong("Oma Benites Alfaro"),
+                    strong("Omar Benites Alfaro"),
                     br(),
                     a("< obacc07@gmail.com >"),
                     br(),
                     code("Centro Internacional de la Papa (CIP)")
+                  ),
+
+                  p(
+                    strong("Jimmy R. Gomez Carrion"),
+                    br(),
+                    a("< purmacana@gmail.com >"),
+                    br(),
+                    code("Universidad Nacional Agraria la Molina, Lima, Perú")
                   ),
 
 
@@ -668,7 +678,7 @@ shinyUI(dashboardPage(skin = "green",
 
                     column(width = 4,
 
-                      textInput("tool_lb1", label = "Label", value = "tratamiento1")
+                      textInput("tool_lb1", label = "Label", value = "treat1")
 
                     ),
 
@@ -681,13 +691,13 @@ shinyUI(dashboardPage(skin = "green",
 
                     column(width = 4,
 
-                      textInput("tool_lb2", label = "Label", value = "tratamiento2")
+                      textInput("tool_lb2", label = "Label", value = "treat2")
 
                     ),
 
-                    column(width = 5,
+                    column(width = 4,
 
-                      numericInput("tool_rep",label = "Repetitions", value = 3, min = 1)
+                      numericInput("tool_rep",label = "Repetitions", value = "", min = 1)
 
                     ),
 
@@ -697,14 +707,22 @@ shinyUI(dashboardPage(skin = "green",
                         choices = c("crd", "rcbd", "lsd"),selected = "crd", inline = TRUE)
 
 
+                    ),
+
+                    column(width = 3,
+
+                      downloadButton('downloadData', 'Download')
+
                     )
 
 
                   ),
 
 
-                  box(title = "Table", width = 5
+                  box(title = "Table", width = 5,
 
+
+                    DT::dataTableOutput("fbdsg")
 
 
                   )

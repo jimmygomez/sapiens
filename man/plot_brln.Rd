@@ -34,6 +34,8 @@ plot_brln(data, type = "bar", x, y, z, ylab = "", xlab = "", lgl = "",
 \item{lmt}{limits of the y axis}
 
 \item{brk}{break of the y axis}
+
+\item{font}{letter size in plot}
 }
 \value{
 Line o bar plot
