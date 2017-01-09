@@ -4,7 +4,7 @@
 \alias{plot_correlation}
 \title{Correlation graphic}
 \usage{
-plot_correlation(data, method = "pearson", sig = 0.05)
+plot_correlation(data, method = "pearson", sig = 0.05, color = NULL)
 }
 \arguments{
 \item{data}{matrix with numeric data}
@@ -12,6 +12,8 @@ plot_correlation(data, method = "pearson", sig = 0.05)
 \item{method}{method of the correlation analisis: c("pearson", "kendall", "spearman", "lin")}
 
 \item{sig}{level of significance}
+
+\item{color}{colors in the correlation matrix}
 }
 \value{
 correlation plot
