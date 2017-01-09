@@ -258,12 +258,13 @@ plot_brln <- function(data, type= "bar", x, y, z, ylab = "", xlab = "", lgl = ""
 #' @param data matrix with numeric data
 #' @param method method of the correlation analisis: c("pearson", "kendall", "spearman", "lin")
 #' @param sig level of significance
+#' @param color colors in the correlation matrix
 #' @return correlation plot
 #' @importFrom agricolae correlation
 #' @importFrom corrplot corrplot
 #' @export
 
-plot_correlation <- function(data, method = "pearson", sig = 0.05){
+plot_correlation <- function(data, method = "pearson", sig = 0.05, color = NULL){
 
   data <-  data %>% dplyr::select_if(is.numeric) %>% as.data.frame()
   sig <- as.numeric(sig)
@@ -272,7 +273,19 @@ plot_correlation <- function(data, method = "pearson", sig = 0.05){
 
   #write.csv(cor$pvalue, "pvalues.csv")
 
-  col <- colorRampPalette(c("#DD5143", "#F38A78","#FEC9B8", "#FFFFFF", "#FFFFFF","#CFEDFB", "#68C7EC", "#00A0DC"))
+  if ( is.null(color)  ){
+
+    col <- colorRampPalette(c("#DD5143", "#F38A78","#FEC9B8", "#FFFFFF", "#FFFFFF","#CFEDFB", "#68C7EC", "#00A0DC"))
+
+  } else {
+
+    palet <- unlist(strsplit(color, split = " "))
+    clr <-  palet[ palet != ""]
+
+    col <- colorRampPalette(clr) # modificar con funcion de design_fieldbook
+
+  }
+
 
   crp <- corrplot::corrplot(
 

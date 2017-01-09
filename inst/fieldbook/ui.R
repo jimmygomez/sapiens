@@ -330,12 +330,12 @@ shinyUI(dashboardPage(skin = "green",
 
            ),
 
-            column(width = 3,
+            column(width = 6,
 
-              selectInput("corcol",
+              textInput("corcol",
                 label = "Color",
-                choices = c("palet 01", "palet 02", "palet 03"),
-                selected = "palet 03")
+                value = "#DD5143 #F38A78 #68C7EC #00A0DC"
+               )
 
             )
 
@@ -704,7 +704,7 @@ shinyUI(dashboardPage(skin = "green",
                     column(width = 5,
 
                       radioButtons("tool_dsg", label = "Design",
-                        choices = c("crd", "rcbd", "lsd"),selected = "crd", inline = TRUE)
+                        choices = c("crd", "rcbd", "lsd"), selected = "crd", inline = TRUE)
 
 
                     ),

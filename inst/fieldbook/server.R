@@ -45,31 +45,31 @@ fb <-  eventReactive(input$reload, {
 # fieldbook ------------------------------------------------
 
 
-output$fbook <- DT::renderDataTable({
-
-
-  file <- fb()
-
-  DT::datatable(file,
-    #filter = list(position = 'top', clear = FALSE),
-    extensions = 'Scroller',
-    rownames=FALSE,
-    options = list(
-      autoWidth = TRUE,
-      columnDefs = list(list(className = 'dt-center', targets ="_all")),
-      searching = FALSE,
-      deferRender=TRUE,
-      scrollY = 450,
-      scroller = TRUE,
-      initComplete = DT::JS(
-        "function(settings, json) {",
-        "$(this.api().table().header()).css({'background-color': '#000', 'color': '#fff'});",
-        "}")
-    ))
-
-
-
-})
+# output$fbook <- DT::renderDataTable({
+#
+#
+#   file <- fb()
+#
+#   DT::datatable(file,
+#     #filter = list(position = 'top', clear = FALSE),
+#     extensions = 'Scroller',
+#     rownames=FALSE,
+#     options = list(
+#       autoWidth = TRUE,
+#       columnDefs = list(list(className = 'dt-center', targets ="_all")),
+#       searching = FALSE,
+#       deferRender=TRUE,
+#       scrollY = 450,
+#       scroller = TRUE,
+#       initComplete = DT::JS(
+#         "function(settings, json) {",
+#         "$(this.api().table().header()).css({'background-color': '#000', 'color': '#fff'});",
+#         "}")
+#     ))
+#
+#
+#
+# })
 
 
 output$fbook <- renderUI({
@@ -166,7 +166,7 @@ output$crpt <- renderPlot({
 
   file <- fb()
 
-  sapiens::plot_correlation(data = file, sig = input$corsig)
+  sapiens::plot_correlation(data = file, sig = input$corsig, color = input$corcol)
 
 })
 
@@ -685,15 +685,14 @@ DT::datatable(file,
 # Download fieldbook ------------------------------------------------------
 
 
-
 output$downloadData <- downloadHandler(
   filename = function() {
-    paste("FieldBook-", Sys.Date(), '.xlsx', sep='')
+    paste("FieldBook-", Sys.Date(), '.csv', sep='')
   },
   content = function(file) {
     fb <- fdbk()
-    #write.csv(fb, file)
-    openxlsx::write.xlsx(x = fb, file = file)
+    write.csv(fb, file)
+
   }
 )
 
