@@ -502,9 +502,6 @@ shinyUI(dashboardPage(skin = "green",
         tabItem(tabName = "graph",
 
 
-        box(width = 12,
-
-
             box(width = 8, title = NULL, background = "blue",
 
 
@@ -595,19 +592,30 @@ shinyUI(dashboardPage(skin = "green",
 
 
 
-          column(width = 2,
+        box(width = 10,
 
 
-          radioButtons(
-            inputId ="gtype",
-            label = "Type",
-            choices = c("bar", "line"),
-            selected = "bar",
-            inline = TRUE)
+          plotOutput("stplot")
+
+
+
+        ),
+
+        box(width = 2,
+
+          column(width = 12,
+
+
+            radioButtons(
+              inputId ="gtype",
+              label = "Type",
+              choices = c("bar", "line"),
+              selected = "bar",
+              inline = TRUE)
           ),
 
 
-          column(width = 2,
+          column(width = 12,
 
 
             radioButtons(
@@ -618,7 +626,7 @@ shinyUI(dashboardPage(skin = "green",
               inline = TRUE)
           ),
 
-          column(width = 2,
+          column(width = 12,
 
 
             radioButtons(
@@ -630,7 +638,7 @@ shinyUI(dashboardPage(skin = "green",
           ),
 
 
-          column(width = 2,
+          column(width = 12,
 
 
             radioButtons(
@@ -642,7 +650,7 @@ shinyUI(dashboardPage(skin = "green",
           ),
 
 
-          column(width = 4,
+          column(width = 12,
 
 
             radioButtons(
@@ -650,22 +658,13 @@ shinyUI(dashboardPage(skin = "green",
               label = "Label",
               choices = c("none", "left", "right", "bottom", "top"),
               selected = "top",
-              inline = TRUE)
+              inline = FALSE)
           )
 
 
 
-        ),
+          )
 
-
-        box(width = 12,
-
-
-            plotOutput("stplot")
-
-
-
-        )
 
 
         ),
