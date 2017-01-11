@@ -468,7 +468,18 @@ shinyUI(dashboardPage(skin = "green",
           box(width = 5,
 
 
-          verbatimTextOutput("tbav")
+            column(width = 12,
+
+              verbatimTextOutput("tbav")
+
+            ),
+
+
+            column(width = 3,
+
+                downloadButton('download_mc', 'Download')
+
+            )
 
 
           ),
@@ -725,7 +736,7 @@ shinyUI(dashboardPage(skin = "green",
 
                      column(width = 3,
 
-                      downloadButton('downloadData', 'Download')
+                      downloadButton('download_fb', 'Download')
 
                     )
 

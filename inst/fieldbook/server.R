@@ -441,6 +441,20 @@ output$mnc = DT::renderDataTable({
 })
 
 
+# download mean comparison table ------------------------------------------
+
+
+output$download_mc <- downloadHandler(
+  filename = function() {
+    paste("summary_", input$rsp , '.csv', sep='')
+  },
+  content = function(file) {
+    dt <- comp()
+    write.csv(dt, file)
+
+  }
+)
+
 
 
 # graphics ----------------------------------------------------------------
@@ -682,6 +696,7 @@ DT::datatable(file,
     columnDefs = list(list(className = 'dt-center', targets ="_all")),
     deferRender = FALSE,
     scrollY = 380,
+    scrollX = TRUE,
     scroller = TRUE,
     initComplete = DT::JS(
       "function(settings, json) {",
@@ -696,7 +711,7 @@ DT::datatable(file,
 # Download fieldbook ------------------------------------------------------
 
 
-output$downloadData <- downloadHandler(
+output$download_fb <- downloadHandler(
   filename = function() {
     paste("FieldBook-", Sys.Date(), '.csv', sep='')
   },
