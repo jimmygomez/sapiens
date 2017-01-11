@@ -594,20 +594,18 @@ if(gtype == "bar" && gcolor == "color" ){
 
 # fieldbook design --------------------------------------------------------
 
+
+
 fdbk <- reactive({
 
   trt1 <- input$tool_f1
   trt2 <- input$tool_f2
-  r <- input$tool_rep
   dsg <-  input$tool_dsg
   lbl1 <- input$tool_lb1
   lbl2 <- input$tool_lb2
+  r <- input$tool_rep
+  int <- input$tool_eva
 
-  if(trt1 == "" && trt2 == "" && r == ""){
-
-    cat("Select your parameter")
-
-  }
 
   if( trt2 == "" ){
 
@@ -630,7 +628,7 @@ fdbk <- reactive({
   }
 
 
-  if( r == "" ){
+  if( input$tool_rep == "" ){
 
     r <- NULL
 
@@ -641,15 +639,28 @@ fdbk <- reactive({
   }
 
 
-  book <- sapiens::design_fieldbook(
+  if( input$tool_var == "" ){
+
+    vars <- NULL
+
+  } else {
+
+    vars <- input$tool_var
+
+  }
+
+
+  sapiens::design_fieldbook(
     treat1 = trt1,
     treat2 = trt2,
     rep = r,
     design = dsg,
     lbl_treat1 = lbl1,
-    lbl_treat2 = lbl2)
+    lbl_treat2 = lbl2,
+    variables = vars,
+    intime = int
+    )
 
-  book
 
 })
 
@@ -664,12 +675,12 @@ file <- fdbk()
 DT::datatable(file,
   # filter = list(position = 'top', clear = FALSE),
   extensions = 'Scroller',
-  rownames=FALSE,
+  rownames=TRUE,
   options = list(
     autoWidth = TRUE,
-    columnDefs = list(list(className = 'dt-center', targets ="_all")),
     searching = FALSE,
-    deferRender=TRUE,
+    columnDefs = list(list(className = 'dt-center', targets ="_all")),
+    deferRender = FALSE,
     scrollY = 380,
     scroller = TRUE,
     initComplete = DT::JS(

@@ -82,13 +82,14 @@ test_comparison <- function( aov, comp, type = "snk", sig = 0.05){
 #' @param design experimental design c("rcbd","crd","lsd")
 #' @param lbl_treat1 col label for treat 1
 #' @param lbl_treat2 col label for treat 2
+#' @param variables name of the variable evaluated
 #' @return Table with the experimental design
 #' @importFrom agricolae design.ab
 #' @importFrom plyr rename
 #' @export
 
 
-design_fieldbook <- function( treat1 = NULL, treat2 = NULL, rep = NULL, design = "crd", lbl_treat1 = NULL, lbl_treat2 = NULL){
+design_fieldbook <- function( treat1 = NULL, treat2 = NULL, rep = NULL, intime = 1, design = "crd", lbl_treat1 = NULL, lbl_treat2 = NULL, variables = NULL){
 
 
   if( is.null(treat1) && is.null(treat2) && is.null(rep) ){
@@ -140,6 +141,15 @@ design_fieldbook <- function( treat1 = NULL, treat2 = NULL, rep = NULL, design =
   }
 
 
+  if ( !is.null(variables) ){
+
+    varst <- unlist(strsplit(variables, split = " "))
+    varfb <- factor(unique( varst[ varst != ""]))
+    varfb <- as.character(varfb)
+
+  }
+
+
 
   vc1 <- unlist(strsplit(tr1, split = " "))
   vc2 <- unlist(strsplit(tr2, split = " "))
@@ -156,9 +166,7 @@ design_fieldbook <- function( treat1 = NULL, treat2 = NULL, rep = NULL, design =
     trt = fact,
     r = rep,
     design = dsg,
-    serie = 0,
-    first = TRUE,
-    randomization = TRUE
+    serie = 2
   )
 
   book <- table$book
@@ -177,6 +185,7 @@ design_fieldbook <- function( treat1 = NULL, treat2 = NULL, rep = NULL, design =
     fb[, lbt2] <- NULL
     fb
 
+
   } else {
 
     fb
@@ -184,8 +193,54 @@ design_fieldbook <- function( treat1 = NULL, treat2 = NULL, rep = NULL, design =
   }
 
 
+  if (design == "crd"){
+
+    fb[,"r"] <- paste("r", fb[,"r"], sep = "")
+
+    fb <- plyr::rename(x = fb, replace= c("r" = "rep"))
+
+  } else if ( design == "rcbd" ){
+
+    fb[,"block"] <- paste("b", fb[,"block"], sep = "")
+    fb
+
+  } else if ( design == "lsd" ){
+
+    fb[,"row"] <- paste("r", fb[,"row"], sep = "")
+    fb[,"col"] <- paste("c", fb[,"col"], sep = "")
+    fb
+
+  }
+
+  if(intime == 1){
+
+    fb[,"ID"] <- paste("U", fb[,"ID"], sep = "")
+    fb
+
+  } else {
+
+
+    fk <- fb[rep(seq_len(nrow(fb)), intime),] # if add each = intime!! you can  use for sub sample
+    tm <- as.factor(1:intime)
+    fk[,"intime"] <- rep(tm, each = nrow(fb))
+    fk[,"intime"] <- paste("E", fk[,"intime"], sep = "")
+    fk[,"ID"] <- paste("U", fb[,"ID"], sep = "")
+    fb <- fk
+
+  }
+
+
+  if ( !is.null(variables) ){
+
+    fb[, varfb ] <- ""
+    fb
+
+  } else { fb }
+
+
 
 }
+
 
 
 

@@ -4,8 +4,9 @@
 \alias{design_fieldbook}
 \title{Field book design for data collection}
 \usage{
-design_fieldbook(treat1 = NULL, treat2 = NULL, rep = NULL,
-  design = "crd", lbl_treat1 = NULL, lbl_treat2 = NULL)
+design_fieldbook(treat1 = NULL, treat2 = NULL, rep = NULL, intime = 1,
+  design = "crd", lbl_treat1 = NULL, lbl_treat2 = NULL,
+  variables = NULL)
 }
 \arguments{
 \item{treat1}{strign with the name of the level factor}
@@ -19,6 +20,8 @@ design_fieldbook(treat1 = NULL, treat2 = NULL, rep = NULL,
 \item{lbl_treat1}{col label for treat 1}
 
 \item{lbl_treat2}{col label for treat 2}
+
+\item{variables}{name of the variable evaluated}
 }
 \value{
 Table with the experimental design

@@ -282,7 +282,7 @@ plot_correlation <- function(data, method = "pearson", sig = 0.05, color = NULL)
     palet <- unlist(strsplit(color, split = " "))
     clr <-  palet[ palet != ""]
 
-    col <- colorRampPalette(clr) # modificar con funcion de design_fieldbook
+    col <- colorRampPalette(clr)
 
   }
 

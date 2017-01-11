@@ -664,11 +664,11 @@ shinyUI(dashboardPage(skin = "green",
 
         tabItem(tabName = "tools",
 
-          box(title =  h3(icon("book"), "My FieldBook"),
+          box(title = "My FieldBook",
             status = "info",
             width = 12,
 
-                  box(title = "Parameters", width = 7,
+                  box(title = "Parameters", width = 6,
 
                     column(width = 8,
 
@@ -695,9 +695,22 @@ shinyUI(dashboardPage(skin = "green",
 
                     ),
 
-                    column(width = 4,
+                    column(width = 12,
 
-                      numericInput("tool_rep",label = "Repetitions", value = "", min = 1)
+                      textInput("tool_var", label = "Variables", value = "")
+
+                    ),
+
+                    column(width = 2,
+
+                      numericInput("tool_rep",label = "Repetitions", value = 3, min = 2)
+
+                    ),
+
+
+                    column(width = 2,
+
+                      numericInput("tool_eva",label = "Intime", value = 1, min = 1)
 
                     ),
 
@@ -709,7 +722,8 @@ shinyUI(dashboardPage(skin = "green",
 
                     ),
 
-                    column(width = 3,
+
+                     column(width = 3,
 
                       downloadButton('downloadData', 'Download')
 
@@ -719,7 +733,7 @@ shinyUI(dashboardPage(skin = "green",
                   ),
 
 
-                  box(title = "Table", width = 5,
+                  box(title = "Table", width = 6,
 
 
                     DT::dataTableOutput("fbdsg")
