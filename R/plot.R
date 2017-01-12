@@ -86,6 +86,9 @@ plot_box <- function(data, x, y, z, ylab = "", xlab = "", lgl = "",lgd = "right"
 #' @param erb Show the error bar.
 #' @param lmt limits of the y axis
 #' @param brk break of the y axis
+#' @param xbl axis brakes labels in strign with doble space
+#' @param zbl legend label in strign with doble space
+#' @param color colored figure (TRUE), otherwise black & white (FALSE)
 #' @param font letter size in plot
 #' @return Line o bar plot
 #' @importFrom dplyr mutate
@@ -93,7 +96,7 @@ plot_box <- function(data, x, y, z, ylab = "", xlab = "", lgl = "",lgd = "right"
 #' @importFrom gtools mixedsort
 #' @export
 
-plot_brln <- function(data, type= "bar", x, y, z, ylab = "", xlab = "", lgl = "",lgd = "right", sig = NULL, erb = FALSE, lmt = NULL, brk = NULL, font = 1){
+plot_brln <- function(data, type= "bar", x, y, z, ylab = "", xlab = "", lgl = "",lgd = "right", sig = NULL, erb = FALSE, lmt = NULL, brk = NULL, xbl = NULL, zbl = NULL, color = TRUE, font = 1){
 
   ste <- NULL #To avoid this NOTE: fplot: no visible binding for global variable 'ste'
 
@@ -123,13 +126,51 @@ plot_brln <- function(data, type= "bar", x, y, z, ylab = "", xlab = "", lgl = ""
   data <- data %>% mutate(ymax = mean+ste)
 
 
+  if( !is.null(xbl) ){
+
+    xbl <- unlist(strsplit(xbl, split = "  "))
+    xbl <- factor(unique( xbl[ xbl != "  "]))
+    xbl <- as.character(xbl)
+
+  } else {
+
+    xbl <- ggplot2::waiver()
+
+  }
+
+  if( !is.null(zbl) ){
+
+    zbl <- unlist(strsplit(zbl, split = "  "))
+    zbl <- factor(unique( zbl[ zbl != "  "]))
+    zbl <- as.character(zbl)
+
+  } else {
+
+    zbl <- ggplot2::waiver()
+
+  }
+
+
 
   if (type == "bar"){
 
     bsp <- ggplot(data, aes_string(x , y, fill= z))+
       geom_bar(position=position_dodge(),colour="black",stat="identity", size=.4)+
-      scale_x_discrete(xlab)+
-      scale_fill_discrete(lgl)
+      scale_x_discrete(xlab, labels = xbl)+
+
+
+      if ( color == TRUE ){
+
+      scale_fill_discrete(lgl, labels = zbl)
+
+
+      } else if ( color == FALSE ) {
+
+      scale_fill_grey(lgl, labels = zbl, start = 0, end = 1)
+
+
+      }
+
 
       if (is.null(lmt)){
 
@@ -178,12 +219,29 @@ plot_brln <- function(data, type= "bar", x, y, z, ylab = "", xlab = "", lgl = ""
 
   } else if(type == "line"){
 
+
+
+
+      if ( color == TRUE ){
+
     bsp <- ggplot(data, aes_string(x, y, group = z, shape= z, color= z))+
       geom_line(size = 0.3)+
       geom_point(size = 1.2*font)+
-      scale_x_discrete(xlab)+
-      scale_color_discrete(lgl)+
-      scale_shape_discrete(lgl)
+      scale_x_discrete(xlab, labels = xbl)+
+      scale_color_discrete(lgl, labels = zbl)+
+      scale_shape_discrete(lgl, labels = zbl)
+
+
+      } else if (color == FALSE ){
+
+        bsp <- ggplot(data, aes_string(x, y, group = z, shape= z, color= z))+
+          geom_line(size = 0.3)+
+          geom_point(size = 1.2*font)+
+          scale_x_discrete(xlab, labels = xbl)+
+          scale_color_grey(lgl, labels = zbl, start = 0, end = 0) +
+          scale_shape_discrete(lgl, labels = zbl)
+
+      }
 
 
     if (is.null(lmt)){
@@ -233,6 +291,7 @@ plot_brln <- function(data, type= "bar", x, y, z, ylab = "", xlab = "", lgl = ""
   }
 
 
+
   p + theme_bw()+
     theme(
       axis.title.x = element_text(size= 8*font),
@@ -247,6 +306,7 @@ plot_brln <- function(data, type= "bar", x, y, z, ylab = "", xlab = "", lgl = ""
       legend.background = element_rect(fill= "transparent"),
       text = element_text(size = 8*font)
     )
+
 
 
 }

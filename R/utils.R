@@ -76,13 +76,13 @@ test_comparison <- function( aov, comp, type = "snk", sig = 0.05){
 #' Field book design for data collection
 #'
 #' @description Function to construct your field book for your experiment
-#' @param treat1 strign with the name of the level factor
-#' @param treat2 strign with the name of the level factor
+#' @param treat1 strign with the name of the level factor with only space
+#' @param treat2 strign with the name of the level factor with only space
 #' @param rep number of repetition
 #' @param design experimental design c("rcbd","crd","lsd")
 #' @param lbl_treat1 col label for treat 1
 #' @param lbl_treat2 col label for treat 2
-#' @param variables name of the variable evaluated
+#' @param variables name of the variable evaluated in string with only space
 #' @return Table with the experimental design
 #' @importFrom agricolae design.ab
 #' @importFrom plyr rename

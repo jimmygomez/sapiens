@@ -6,7 +6,7 @@
 \usage{
 plot_brln(data, type = "bar", x, y, z, ylab = "", xlab = "", lgl = "",
   lgd = "right", sig = NULL, erb = FALSE, lmt = NULL, brk = NULL,
-  font = 1)
+  xbl = NULL, zbl = NULL, color = TRUE, font = 1)
 }
 \arguments{
 \item{data}{Output dtsm fuction}
@@ -34,6 +34,12 @@ plot_brln(data, type = "bar", x, y, z, ylab = "", xlab = "", lgl = "",
 \item{lmt}{limits of the y axis}
 
 \item{brk}{break of the y axis}
+
+\item{xbl}{axis brakes labels in strign with doble space}
+
+\item{zbl}{legend label in strign with doble space}
+
+\item{color}{colored figure (TRUE), otherwise black & white (FALSE)}
 
 \item{font}{letter size in plot}
 }

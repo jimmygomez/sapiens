@@ -9,9 +9,9 @@ design_fieldbook(treat1 = NULL, treat2 = NULL, rep = NULL, intime = 1,
   variables = NULL)
 }
 \arguments{
-\item{treat1}{strign with the name of the level factor}
+\item{treat1}{strign with the name of the level factor with only space}
 
-\item{treat2}{strign with the name of the level factor}
+\item{treat2}{strign with the name of the level factor with only space}
 
 \item{rep}{number of repetition}
 
@@ -21,7 +21,7 @@ design_fieldbook(treat1 = NULL, treat2 = NULL, rep = NULL, intime = 1,
 
 \item{lbl_treat2}{col label for treat 2}
 
-\item{variables}{name of the variable evaluated}
+\item{variables}{name of the variable evaluated in string with only space}
 }
 \value{
 Table with the experimental design

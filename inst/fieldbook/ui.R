@@ -501,165 +501,195 @@ shinyUI(dashboardPage(skin = "green",
 
         tabItem(tabName = "graph",
 
+          box( width = 10,
 
-            box(width = 8, title = NULL, background = "blue",
 
+            box(width = 5, title = NULL, background = "blue",
+
+
+                      column(width = 12,
+
+                        textInput(
+                          inputId ="gply",
+                          label = "Y label",
+                          value = "")
+
+
+                      ),
 
                       column(width = 4,
-
-                        textInput(inputId ="gply", label = "Y label", value = "")
-
-
-                      ),
-
-
-                      column(width = 4,
-
-                        textInput(inputId ="gplx", label = "X label", value = "")
-
-
-                      ),
-
-
-                      column(width = 2,
-
-                        textInput(inputId ="gplz", label = "Legend", value = "")
-
-
-                      ),
-
-                      column(width = 2,
 
 
                         numericInput(
-                          inputId ="gfont",
-                          label = "Size",
-                          value = 2,
-                          min = 1,
-                          step = 0.1
+                          inputId ="gbrakes",
+                          label = "Brakes",
+                          value = NA,
+                          min = 0
                         )
 
-                      )
+                      ),
 
 
-              ),
-
-
-
-            box(width = 4, title = NULL, background = "red",
-
-
-                    column(width = 4,
-
-
-                      numericInput(
-                        inputId ="gbrakes",
-                        label = "Brakes axis",
-                        value = NA,
-                        min = 0
-                      )
-
-                    ),
-
-
-                    column(width = 4,
+                      column(width = 4,
 
 
                         numericInput(
                           inputId ="glmti",
-                          label = "Initial limit",
+                          label = "Limit (i)",
                           value = NA
                         )
 
                       ),
 
 
-                    column(width = 4,
+                      column(width = 4,
 
 
-                      numericInput(
-                        inputId ="glmtf",
-                        label = "Final limit",
-                        value = NA
+                        numericInput(
+                          inputId ="glmtf",
+                          label = "Limit (f)",
+                          value = NA
+                        )
+
                       )
 
-                      )
 
+
+
+              ),
+
+
+
+            box(width = 4, title = NULL, background = "green",
+
+
+
+
+                  column(width = 12,
+
+                    textInput(inputId ="gplx", label = "X label", value = "")
+
+
+                  ),
+
+
+                  column(width = 12,
+
+                    textInput(inputId ="gp_xbk", label = "Brakes legend", value = "")
+
+
+                  )
 
 
 
             ),
 
 
+            box(width = 3, background = "red",
 
-        box(width = 10,
+                  column(width = 12,
 
-
-          plotOutput("stplot")
-
-
-
-        ),
-
-        box(width = 2,
-
-          column(width = 12,
+                    textInput(inputId ="gplz", label = "Legend", value = "")
 
 
-            radioButtons(
-              inputId ="gtype",
-              label = "Type",
-              choices = c("bar", "line"),
-              selected = "bar",
-              inline = TRUE)
-          ),
+                  ),
 
 
-          column(width = 12,
+                column(width = 12,
+
+                  textInput(inputId ="gp_zbk", label = "Brakes legend", value = "")
 
 
-            radioButtons(
-              inputId ="gcolor",
-              label = "Color",
-              choices = c("color", "gray"),
-              selected = "color",
-              inline = TRUE)
-          ),
+                )
 
-          column(width = 12,
+            ),
 
 
-            radioButtons(
-              inputId ="gerbr",
-              label = "Error",
-              choices = c("yes", "no"),
-              selected = "yes",
-              inline = TRUE)
-          ),
+          box(width = 12,
 
 
-          column(width = 12,
+                plotOutput("stplot")
 
 
-            radioButtons(
-              inputId ="gsig",
-              label = "Significance",
-              choices = c("yes", "no"),
-              selected = "yes",
-              inline = TRUE)
-          ),
 
-
-          column(width = 12,
-
-
-            radioButtons(
-              inputId ="glabel",
-              label = "Label",
-              choices = c("none", "left", "right", "bottom", "top"),
-              selected = "top",
-              inline = FALSE)
           )
+
+
+      ),
+
+          box(width = 2,
+
+            column(width = 12,
+
+
+              numericInput(
+                inputId ="gfont",
+                label = "Size",
+                value = 2,
+                min = 1,
+                step = 0.1
+              )
+
+            ),
+
+
+            column(width = 12,
+
+
+              radioButtons(
+                inputId ="gtype",
+                label = "Type",
+                choices = c("bar", "line"),
+                selected = "bar",
+                inline = TRUE)
+            ),
+
+
+            column(width = 12,
+
+
+              radioButtons(
+                inputId ="gcolor",
+                label = "Color",
+                choices = c("yes", "no"),
+                selected = "yes",
+                inline = TRUE)
+            ),
+
+
+            column(width = 12,
+
+
+              radioButtons(
+                inputId ="gsig",
+                label = "Significance",
+                choices = c("yes", "no"),
+                selected = "yes",
+                inline = TRUE)
+            ),
+
+            column(width = 12,
+
+
+              radioButtons(
+                inputId ="gerbr",
+                label = "Error",
+                choices = c("yes", "no"),
+                selected = "yes",
+                inline = TRUE)
+            ),
+
+
+            column(width = 12,
+
+
+              radioButtons(
+                inputId ="glabel",
+                label = "Label",
+                choices = c("none", "left", "right", "bottom", "top"),
+                selected = "top",
+                inline = FALSE)
+            )
 
 
 

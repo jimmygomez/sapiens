@@ -480,6 +480,47 @@ glabel <- input$glabel
 limits <- input$glmti * input$glmtf
 brakes <- input$gbrakes
 
+xbl <- input$gp_xbk
+zbl <- input$gp_zbk
+
+
+# Color -------------------------------------------------------------------
+
+if ( gcolor == "yes" ){
+
+  gcolor <- TRUE
+
+} else {
+
+  gcolor <- FALSE
+
+}
+
+
+
+# Label brake axis --------------------------------------------------------
+
+
+if ( xbl == ""){
+
+  xbl <- NULL
+
+} else {
+
+  xbl <- input$gp_xbk
+
+}
+
+if ( zbl == ""){
+
+  zbl <- NULL
+
+} else {
+
+  zbl <- input$gp_zbk
+
+}
+
 # limits & brake ----------------------------------------------------------
 
 if(is.na(limits)) {
@@ -553,7 +594,10 @@ pt <- sapiens::plot_brln(data = df, type = gtype,
   sig = gsig,
   font = gfont,
   lmt = glimits,
-  brk = gbrakes
+  brk = gbrakes,
+  xbl = xbl,
+  zbl = zbl,
+  color = gcolor
   )
 
 
@@ -576,31 +620,16 @@ pt <- sapiens::plot_brln(data = df, type = gtype,
     sig = gsig,
     font = gfont,
     lmt = glimits,
-    brk = gbrakes
+    brk = gbrakes,
+    xbl = xbl,
+    zbl = zbl,
+    color = gcolor
     )
 
-  }
-
-
-if(gtype == "bar" && gcolor == "color" ){
-
-  pt
-
-} else if (gtype == "bar" && gcolor == "gray"){
-
-  pt + scale_fill_grey(gplz, start = 1, end = 0)
-
-} else if (gtype == "line" && gcolor == "color"){
-
-  pt
-
-} else if (gtype == "line" && gcolor == "gray"){
-
-  pt +
-    scale_color_grey(gplz, start = 0, end = 0) +
-    scale_shape_discrete(gplz)
-
 }
+
+
+pt
 
 
 })
