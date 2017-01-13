@@ -1,74 +1,3 @@
-#' Boxplot graphic
-#'
-#' @description Function use the raw data for made a boxplot graphic
-#' @param data raw data
-#' @param x Axis x variable
-#' @param y Axis y variable
-#' @param z Group variable
-#' @param ylab Title for the axis y
-#' @param xlab Title for the axis x
-#' @param lgl Title for the legend
-#' @param lgd the position of legends ("none", "left", "right", "bottom", "top", or two-element numeric vector)
-#' @param brk break of the y axis
-#' @param font letter size in plot
-#' @return boxplot
-#' @importFrom dplyr mutate
-#' @importFrom ggplot2 aes aes_string element_blank element_rect element_text geom_bar geom_boxplot geom_errorbar geom_line geom_point geom_text ggplot position_dodge position_jitterdodge scale_color_discrete scale_fill_hue scale_shape_discrete scale_x_discrete scale_y_continuous theme theme_bw unit scale_fill_discrete
-#' @importFrom gtools mixedsort
-#' @export
-
-
-plot_box <- function(data, x, y, z, ylab = "", xlab = "", lgl = "",lgd = "right", brk = NULL, font = 1){
-
-
-  data[,x] <- factor(data[,x], levels = gtools::mixedsort(data[,x]))
-  data[,z] <- factor(data[,z], levels = gtools::mixedsort(data[,z]))
-
-
-  yl <- gsub(pattern = " ",replacement = "~", ylab)
-  ylab <- eval(expression(parse(text = yl)))
-
-  xl <- gsub(pattern = " ",replacement = "~", xlab)
-  xlab <- eval(expression(parse(text = xl)))
-
-  ll <- gsub(pattern = " ",replacement = "~", lgl)
-  lgl  <- eval(expression(parse(text = ll)))
-
-
-
-  if(is.null(brk)){
-
-    brks <- ggplot2::waiver() } else {
-
-      brks <- (((round(min(data[,y]), 0))*(-20)):((round(min(data[,y]), 0))*(+20))) * brk
-
-      # brks <-  scales::pretty_breaks(n = brk)
-
-    }
-
-  ggplot(data, aes_string( x = x , y = y, fill = z))+
-    geom_boxplot(outlier.colour = "red", outlier.size = 2.5)+
-    geom_point(position = position_jitterdodge())+
-    scale_x_discrete( xlab )+
-    scale_y_continuous( ylab, breaks = brks)+
-    scale_fill_discrete( lgl )+
-    theme_bw()+
-    theme(
-      axis.title.x = element_text(size= 8*font),
-      axis.title.y = element_text(size= 8*font, angle=90),
-      panel.grid.major = element_blank(),
-      panel.grid.minor = element_blank(),
-      legend.position = lgd,
-      legend.title = element_text(size= 8*font),
-      legend.text = element_text(size= 8*font),
-      legend.key.size = unit(0.8*font, "lines"),
-      legend.key = element_blank(),
-      legend.background = element_rect(fill= "transparent"),
-      text = element_text(size = 8*font)
-    )
-}
-
-
 
 #' Plot line or bar graphic
 #'
@@ -106,7 +35,6 @@ plot_brln <- function(data, type= "bar", x, y, z, ylab = "", xlab = "", lgl = ""
 
     brks <- (((round(min(data[,y]), 0))*(-20)):((round(min(data[,y]), 0))*(+20))) * brk
 
-    # brks <-  scales::pretty_breaks(n = brk)
 
     }
 
@@ -312,6 +240,79 @@ plot_brln <- function(data, type= "bar", x, y, z, ylab = "", xlab = "", lgl = ""
 }
 
 
+
+#' Boxplot graphic
+#'
+#' @description Function use the raw data for made a boxplot graphic
+#' @param data raw data
+#' @param x Axis x variable
+#' @param y Axis y variable
+#' @param z Group variable
+#' @param ylab Title for the axis y
+#' @param xlab Title for the axis x
+#' @param lgl Title for the legend
+#' @param lgd the position of legends ("none", "left", "right", "bottom", "top", or two-element numeric vector)
+#' @param brk break of the y axis
+#' @param font letter size in plot
+#' @return boxplot
+#' @importFrom dplyr mutate
+#' @importFrom ggplot2 aes aes_string element_blank element_rect element_text geom_bar geom_boxplot geom_errorbar geom_line geom_point geom_text ggplot position_dodge position_jitterdodge scale_color_discrete scale_fill_hue scale_shape_discrete scale_x_discrete scale_y_continuous theme theme_bw unit scale_fill_discrete
+#' @importFrom gtools mixedsort
+#' @export
+
+
+plot_box <- function(data, x, y, z, ylab = "", xlab = "", lgl = "",lgd = "right", brk = NULL, font = 1){
+
+
+  data[,x] <- factor(data[,x], levels = gtools::mixedsort(data[,x]))
+  data[,z] <- factor(data[,z], levels = gtools::mixedsort(data[,z]))
+
+
+  yl <- gsub(pattern = " ",replacement = "~", ylab)
+  ylab <- eval(expression(parse(text = yl)))
+
+  xl <- gsub(pattern = " ",replacement = "~", xlab)
+  xlab <- eval(expression(parse(text = xl)))
+
+  ll <- gsub(pattern = " ",replacement = "~", lgl)
+  lgl  <- eval(expression(parse(text = ll)))
+
+
+
+  if(is.null(brk)){
+
+    brks <- ggplot2::waiver() } else {
+
+      brks <- (((round(min(data[,y]), 0))*(-20)):((round(min(data[,y]), 0))*(+20))) * brk
+
+      # brks <-  scales::pretty_breaks(n = brk)
+
+    }
+
+  ggplot(data, aes_string( x = x , y = y, fill = z))+
+    geom_boxplot(outlier.colour = "red", outlier.size = 2.5)+
+    geom_point(position = position_jitterdodge())+
+    scale_x_discrete( xlab )+
+    scale_y_continuous( ylab, breaks = brks)+
+    scale_fill_discrete( lgl )+
+    theme_bw()+
+    theme(
+      axis.title.x = element_text(size= 8*font),
+      axis.title.y = element_text(size= 8*font, angle=90),
+      panel.grid.major = element_blank(),
+      panel.grid.minor = element_blank(),
+      legend.position = lgd,
+      legend.title = element_text(size= 8*font),
+      legend.text = element_text(size= 8*font),
+      legend.key.size = unit(0.8*font, "lines"),
+      legend.key = element_blank(),
+      legend.background = element_rect(fill= "transparent"),
+      text = element_text(size = 8*font)
+    )
+}
+
+
+
 #' Correlation graphic
 #'
 #' @description Function use to plot correlation matrix
@@ -324,7 +325,7 @@ plot_brln <- function(data, type= "bar", x, y, z, ylab = "", xlab = "", lgl = ""
 #' @importFrom corrplot corrplot
 #' @export
 
-plot_correlation <- function(data, method = "pearson", sig = 0.05, color = NULL){
+plot_correlation <- function(data, method = "pearson", sig = 0.05, color = NULL, font = 1){
 
   data <-  data %>% dplyr::select_if(is.numeric) %>% as.data.frame()
   sig <- as.numeric(sig)
@@ -359,8 +360,9 @@ plot_correlation <- function(data, method = "pearson", sig = 0.05, color = NULL)
     addgrid.col = "black",
     col=col(8),
     p.mat = cor$pvalue,
-    sig.level = sig
-
+    sig.level = sig,
+    tl.cex = 1*font,
+    number.cex = 0.9*font
     )
 
 

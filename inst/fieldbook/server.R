@@ -166,7 +166,11 @@ output$crpt <- renderPlot({
 
   file <- fb()
 
-  sapiens::plot_correlation(data = file, sig = input$corsig, color = input$corcol)
+  sapiens::plot_correlation(
+    data = file,
+    sig = input$corsig,
+    color = input$corcol,
+    font = input$cor_font)
 
 })
 
@@ -431,6 +435,7 @@ output$mnc = DT::renderDataTable({
       searching = FALSE,
       deferRender=TRUE,
       scrollY = 420,
+      scrollX = TRUE,
       scroller = TRUE,
       initComplete = DT::JS(
         "function(settings, json) {",

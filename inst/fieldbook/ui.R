@@ -319,7 +319,7 @@ shinyUI(dashboardPage(skin = "green",
            ),
 
 
-           column(width = 3,
+           column(width = 2,
 
             numericInput("corsig",
                label = "Significance",
@@ -330,7 +330,19 @@ shinyUI(dashboardPage(skin = "green",
 
            ),
 
-            column(width = 6,
+
+           column(width = 2,
+
+             numericInput("cor_font",
+               label = "Font",
+               value = 1,
+               min = 0,
+               step = 0.1)
+
+
+           ),
+
+            column(width = 5,
 
               textInput("corcol",
                 label = "Color",
@@ -575,7 +587,7 @@ shinyUI(dashboardPage(skin = "green",
 
                   column(width = 12,
 
-                    textInput(inputId ="gp_xbk", label = "Brakes legend", value = "")
+                    textInput(inputId ="gp_xbk", label = "Brake Text", value = "")
 
 
                   )
@@ -597,7 +609,7 @@ shinyUI(dashboardPage(skin = "green",
 
                 column(width = 12,
 
-                  textInput(inputId ="gp_zbk", label = "Brakes legend", value = "")
+                  textInput(inputId ="gp_zbk", label = "Brake Text", value = "")
 
 
                 )
@@ -685,7 +697,7 @@ shinyUI(dashboardPage(skin = "green",
 
               radioButtons(
                 inputId ="glabel",
-                label = "Label",
+                label = "Legend",
                 choices = c("none", "left", "right", "bottom", "top"),
                 selected = "top",
                 inline = FALSE)
