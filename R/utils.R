@@ -17,14 +17,11 @@ data_summary <- function(meanComp){
   #to avoid no bisible global variable function
   std <- r <- trt <- means <- Min <- Max <- ste <- M <- NULL
 
-  #fct <- as.character(mc$parameters$name.t)
   fct <- as.character(meanComp$parameters$name.t)
-  fct <- as.expression(strsplit(fct, split = ":"))
+  fcts <- as.expression(strsplit(fct, split = ":"))
 
-  #dtmn <- mc$means #flavio
-  dtmn <- meanComp$means #omar
-  #dtgr <- mc$groups #flavio
-  dtgr <- meanComp$groups #omar
+  dtmn <- meanComp$means
+  dtgr <- meanComp$groups
 
   dtgr$trt <- gsub("\\s", "", as.character(dtgr$trt))
 
@@ -33,11 +30,14 @@ data_summary <- function(meanComp){
 
   sm <- dplyr::full_join(dta[2:7], dtgr, by = "trt") %>%
     dplyr::select(trt, means, Min, Max, r, std, ste, M) %>%
-    tidyr::separate("trt", sep = ":", into = eval(fct)) %>%
-    dplyr::rename(mean = means, min = Min, max = Max, sg = M)
+    tidyr::separate("trt", sep = ":", into = eval(fcts)) %>%
+    dplyr::rename(mean = means, min = Min, max = Max, sg = M) %>%
+    dplyr::mutate_each_(funs(factor(.)), fct)
+
 
 
 }
+
 
 
 #' Multiple comparison test

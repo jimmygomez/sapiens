@@ -484,15 +484,7 @@ shinyUI(dashboardPage(skin = "green",
 
               verbatimTextOutput("tbav")
 
-            ),
-
-
-            column(width = 3,
-
-                downloadButton('download_mc', 'Download')
-
             )
-
 
           ),
 
@@ -698,10 +690,42 @@ shinyUI(dashboardPage(skin = "green",
               radioButtons(
                 inputId ="glabel",
                 label = "Legend",
-                choices = c("none", "left", "right", "bottom", "top"),
+                choices = c("none", "left", "right", "top", "bottom"),
                 selected = "top",
-                inline = FALSE)
+                inline = TRUE)
+            ),
+
+
+
+            column(width = 12,
+
+              numericInput('plot_H', 'Height (mm)',
+                value = 75,
+                min = 0,
+                step = 5)
+
+             ),
+
+
+            column(width = 12,
+
+
+              numericInput('plot_W', 'Width (mm)',
+                value = 105,
+                min = 0,
+                step = 5)
+
+
+            ),
+
+
+            column(width = 12,
+
+              downloadButton('download_plot', ' .tiff (300 dpi)')
+
             )
+
+
 
 
 

@@ -426,17 +426,26 @@ output$mnc = DT::renderDataTable({
 
 
   DT::datatable(file,
-    # filter = list(position = 'top', clear = FALSE),
-    extensions = 'Scroller',
-    rownames=FALSE,
+
+    filter = 'top',
+    extensions = c('Buttons', 'Scroller'),
+    rownames = FALSE,
+
     options = list(
+
+      searchHighlight = TRUE,
+      searching = TRUE,
+
+      dom = 'Bfrtip',
+      buttons = c('copy', 'csv', 'excel'),
+
       autoWidth = TRUE,
       columnDefs = list(list(className = 'dt-center', targets ="_all")),
-      searching = FALSE,
       deferRender=TRUE,
       scrollY = 420,
       scrollX = TRUE,
       scroller = TRUE,
+
       initComplete = DT::JS(
         "function(settings, json) {",
         "$(this.api().table().header()).css({'background-color': '#000', 'color': '#fff'});",
@@ -446,26 +455,9 @@ output$mnc = DT::renderDataTable({
 })
 
 
-# download mean comparison table ------------------------------------------
-
-
-output$download_mc <- downloadHandler(
-  filename = function() {
-    paste("summary_", input$rsp , '.csv', sep='')
-  },
-  content = function(file) {
-    dt <- comp()
-    write.csv(dt, file)
-
-  }
-)
-
-
-
 # graphics ----------------------------------------------------------------
 
-
-output$stplot <- renderPlot({
+stat_plot <- reactive({
 
 
 df <- comp()
@@ -638,6 +630,27 @@ pt
 
 
 })
+
+
+
+# plot output -------------------------------------------------------------
+
+output$stplot <- renderPlot({
+
+  plot <-  stat_plot()
+  plot
+
+})
+
+# download plot -----------------------------------------------------------
+
+output$download_plot <- downloadHandler(
+  file = function(){ paste( "plot_", input$rsp, '.tiff', sep = '')},
+  content = function(file){
+    ggplot2::ggsave(file, plot = stat_plot(), device = "tiff", dpi = 300, width = input$plot_W, height = input$plot_H, units = "mm" )
+
+  }
+)
 
 
 # fieldbook design --------------------------------------------------------
