@@ -1,0 +1,45 @@
+---
+title: "Field Book Manual"
+---
+#Objective of FieldBook
+_FieldBook_ es una aplicacion _online_ que buscas ser una herramienta de ayuda a toda persona que este interesado en utilizar las estadísticas como herramientas cotidianas en su vida académica, comercial y personal. Si está herramienta te ayuda a reducir el tiempo en operaciones monótonas y pasar directamente a la discusión e interpretación de tus pruebas, nuestro esfuerzo no habrá sido en vano.
+
+#Description scream
+
+##Barra de direccion y ejección
+
+![**In Black:** applications.  **In Green:** FielBook application](imagen/001_fieldbook.png)
+
+En la barra de direcciones se muestran las aplicaciones con las que cuenta _quipo.org_ en el cual puedes ingresar a la aplicación de su interés pulsando sobre él: ¡Bienvenido a FieldBook! para visualizar pantalla completa pulse el boton adjunto: ![Bottom FullScream](imagen/002_fullscream.png) 
+
+Aqui podrás encontrar heramientas que te permitirán  desarrollar de manera sencilla, rápida y rigurosa tus pruebas no paramétricas y comparación de medias. 
+
+
+
+#Tools
+
+
+
+#FieldBook
+
+
+
+#outliers
+
+
+
+#Multivariate
+
+
+#Stadistic
+
+
+#Graphics
+
+
+
+
+
+
+
+
