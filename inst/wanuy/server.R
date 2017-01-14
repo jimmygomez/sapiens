@@ -37,43 +37,97 @@ output$sfrt = renderPrint({
 #--------------developer bucles------------------
 
 #calculo de fertilizantes compuestos,
+#issue description.
+# un plan de fertilizacion es una operacion engorrosa, y útil para los calculos de nutrición mineral que requierem
+# las plantas, los cuales deben de hacerce conjuntamente con los analisis de suelo, foliar, cosecha extraida y agua
+# estos minerales deben ser repuestos para evitar reducir la fertilidad del suelo en detrimento de la agricultura.
+# la complicacion surge cuando se usan fuentes mienrales NO puras, es decir cuando se ingrese N adicionalmente
+# ya estamos ingresando P2O5 ó K2O.Este debe tener tal equilibrio que no debe superar la demanda del cultivo,
+# para evitar gastos inecesarios y contaminación.
 
-# ETAPA1, INGRESO DE EXIGENCIAS Y RESUMEN DEL LOS ARREGLOS
-  Nitrogeno<-0;
-  Phosphorus<-10;
-  Potassium<-20;
-  Ca<-10;
-  Mg<-80;
-  Zn<-0;
-  B<-10;
-  Cu<-0
+# --------------------------------ETAPA1: requerimientos de la plantas---------------------------------------------
 
-  #EXIGENCIAS nota A:array ############
-A<-c(N,P,K,Ca,Mg,Zn,B,Cu)
+  Nitrogeno <-0        #En su forma de N
+  Phosphor <-250          #En su forma de P2O5
+  Potassium <-0         #En su forma de K2O
+  Calcium <-80            #  Mg<-80; Zn<-0;  B<-10;  Cu<-0
 
-l_n<-6;   l_p<-2;   l_k<-1;   l_ca<-9;   l_mg<-10;   l_zn<-10;   l_b<-0;   l_cu<-0 # Ingresamos la ley.
-ley1<-c(l_n,l_p,l_k,l_ca,l_mg,l_zn,l_b,l_cu)/100;comment(ley1)<-'ley1 : c(N,P,K,Ca,Mg,Zn,B,Cu) en % '
+  need_crop<- c(  Nitrogeno,
+                    Phosphor,
+                    Potassium,
+                    Calcium )
 
-pc1<-length(A[A>0]);pc1
+  need_cropname <- c("N", "P2O5", "K2O", "Ca")
+
+  for(i in 1:length(need_crop)){
+    if( need_crop[i]==0 ){
+
+      q  <- i
+
+
+    }else{
+
+             }
+
+  }
+
+  need_cropname[need_crop>0]
+
+
+
+#-------------------------------ETAPA2: ingresar los fertilizantes %-----------------------------------------
+  # Construir la matriz con los fertilizantes. c( N, P2O, k2O, Ca )
+ #ingrese los fertilizantes que cubriran la necesidades del cultivo -> need_crop
+
+  f1 <- c(0.1, 0, 0.4, 0.05)
+  f2 <- c(0 ,0.1, 0.1, 0)
+  f3 <- c(0.3, 0.1, 0.1,0)
+  f4 <- c(0.5, 0, 0, 0.05) #posible mejora con 'Declarations'
+
+  #contruir matriz
+    mymatrix <- c(f1,
+                  f2,
+                  f3,
+                  f4)
+  #matriz de los fertilizantes
+    need_fert <- matrix( data=mymatrix,  nrow= length(need_crop), byrow = T  )
+    colnames(need_fert)<-paste(need_cropname,sep='')
+
+#------------------------------ETAPA3: Filtrar por elementos signficantes
+    n_c.s <- need_crop[need_crop<=0];n_c.s
+
+    n_c.l<-which(!is.na(need_crop[need_crop>0]));n_c.l
+    #ubicacion de los elementos need_crop
+
+
 
 #PC1 :  1er punto de control
 #if(pc1!=0){
 
 
-A1<-c(N,P,K,Ca,Mg,Zn,B,Cu)    # A1 CON LAS EXIGENCIAS
-comment(A1)<-'A1 : N,P,K,Ca,Mg,Zn,B,Cu'
+#<-'nombre_ubic : muestra la posici?n 1er elemento a cubrir'
+
+
+
+
+
+
+
 
 
 A2<-order(A1, na.last = TRUE, decreasing = FALSE,
-          method = c("shell", "radix"))               # A2 ubicacion elementos  ORDENADO CRECIENTEMENTE
+          method = c("shell", "radix"))
+# A2 ubicacion elementos  ORDENADO CRECIENTEMENTE
 comment(A2)<-'A2 : Ubicacion de los elementos ordenados'
 #1) inicio    ORDENAMIENTO DE LOS ELEMENTOS#
 for (i in A2) {
   A3<-A1[A2]
   comment(A3)<-'A3 : Elementos ordenados segun A2'
-  A4<-A3[A3>0]                                          # A4 CON LAS EXIGENCIAS SIGNIFICATIVAS
+  A4<-A3[A3>0]
+  # A4 CON LAS EXIGENCIAS SIGNIFICATIVAS
   comment(A4)<-'A4 : Exigencias significativas'
-  A5<-A3[A3<=0]                                         # A5 EXIGENCIAS NO SIGNIFICATIVAS
+  A5<-A3[A3<=0]
+# A5 EXIGENCIAS NO SIGNIFICATIVAS
   comment(A5)<-'A5 : Exigencias NO signifcativas'
   nombre<-c("Nitrogeno","Fosforo","Potasio","Calcio","Magnesio","Zinc","Boro","Cobre")
   comment(nombre)<-'nombre : Nombre de los elementos seg?n orden A1'
@@ -107,9 +161,9 @@ ubic<-NA # declarar NA porque solo se desea que ubique un numero natural
 for(f in 1:l1){
   switch (nombre[f]==nombre_Ordenado[1],ubic[f]<-f)
 
-  comment(ubic)<-'ubic : nuestra la ubicaci?n del 1er elemento a cubrir'
+
   nombre_ubic<-which(!is.na(ubic));comment(nombre_ubic)<-'nombre_ubic : muestra la posici?n 1er elemento a cubrir'
-  e<-nombre_ubic;comment(e)<-'e : nombre_ubic  A1'
+  e<-nombre_ubic;
 
 }
 #3final del bucle para hallar     e
