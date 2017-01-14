@@ -721,7 +721,7 @@ shinyUI(dashboardPage(skin = "green",
 
             column(width = 12,
 
-              downloadButton('download_plot', ' .tiff (300 dpi)')
+              downloadButton('download_plot', ' TIFF (300 dpi)')
 
             )
 
@@ -795,13 +795,6 @@ shinyUI(dashboardPage(skin = "green",
                       radioButtons("tool_dsg", label = "Design",
                         choices = c("crd", "rcbd", "lsd"), selected = "crd", inline = TRUE)
 
-
-                    ),
-
-
-                     column(width = 3,
-
-                      downloadButton('download_fb', 'Download')
 
                     )
 

@@ -442,7 +442,7 @@ output$mnc = DT::renderDataTable({
       autoWidth = TRUE,
       columnDefs = list(list(className = 'dt-center', targets ="_all")),
       deferRender=TRUE,
-      scrollY = 420,
+      scrollY = 400,
       scrollX = TRUE,
       scroller = TRUE,
 
@@ -734,17 +734,26 @@ output$fbdsg = DT::renderDataTable({
 file <- fdbk()
 
 DT::datatable(file,
-  # filter = list(position = 'top', clear = FALSE),
-  extensions = 'Scroller',
-  rownames=TRUE,
+
+  filter = 'top',
+  extensions = c('Buttons', 'Scroller'),
+  rownames = FALSE,
+
   options = list(
+
+    searchHighlight = TRUE,
+    searching = TRUE,
+
+    dom = 'Bfrtip',
+    buttons = c('copy', 'csv', 'excel'),
+
     autoWidth = TRUE,
-    searching = FALSE,
     columnDefs = list(list(className = 'dt-center', targets ="_all")),
-    deferRender = FALSE,
-    scrollY = 380,
+    deferRender=TRUE,
+    scrollY = 400,
     scrollX = TRUE,
     scroller = TRUE,
+
     initComplete = DT::JS(
       "function(settings, json) {",
       "$(this.api().table().header()).css({'background-color': '#000', 'color': '#fff'});",
@@ -753,21 +762,6 @@ DT::datatable(file,
 
 
 })
-
-
-# Download fieldbook ------------------------------------------------------
-
-
-output$download_fb <- downloadHandler(
-  filename = function() {
-    paste("FieldBook-", Sys.Date(), '.csv', sep='')
-  },
-  content = function(file) {
-    fb <- fdbk()
-    write.csv(fb, file)
-
-  }
-)
 
 
 
