@@ -69,7 +69,7 @@ shinyUI(dashboardPage(skin = "green",
 
 
                 box(
-                  title = "Charateristics",
+                  title = "Characteristics",
                   width = 6,
                   status = "danger",
                   solidHeader = T,
