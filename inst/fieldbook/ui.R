@@ -630,7 +630,7 @@ shinyUI(dashboardPage(skin = "green",
                 inputId ="gfont",
                 label = "Size",
                 value = 2,
-                min = 1,
+                min = 0,
                 step = 0.1
               )
 
@@ -822,7 +822,7 @@ shinyUI(dashboardPage(skin = "green",
 # information -------------------------------------------------------------
 
 
-        tabItem(tabName = "info",
+        tabItem(tabName = "info!",
 
                 h4(strong("FieldBook")),
 
