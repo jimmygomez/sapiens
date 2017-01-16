@@ -71,8 +71,6 @@ output$sfrt = renderPrint({
 
   }
 
-  need_cropname[need_crop>0]
-
 
 
 #-------------------------------ETAPA2: ingresar los fertilizantes %-----------------------------------------
@@ -88,26 +86,26 @@ output$sfrt = renderPrint({
     mymatrix <- c(f1,
                   f2,
                   f3,
-                  f4)
+                  f4,
+                  need_crop)
   #matriz de los fertilizantes
-    need_fert <- matrix( data=mymatrix,  nrow= length(need_crop), byrow = T  )
+    need_fert <- matrix( data=mymatrix,  ncol= length(need_crop), byrow = T  )
     colnames(need_fert)<-paste(need_cropname,sep='')
 
-#------------------------------ETAPA3: Filtrar por elementos signficantes
-    n_c.s <- need_crop[need_crop<=0];n_c.s
 
-    n_c.l<-which(!is.na(need_crop[need_crop>0]));n_c.l
+#------------------------------ETAPA3: Filtrar por elementos signficantes
+
+    # fertilizantes que requerimos para el plan de fertilizacion
+    nc.1 <- need_cropname[need_crop>0] ;nc.1
+
+    nc.0 <- need_cropname[need_crop<=0] ;nc.0
+
+    need_fert[,nc.0[1]] #llamar a los elementos nitrogendos
+    #n_c.l<-which(!is.na(need_crop[need_crop>0]));n_c.l
     #ubicacion de los elementos need_crop
 
-
-
-#PC1 :  1er punto de control
-#if(pc1!=0){
-
-
-#<-'nombre_ubic : muestra la posici?n 1er elemento a cubrir'
-
-
+  #PC1 :  1er punto de control
+  #if(pc1!=0){
 
 
 
@@ -118,7 +116,7 @@ output$sfrt = renderPrint({
 A2<-order(A1, na.last = TRUE, decreasing = FALSE,
           method = c("shell", "radix"))
 # A2 ubicacion elementos  ORDENADO CRECIENTEMENTE
-comment(A2)<-'A2 : Ubicacion de los elementos ordenados'
+
 #1) inicio    ORDENAMIENTO DE LOS ELEMENTOS#
 for (i in A2) {
   A3<-A1[A2]
