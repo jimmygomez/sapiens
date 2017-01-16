@@ -420,37 +420,31 @@ shinyUI(dashboardPage(skin = "green",
         tabItem(tabName = "stat",
 
 
-          box(width = 12, background = "black",
+          box(width = 5, background = "black",
 
-            column(width = 2,
+            column(width = 6,
 
-              uiOutput("resp")
-
-            ),
-
-            column(width = 2,
-
-              uiOutput("stv1")
+              uiOutput("stat_response")
 
             ),
 
 
-            column(width = 2,
+            column(width = 6,
 
-              uiOutput("stv2")
-
-            ),
-
-
-            column(width = 2,
-
-              uiOutput("block")
+              uiOutput("stat_block")
 
 
             ),
 
+            column(width = 12,
 
-            column(width = 2,
+              uiOutput("stat_factor")
+
+            ),
+
+
+
+            column(width = 6,
 
               numericInput("stsig",
                 label = "Significance",
@@ -462,7 +456,7 @@ shinyUI(dashboardPage(skin = "green",
 
             ),
 
-            column(width = 2,
+            column(width = 6,
 
               selectInput("stmc",
                 label = "Type",
@@ -470,23 +464,20 @@ shinyUI(dashboardPage(skin = "green",
                 selected = "snk")
 
 
-            )
+            ),
+
+
+              column(width = 12,
+
+                verbatimTextOutput("tbav")
+
+              )
+
+
 
 
           ),
 
-
-
-          box(width = 5,
-
-
-            column(width = 12,
-
-              verbatimTextOutput("tbav")
-
-            )
-
-          ),
 
 
           box(width = 7,
@@ -822,16 +813,12 @@ shinyUI(dashboardPage(skin = "green",
 # information -------------------------------------------------------------
 
 
-        tabItem(tabName = "info!",
-
-                h4(strong("FieldBook")),
-
-                p("User Manual"),
+        tabItem(tabName = "info!"
 
 
 
-                br(),
-                br()
+
+
 
         )
 

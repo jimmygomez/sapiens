@@ -25,7 +25,7 @@
 #' @importFrom gtools mixedsort
 #' @export
 
-plot_brln <- function(data, type= "bar", x, y, z, ylab = "", xlab = "", lgl = "",lgd = "right", sig = NULL, erb = FALSE, lmt = NULL, brk = NULL, xbl = NULL, zbl = NULL, color = TRUE, font = 1){
+plot_brln <- function(data, type= "bar", x, y, z, ylab = NULL, xlab = NULL, lgl = NULL,lgd = "right", sig = NULL, erb = FALSE, lmt = NULL, brk = NULL, xbl = NULL, zbl = NULL, color = TRUE, font = 1){
 
   ste <- NULL #To avoid this NOTE: fplot: no visible binding for global variable 'ste'
 
@@ -41,14 +41,47 @@ plot_brln <- function(data, type= "bar", x, y, z, ylab = "", xlab = "", lgl = ""
   data[,x] <- factor(data[,x], levels = gtools::mixedsort(data[,x]))
   data[,z] <- factor(data[,z], levels = gtools::mixedsort(data[,z]))
 
-  yl <- gsub(pattern = " ",replacement = "~", ylab)
-  ylab <- eval(expression(parse(text = yl)))
+
+  if ( is.null(ylab)){
+
+    ylab <- y
+
+  } else {
+
+    yl <- gsub(pattern = " ",replacement = "~", ylab)
+    ylab <- eval(expression(parse(text = yl)))
+
+  }
+
+
+  if ( is.null(xlab)){
+
+    xlab <- x
+
+  } else {
+
 
   xl <- gsub(pattern = " ",replacement = "~", xlab)
   xlab <- eval(expression(parse(text = xl)))
 
-  ll <- gsub(pattern = " ",replacement = "~", lgl)
-  lgl  <- eval(expression(parse(text = ll)))
+
+  }
+
+
+  if ( is.null(lgl)){
+
+    lgl <- z
+
+  } else {
+
+
+    ll <- gsub(pattern = " ",replacement = "~", lgl)
+    lgl  <- eval(expression(parse(text = ll)))
+
+
+  }
+
+
 
 
   data <- data %>% mutate(ymax = mean+ste)

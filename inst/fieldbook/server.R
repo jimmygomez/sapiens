@@ -220,13 +220,13 @@ output$pca <- renderPlot({
 # Select factors
 
 
-output$resp <- renderUI({
+output$stat_response <- renderUI({
 
   file <- fb()
   fbn <- names(file)
 
   selectInput(
-    inputId = "rsp",
+    inputId = "stat_rsp",
     label = "Response",
     choices = c("choose" = "", fbn)
   )
@@ -234,113 +234,67 @@ output$resp <- renderUI({
 })
 
 
-output$stv1 <- renderUI({
+output$stat_factor <- renderUI({
 
   file <- fb()
   fbn <- names(file)
 
   selectInput(
-    inputId = "fac1",
-    label = "Factor 1",
-    choices = c("choose" = "", fbn)
-  )
-
-})
-
-output$stv2 <- renderUI({
-
-  file <- fb()
-  fbn <- names(file)
-
-  selectInput(
-    inputId = "fac2",
-    label = "Factor 2",
-    choices = c("choose" = "", fbn)
+    inputId = "stat_fact",
+    label = "Factors",
+    choices = c("choose" = "", fbn),
+    multiple = TRUE
   )
 
 })
 
 
-output$block <- renderUI({
+
+output$stat_block <- renderUI({
 
   file <- fb()
   fbn <- names(file)
 
   selectInput(
-    inputId = "blk",
+    inputId = "stat_blk",
     label = "Block",
-    choices = c("choose" = "", fbn)
+    choices = c("choose" = "", fbn),
+    multiple = TRUE
   )
 
 })
 
 # ANOVA
 
+
 av <- reactive({
 
-  file <- fb()
+    file <- fb()
 
-  fac1 <- input$fac1
-  fac2 <- input$fac2
-  blk <-  input$blk
-  rsp <-  input$rsp
+    variable <- input$stat_rsp
 
+    factor <- input$stat_fact %>% paste0() %>%  paste(collapse= " * ")
 
-  if(fac1 != ""){
+    block <- input$stat_blk %>% paste0() %>% paste(collapse= " + ")
 
-    file[, fac1 ] <- file[,fac1] %>% as.factor()
-
-  }
-
-  if(fac2 != ""){
-
-    file[, fac2] <- file[, fac2] %>% as.factor()
-
-  }
-
-  if(blk != ""){
-
-    file[,blk] <- file[,blk] %>% as.factor()
-
-  }
+    file <- file %>% dplyr::mutate_each_(funs(factor(.)), input$stat_fact)
 
 
+    if ( block == "" ){
 
-  if (is.null(file)){return(NULL)}
-
-  else if(fac1 == '' && fac2 == '' && blk == '' && rsp == '')
-
-  {return(NULL)}
-
-  else if( !(fac1 == '') && !(fac2 == '') && !(blk == '') && !(rsp == ''))
-
-  {
-    formula <- as.formula( paste(rsp, paste(blk, paste(fac1, fac2, sep = "*"), sep = " + ") , sep = " ~ ") )
-    modelo <- aov(formula, data = file)
-  }
+      formula <- as.formula(paste( variable , factor, sep = " ~ "))
 
 
-  else if( !(fac1 == '') && !(fac2 == '') && !(rsp == ''))
+    } else {
 
-  {
-    formula <- as.formula( paste(rsp, paste(fac1, fac2, sep = "*") , sep = " ~ ") )
-    modelo <- aov(formula, data = file)
-  }
+      formula <- as.formula(paste( variable , paste(block, factor, sep = " + "), sep = " ~ "))
 
-  else if( !(fac1 == '') && !(blk == '') && !(rsp == ''))
-
-  {
-    formula <- as.formula( paste(rsp, paste(blk, fac1, sep = " + ") , sep = " ~ ") )
-    modelo <- aov(formula, data = file)
-  }
+    }
 
 
-  else if( !(fac1 == '') && !(rsp == ''))
+    av <- aov(formula, data = file)
+    av
 
-  {
-    formula <- as.formula(paste(rsp, fac1, sep = " ~ "))
-    modelo <- aov(formula, data = file)
-  }
 
 
 })
@@ -371,31 +325,35 @@ comp <- reactive({
   file <- av()
   test <- input$stmc
   sig <- input$stsig
+  factor <- input$stat_fact
+  variable <- input$stat_rsp
 
   if (is.null(file)) return(NULL)
 
-  else if( !(input$fac1 == '') && !(input$fac2 == '') && !(input$rsp == ''))
+  else if( length(factor) == 1 && !(variable == '') )
 
   {
 
-  rs <- sapiens::test_comparison(
+    rs <- sapiens::test_comparison(
       aov = file,
-      comp = c(input$fac1, input$fac2 ),
+      comp = factor[1],
       type = test,
       sig = sig)
+
 
   }
 
 
-  else if( !(input$fac1 == '') && !(input$rsp == ''))
+  else if( length(factor) >= 2 && !(variable == '') )
 
   {
 
-  rs <- sapiens::test_comparison(
+    rs <- sapiens::test_comparison(
       aov = file,
-      comp = c(input$fac1),
+      comp = c( factor[1], factor[2] ),
       type = test,
       sig = sig)
+
 
   }
 
@@ -420,7 +378,7 @@ output$mnc = DT::renderDataTable({
 
   } else {
 
-    file <- file %>% format(digits = 3, nsmall = 3) %>% as.data.frame()
+    file <- file %>% format(digits = 3, nsmall = 3)
 
   }
 
@@ -461,14 +419,15 @@ stat_plot <- reactive({
 
 
 df <- comp()
-fac1 <- input$fac1
-fac2 <- input$fac2
-rsp <- input$rsp
+factor <- input$stat_fact
+variable <- input$stat_rsp
 gtype <- input$gtype
 gcolor <- input$gcolor
+
 gply <- input$gply
 gplx <- input$gplx
 gplz <- input$gplz
+
 gerbr <- input$gerbr
 gsig <- input$gsig
 gfont <- input$gfont
@@ -479,6 +438,31 @@ brakes <- input$gbrakes
 
 xbl <- input$gp_xbk
 zbl <- input$gp_zbk
+
+
+# Title axis --------------------------------------------------------------
+
+if ( gply == ""){
+
+  gply <- variable
+
+} else {
+
+  gply <- input$gply
+
+}
+
+if ( gplx == ""){
+
+  gplx <- NULL
+
+}
+
+if ( gplz == ""){
+
+  gplz <- NULL
+
+}
 
 
 # Color -------------------------------------------------------------------
@@ -575,40 +559,13 @@ if (gsig == "no"){
 
 if (is.null(df)) return(NULL)
 
-else if( !(fac1 == '') && !(fac2 == '') && !(rsp == ''))
-
-{
-
-pt <- sapiens::plot_brln(data = df, type = gtype,
-  x = input$fac1,
-  y = "mean",
-  z = input$fac2,
-  ylab = gply,
-  xlab = gplx,
-  lgl = gplz,
-  lgd = glabel,
-  erb = gerbr,
-  sig = gsig,
-  font = gfont,
-  lmt = glimits,
-  brk = gbrakes,
-  xbl = xbl,
-  zbl = zbl,
-  color = gcolor
-  )
+else if( length(factor) == 1 && !(variable == '') ){
 
 
-}
-
-
-else if( !(fac1 == '') && !(rsp == ''))
-
-{
-
-pt <- sapiens::plot_brln(data = df, type = gtype,
-    x = input$fac1,
+  pt <- sapiens::plot_brln(data = df, type = gtype,
+    x = factor[1],
     y = "mean",
-    z = input$fac1,
+    z = factor[1],
     ylab = gply,
     xlab = gplx,
     lgl = gplz,
@@ -621,7 +578,35 @@ pt <- sapiens::plot_brln(data = df, type = gtype,
     xbl = xbl,
     zbl = zbl,
     color = gcolor
-    )
+  )
+
+
+}
+
+
+else if( length(factor) >= 2  && !(variable == ''))
+
+{
+
+
+  pt <- sapiens::plot_brln(data = df, type = gtype,
+    x = factor[1],
+    y = "mean",
+    z = factor[2],
+    ylab = gply,
+    xlab = gplx,
+    lgl = gplz,
+    lgd = glabel,
+    erb = gerbr,
+    sig = gsig,
+    font = gfont,
+    lmt = glimits,
+    brk = gbrakes,
+    xbl = xbl,
+    zbl = zbl,
+    color = gcolor
+  )
+
 
 }
 
@@ -762,6 +747,7 @@ DT::datatable(file,
 
 
 })
+
 
 
 

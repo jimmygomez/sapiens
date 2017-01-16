@@ -32,7 +32,7 @@ data_summary <- function(meanComp){
     dplyr::select(trt, means, Min, Max, r, std, ste, M) %>%
     tidyr::separate("trt", sep = ":", into = eval(fcts)) %>%
     dplyr::rename(mean = means, min = Min, max = Max, sg = M) %>%
-    dplyr::mutate_each_(funs(factor(.)), fct)
+    dplyr::mutate_each_(funs(factor(.)), fct) %>% as.data.frame()
 
 }
 
@@ -111,7 +111,7 @@ design_fieldbook <- function( treat1 = NULL, treat2 = NULL, rep = NULL, intime =
 
     } else {
 
-      lbt1 <- lbl_treat1
+      lbt1 <- gsub("\\s", "_", lbl_treat1)
 
     }
 
@@ -132,7 +132,7 @@ design_fieldbook <- function( treat1 = NULL, treat2 = NULL, rep = NULL, intime =
 
       } else {
 
-        lbt2 <- lbl_treat2
+        lbt2 <- gsub("\\s", "_", lbl_treat2)
 
       }
 
