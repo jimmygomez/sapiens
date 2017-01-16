@@ -69,7 +69,7 @@ shinyUI(dashboardPage(skin = "green",
 
 
                 box(
-                  title = "Charateristics",
+                  title = "Characteristics",
                   width = 6,
                   status = "danger",
                   solidHeader = T,
@@ -731,11 +731,8 @@ shinyUI(dashboardPage(skin = "green",
 
         tabItem(tabName = "tools",
 
-          box(title = "My FieldBook",
-            status = "info",
-            width = 12,
 
-                  box(title = "Parameters", width = 6,
+                  box(title = "My FieldBook", status = "info", width = 6,
 
                     column(width = 8,
 
@@ -800,10 +797,6 @@ shinyUI(dashboardPage(skin = "green",
 
 
                   )
-
-
-          )
-
 
 
 

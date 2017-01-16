@@ -630,7 +630,7 @@ output$stplot <- renderPlot({
 # download plot -----------------------------------------------------------
 
 output$download_plot <- downloadHandler(
-  file = function(){ paste( "plot_", input$rsp, '.tiff', sep = '')},
+  file = function(){ paste( "plot_", input$stat_rsp, '.tiff', sep = '')},
   content = function(file){
     ggplot2::ggsave(file, plot = stat_plot(), device = "tiff", dpi = 300, width = input$plot_W, height = input$plot_H, units = "mm" )
 
