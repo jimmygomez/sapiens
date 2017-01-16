@@ -34,8 +34,6 @@ data_summary <- function(meanComp){
     dplyr::rename(mean = means, min = Min, max = Max, sg = M) %>%
     dplyr::mutate_each_(funs(factor(.)), fct)
 
-
-
 }
 
 
@@ -196,18 +194,22 @@ design_fieldbook <- function( treat1 = NULL, treat2 = NULL, rep = NULL, intime =
   if (design == "crd"){
 
     fb[,"r"] <- paste("r", fb[,"r"], sep = "")
-
     fb <- plyr::rename(x = fb, replace= c("r" = "rep"))
+    fb[,"rep"] <- as.factor(fb[,"rep"])
+    fb
 
   } else if ( design == "rcbd" ){
 
     fb[,"block"] <- paste("b", fb[,"block"], sep = "")
+    fb[,"block"] <- as.factor(fb[,"block"])
     fb
 
   } else if ( design == "lsd" ){
 
     fb[,"row"] <- paste("r", fb[,"row"], sep = "")
+    fb[,"row"] <- as.factor(fb[,"row"])
     fb[,"col"] <- paste("c", fb[,"col"], sep = "")
+    fb[,"col"] <- as.factor(fb[,"col"])
     fb
 
   }

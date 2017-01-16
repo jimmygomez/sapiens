@@ -69,7 +69,7 @@ shinyUI(dashboardPage(skin = "green",
 
 
                 box(
-                  title = "Characteristics",
+                  title = "Charateristics",
                   width = 6,
                   status = "danger",
                   solidHeader = T,
@@ -630,7 +630,7 @@ shinyUI(dashboardPage(skin = "green",
                 inputId ="gfont",
                 label = "Size",
                 value = 2,
-                min = 1,
+                min = 0,
                 step = 0.1
               )
 
@@ -721,7 +721,7 @@ shinyUI(dashboardPage(skin = "green",
 
             column(width = 12,
 
-              downloadButton('download_plot', ' .tiff (300 dpi)')
+              downloadButton('download_plot', ' TIFF (300 dpi)')
 
             )
 
@@ -796,13 +796,6 @@ shinyUI(dashboardPage(skin = "green",
                         choices = c("crd", "rcbd", "lsd"), selected = "crd", inline = TRUE)
 
 
-                    ),
-
-
-                     column(width = 3,
-
-                      downloadButton('download_fb', 'Download')
-
                     )
 
 
@@ -829,7 +822,7 @@ shinyUI(dashboardPage(skin = "green",
 # information -------------------------------------------------------------
 
 
-        tabItem(tabName = "info",
+        tabItem(tabName = "info!",
 
                 h4(strong("FieldBook")),
 
