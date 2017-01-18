@@ -2,7 +2,7 @@
 title: "Field Book Manual"
 ---
 #Objective of FieldBook
-_FieldBook_ es una aplicacion _online_ que buscas ser una herramienta de ayuda a toda persona que este interesado en utilizar las estad?sticas como herramientas cotidianas en su vida acad?mica, comercial y personal. Si est? herramienta te ayuda a reducir el tiempo en operaciones mon?tonas y pasar directamente a la discusi?n e interpretaci?n de tus pruebas, nuestro esfuerzo no habr? sido en vano.
+_FieldBook_ es una aplicacion _online_ que busca ser una herramienta de ayuda a toda persona que este interesado en utilizar las estadísticas como herramientas cotidianas en su vida académica, comercial y personal. Si esta herramienta te ayuda a reducir el tiempo en operaciones monotonas y entrar directamente al análisis, la discusión e interpretación de tus pruebas, nuestro esfuerzo no habrá sido en vano.
 
 #Description scream
 
@@ -10,23 +10,96 @@ _FieldBook_ es una aplicacion _online_ que buscas ser una herramienta de ayuda a
 
 ![**In Black:** applications.  **In Green:** FielBook application](imagen/001_fieldbook.png)
 
-En la barra de direcciones se muestran las aplicaciones con las que cuenta _quipo.org_ en el cual puedes ingresar a la aplicaci?n de su inter?s pulsando sobre ?l: ?Bienvenido a FieldBook! para visualizar pantalla completa pulse el boton adjunto: ![Bottom FullScream](imagen/002_fullscream.png) 
+En la barra de direcciones se muestran las aplicaciones con las que cuenta _quipo.org_ en el cual puedes ingresar a la aplicación de su interés pulsando directamente sobre él: ¡Bienvenido a FieldBook! para visualizar pantalla completa pulse el boton adjunto: ![Bottom FullScream](imagen/002_fullscream.png) 
 
-Aqui podr?s encontrar heramientas que te permitir?n  desarrollar de manera sencilla, r?pida y rigurosa tus pruebas no param?tricas y comparaci?n de medias. 
+Aqui podrás encontrar heramientas que te permitirán  desarrollar de manera sencilla, rápida y rigurosa tus pruebas  paramétricas y comparación de medias. 
 
 
 
 #Tools
+Una de las primeras dificultades con la que uno se encuentra cuando pretende desarrollar una investigación, luego de escoger el diseño estadistico más apropiado es: ¿Cómo colectar mis datos?, ¿Cómo roturalo? todo esto ayudará a la hora de ingresar los datos a un programa estadístico.
 
+Si esta es tu primera investigación _Tools_ te será de mucha utilidad.
+
+##Caso práctico
+Supongamos que deseamos realizar la siguiente investigación: Tenemos cuatro individuos de la misma especie de palto (**Treatment1**):
+
+_Antillano_, 
+_Mexicano_, 
+_Nabal_, y 
+_zutano_
+
+queremos saber como se comportan a la  enfermedad  "la pudrición de raíz"" causado por _P. cinnamomi_, por tanto para este factor tenemos dos condiciones (**Treatment2**):
+
+_inoculado_ y 
+_noinoculado_
+
+Los hospederos de dicha enfermedad tendrán la mismas condiciones ambientales y patógeno virulante, el único factor de variación será la genética del hospedero. Por tal razón el diseño estadístico será un 
+
+**diseño ramdomizado completamente al azar**
+
+cdr: Completely random design.
+rcdb: Completely randomized block design.
+lsd: Least significant difference
+
+de dos factores: hospedero y patógeno. Además, deberá de evaluarse en el tiempo (**8 evaluaciones**) para conocer el progreso de la enfermedad, tendrá **6 repeticiones** en cada evaluación (*6 plantas de palto*) y las variables respuesta serán:
+
+
+      Weight fresh root (kg), 
+      Weight dry root (Kg), 
+      Weight humidity root (Kg), 
+      Weight fresh foliage (Kg), 
+      Weight dry foliage (Kg), 
+      Weight humidity foliage (Kg), 
+      Length root (Km), y
+      Damage root (%).
+      
+##Tools
+Con el planteamiento señalado procedemos a llenar _Tools_ 
+![**intelligent tools**](imagen/003_tools.png)
+
+Adionalmente tenemos funciones como *label* el cual son los rótulos de la columna _Treatment1_ y  _Treatment2_ respectivamente.
+
+###Buenas prácticas
+Al ser esta una plataforma de soporte computacional estadístico no deja de ser riguroso con la nomenclatura y simbolos extraños. Evitar ingresar simbologia extraña que **No pertenezca** al alfabeto inglés salgo en **label** pues ahí el programa reconoce que haces referencia a un titulo.
+
+Como se aprecia, para señalar tratamientos diferentes, se separa con espacio. En ocasiones juntamos palabras como
+
+_noinoculado_ si por accidente separamos ambas palabras
+
+_no_  _inoculado_ el programa reconocerá  como dos tratamientos diferentes, _no_ y la otra _inoculado_, otros errores comunes:
+
+        palto001      correcto   (un tratamiento)
+        palto 001     incorrecto (dos tratamientos)
+        pal?to%6""    incorrecto (evitar términos extraños, ´´°!"#$%&/()=?¡][{}[^)
+        palto_001     correcto    (un tratamiento)
+        p4lñtó_001    incorrecto  (evitar tildes y ñ)
+
+
+una vez terminado de ingresar los componentes de nuestro diseño mostrará en **table** la libreta de campo donde podrás _Copy_  ó imprimir en _csv_, adicionalmente _search_ perimte ingresar y ubicar un  grupos de celdas en la plantilla. Los datos serán ingresados a una hoja xlsx, de acuerdo a la plantilla.
+
+![**Table**, Flecha amarilla: Desplegables para escoger itms de intéres.     Flecha roja: Muestra la ubicación y la cantidad de unidades experimentales para tu ensayo.](imagen/004_table.png)
 
 
 #FieldBook
+Cuando hayas digitalizado tus datos recogidos de campo, de acuerdo a la plantilla diseñada en _Tools_ cargaras en **FieldBook** como url ó como xlsx.
+
+![**FieldBook**, **En amarillo**: Hoja en la que se encuentra tu base de datos que deseas subir. **En verde**: Actualizar  modificaciones  ](imagen/005_fieldbook.png)
 
 
+Una subido y actualizado el archivo, pasamos a _Outliers_.
 
 #outliers
+Aquí se visualizan los valores atípicos, y permite al investigador tomar desiciones como realizar una transfomación de datos o suprimer valores atípicos. Además de buscar la
 
 
+![**outliers**  ](imagen/006_outliers.png)
+
+![**outliers**  ](imagen/006_0outliers.png)
+
+![**outliers**  ](imagen/006_1outliers.png)
+
+H[2] O  km^{-1} "[" SO[4] H[2] "]"
 
 #Multivariate
 
