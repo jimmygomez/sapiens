@@ -127,7 +127,7 @@ plot_brln <- function(data, type= "bar", x, y, z, ylab = NULL, xlab = NULL, lgl 
 
       } else if ( color == FALSE ) {
 
-      scale_fill_grey(lgl, labels = zbl, start = 0, end = 1)
+      scale_fill_grey(lgl, labels = zbl, start = 1, end = 0.1)
 
 
       }
