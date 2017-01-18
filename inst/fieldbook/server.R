@@ -21,7 +21,7 @@ fb <-  eventReactive(input$reload, {
 
   validate(
 
-    need( input$fbdt, message = "Insert gss URL or xlsx file" )
+    need( input$fbdt, message = "Insert a Google spreadsheet URL or xlsx file" )
 
     )
 
@@ -313,10 +313,6 @@ output$tbav = renderPrint({
 comp <- reactive({
 
 
-  validate(
-    need( input$comp , "Select you parameter for statistical analysis")
-  )
-
   file <- av()
   test <- input$stmc
   sig <- input$stsig
@@ -401,11 +397,6 @@ output$mnc = DT::renderDataTable({
 # graphics ----------------------------------------------------------------
 
 stat_plot <- reactive({
-
-  validate(
-    need( input$stat_plot , "Select you parameter for statistical analysis")
-  )
-
 
 df <- comp()
 
@@ -633,7 +624,7 @@ output$download_plot <- downloadHandler(
 fdbk <- reactive({
 
   validate(
-    need( input$tool_f1, "Insert levels for you experiment")
+    need( input$tool_f1, "Insert levels for your experiment")
   )
 
   trt1 <- input$tool_f1
