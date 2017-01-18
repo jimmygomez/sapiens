@@ -5,15 +5,9 @@ library(shinydashboard)
 library(sapiens)
 library(agricolae)
 library(dplyr)
-library(plotly)
 library(tibble)
 library(DT)
 library(ggplot2)
-library(leaps)
-library(scatterplot3d)
-library(flashClust)
-library(lubridate)
-
 
 
 shinyUI(dashboardPage(skin = "green",
@@ -27,12 +21,12 @@ shinyUI(dashboardPage(skin = "green",
 
       sidebarMenu(
         menuItem("Presentacion", tabName = "intro", icon = icon("home")),
-        menuItem("Fieldbook", tabName = "fieldbook", icon = icon("cog")),
-        menuItem("Outliers", tabName = "outlier", icon = icon("leaf")),
-        menuItem("Multivariate", tabName = "multv", icon = icon("edit")),
-        menuItem("Statistics", tabName = "stat", icon = icon("cloud")),
+        menuItem("Fieldbook", tabName = "fieldbook", icon = icon("leaf")),
+        menuItem("Outliers", tabName = "outlier", icon = icon("search")),
+        menuItem("Multivariate", tabName = "multv", icon = icon("paperclip")),
+        menuItem("Statistics", tabName = "stat", icon = icon("signal")),
         menuItem("Graphics", tabName = "graph", icon = icon("tint")),
-        menuItem("Tools", tabName = "tools", icon = icon("edit")),
+        menuItem("Tools", tabName = "tools", icon = icon("wrench")),
         menuItem("About", tabName = "info", icon = icon("book"))
       )
 

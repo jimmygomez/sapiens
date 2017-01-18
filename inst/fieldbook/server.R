@@ -5,14 +5,9 @@ library(shinydashboard)
 library(sapiens)
 library(agricolae)
 library(dplyr)
-library(plotly)
 library(tibble)
 library(DT)
 library(ggplot2)
-library(leaps)
-library(scatterplot3d)
-library(flashClust)
-library(lubridate)
 
 
 
@@ -23,53 +18,35 @@ shinyServer(function(input, output) {
 
 fb <-  eventReactive(input$reload, {
 
-  xls <- input$impdata
-  url <- input$fbdt
 
-  if( !is.null(xls) ){
+  validate(
+
+    need( input$fbdt, message = "Insert gss URL or xlsx file" )
+
+    )
+
+
+  if ( !is.null(input$impdata) ) {
+
+    xls <- input$impdata
 
     file.rename(xls$datapath, paste(xls$datapath, ".xlsx", sep = ""))
 
     sapiens::getData(dir = paste(xls$datapath, ".xlsx", sep = ""), sheet = input$sheetdt)
 
+
   } else {
+
+    url <- input$fbdt
 
     sapiens::getData(dir = url, sheet = input$sheetdt)
 
   }
 
 
+
     }, ignoreNULL = FALSE)
 
-
-# fieldbook ------------------------------------------------
-
-
-# output$fbook <- DT::renderDataTable({
-#
-#
-#   file <- fb()
-#
-#   DT::datatable(file,
-#     #filter = list(position = 'top', clear = FALSE),
-#     extensions = 'Scroller',
-#     rownames=FALSE,
-#     options = list(
-#       autoWidth = TRUE,
-#       columnDefs = list(list(className = 'dt-center', targets ="_all")),
-#       searching = FALSE,
-#       deferRender=TRUE,
-#       scrollY = 450,
-#       scroller = TRUE,
-#       initComplete = DT::JS(
-#         "function(settings, json) {",
-#         "$(this.api().table().header()).css({'background-color': '#000', 'color': '#fff'});",
-#         "}")
-#     ))
-#
-#
-#
-# })
 
 
 output$fbook <- renderUI({
@@ -85,6 +62,7 @@ output$fbook <- renderUI({
 # boxplot -----------------------------------------------------------------
 
 output$bpx <- renderUI({
+
 
   file <- fb()
   fbn <- names(file)
@@ -126,6 +104,16 @@ output$bpz <- renderUI({
 
 
 output$boxplot <- renderPlot({
+
+  validate(
+
+    need( input$ybp, "Select your response variable"),
+    need( input$xbp, "Select your X axis variable" ),
+    need( input$zbp, "Select your grouped variable")
+
+  )
+
+
 
   file <- fb()
 
@@ -269,6 +257,13 @@ output$stat_block <- renderUI({
 
 av <- reactive({
 
+  validate(
+
+    need( input$stat_rsp, "Select your response variable" ),
+    need( input$stat_fact, "Select your factors")
+
+  )
+
     file <- fb()
 
     variable <- input$stat_rsp
@@ -306,14 +301,9 @@ output$tbav = renderPrint({
 
   file <- av()
 
-  if (is.null(file)){ cat("select your variables") }
-
-  else {
-
-    summary(file)
+  summary(file)
 
 
-  }
 })
 
 
@@ -322,15 +312,19 @@ output$tbav = renderPrint({
 
 comp <- reactive({
 
+
+  validate(
+    need( input$comp , "Select you parameter for statistical analysis")
+  )
+
   file <- av()
   test <- input$stmc
   sig <- input$stsig
   factor <- input$stat_fact
   variable <- input$stat_rsp
 
-  if (is.null(file)) return(NULL)
 
-  else if( length(factor) == 1 && !(variable == '') )
+  if( length(factor) == 1 && !(variable == '') )
 
   {
 
@@ -371,16 +365,7 @@ output$mnc = DT::renderDataTable({
 
   file <- comp()
 
-
-  if( is.null(file) ){
-
-    file <- cat("select your variables")
-
-  } else {
-
-    file <- file %>% format(digits = 3, nsmall = 3)
-
-  }
+  file <- file %>% format(digits = 3, nsmall = 3)
 
 
   DT::datatable(file,
@@ -417,8 +402,13 @@ output$mnc = DT::renderDataTable({
 
 stat_plot <- reactive({
 
+  validate(
+    need( input$stat_plot , "Select you parameter for statistical analysis")
+  )
+
 
 df <- comp()
+
 factor <- input$stat_fact
 variable <- input$stat_rsp
 gtype <- input$gtype
@@ -557,9 +547,7 @@ if (gsig == "no"){
 # body graph --------------------------------------------------------------
 
 
-if (is.null(df)) return(NULL)
-
-else if( length(factor) == 1 && !(variable == '') ){
+if( length(factor) == 1 && !(variable == '') ){
 
 
   pt <- sapiens::plot_brln(data = df, type = gtype,
@@ -644,6 +632,10 @@ output$download_plot <- downloadHandler(
 
 fdbk <- reactive({
 
+  validate(
+    need( input$tool_f1, "Insert levels for you experiment")
+  )
+
   trt1 <- input$tool_f1
   trt2 <- input$tool_f2
   dsg <-  input$tool_dsg
@@ -715,6 +707,7 @@ fdbk <- reactive({
 # Fieldbook table ---------------------------------------------------------
 
 output$fbdsg = DT::renderDataTable({
+
 
 file <- fdbk()
 
