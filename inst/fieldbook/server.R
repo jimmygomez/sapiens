@@ -376,7 +376,11 @@ output$mnc = DT::renderDataTable({
       searching = TRUE,
 
       dom = 'Bfrtip',
-      buttons = c('copy', 'csv', 'excel'),
+      buttons = list(
+        'copy',
+        list(extend = 'csv', filename = input$stat_rsp),
+        list(extend = 'excel', filename = input$stat_rsp)
+        ),
 
       autoWidth = TRUE,
       columnDefs = list(list(className = 'dt-center', targets ="_all")),
@@ -714,7 +718,11 @@ DT::datatable(file,
     searching = TRUE,
 
     dom = 'Bfrtip',
-    buttons = c('copy', 'csv', 'excel'),
+    buttons = list(
+      'copy',
+      list(extend = 'csv', filename = "FieldBook"),
+      list(extend = 'excel', filename = "FieldBook")
+      ),
 
     autoWidth = TRUE,
     columnDefs = list(list(className = 'dt-center', targets ="_all")),
