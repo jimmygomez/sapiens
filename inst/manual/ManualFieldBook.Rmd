@@ -29,7 +29,7 @@ _Mexicano_,
 _Nabal_, y 
 _zutano_
 
-queremos saber como se comportan a la  enfermedad  "la pudrición de raíz"" causado por _P. cinnamomi_, por tanto para este factor tenemos dos condiciones (**Treatment2**):
+queremos saber como se comportan a la  enfermedad  " pudrición de raíz"" causado por _P. cinnamomi_. Por tanto, para este factor tenemos dos condiciones (**Treatment2**):
 
 _inoculado_ y 
 _noinoculado_
@@ -38,45 +38,49 @@ Los hospederos de dicha enfermedad tendrán la mismas condiciones ambientales y p
 
 **diseño ramdomizado completamente al azar**
 
-cdr: Completely random design.
-rcdb: Completely randomized block design.
-lsd: Least significant difference
+    cdr: Completely random design.
+    rcdb: Completely randomized block design.
+    lsd: Least significant difference
 
 de dos factores: hospedero y patógeno. Además, deberá de evaluarse en el tiempo (**8 evaluaciones**) para conocer el progreso de la enfermedad, tendrá **6 repeticiones** en cada evaluación (*6 plantas de palto*) y las variables respuesta serán:
 
 
-      Weight fresh root (kg), 
-      Weight dry root (Kg), 
-      Weight humidity root (Kg), 
-      Weight fresh foliage (Kg), 
-      Weight dry foliage (Kg), 
-      Weight humidity foliage (Kg), 
-      Length root (Km), y
-      Damage root (%).
+      Weight fresh root (kg), .........FreshRootKg
+      Weight dry root (Kg), ...........DryRootKg
+      Weight humidity root (Kg), ......Hd_rootKg
+      Weight fresh foliage (Kg), ......FreshFolKg
+      Weight dry foliage (Kg), ........DryFolKg
+      Weight humidity foliage (Kg), ...Hd_folKg
+      Length root (Km), y..............LengthRootKm
+      Damage root (%)..................Damage
       
 ##Tools
 Con el planteamiento señalado procedemos a llenar _Tools_ 
 ![**intelligent tools**](imagen/003_tools.png)
 
-Adionalmente tenemos funciones como *label* el cual son los rótulos de la columna _Treatment1_ y  _Treatment2_ respectivamente.
+Adicionalmente tenemos funciones como *label* el cual son los rótulos de la columna _Treatment1_ y  _Treatment2_ respectivamente.
 
 ###Buenas prácticas
 Al ser esta una plataforma de soporte computacional estadístico no deja de ser riguroso con la nomenclatura y simbolos extraños. Evitar ingresar simbologia extraña que **No pertenezca** al alfabeto inglés salgo en **label** pues ahí el programa reconoce que haces referencia a un titulo.
 
 Como se aprecia, para señalar tratamientos diferentes, se separa con espacio. En ocasiones juntamos palabras como
 
-_noinoculado_ si por accidente separamos ambas palabras
+__noinoculado__ si por accidente separamos ambas palabras:  __no__  __inoculado__ el programa reconocerá  como dos tratamientos diferentes, _no_ e _inoculado_, otros errores comunes:
 
-_no_  _inoculado_ el programa reconocerá  como dos tratamientos diferentes, _no_ y la otra _inoculado_, otros errores comunes:
+palto001      correcto   (un tratamiento)
 
-        palto001      correcto   (un tratamiento)
-        palto 001     incorrecto (dos tratamientos)
-        pal?to%6""    incorrecto (evitar términos extraños, ´´°!"#$%&/()=?¡][{}[^)
-        palto_001     correcto    (un tratamiento)
-        p4lñtó_001    incorrecto  (evitar tildes y ñ)
+~~palto~~~~001~~     incorrecto (dos tratamientos)
+
+~~pal?to%6""~~    incorrecto (evitar términos extraños, ´´°!"#$%&/()=?¡][{}[^)
+
+palto_001     correcto    (un tratamiento)
+
+~~p4lñtó_001~~    incorrecto  (evitar tildes y ñ)
 
 
 una vez terminado de ingresar los componentes de nuestro diseño mostrará en **table** la libreta de campo donde podrás _Copy_  ó imprimir en _csv_, adicionalmente _search_ perimte ingresar y ubicar un  grupos de celdas en la plantilla. Los datos serán ingresados a una hoja xlsx, de acuerdo a la plantilla.
+
+    Aunque el programa soporta un mínimo de dos repeticiones, se recomienda al menos tener más de tres repeticiones. Siempre existe la posibilidad de pérdida de datos. En caso de ocurrir, mantener la plantilla tal cual y en la casilla donde corresponde el dato pérdido, dejar en blanco (nulo). No cero (0), puesto que es un valor diferente a nulo.
 
 ![**Table**, Flecha amarilla: Desplegables para escoger itms de intéres.     Flecha roja: Muestra la ubicación y la cantidad de unidades experimentales para tu ensayo.](imagen/004_table.png)
 
@@ -90,16 +94,42 @@ Cuando hayas digitalizado tus datos recogidos de campo, de acuerdo a la plantill
 Una subido y actualizado el archivo, pasamos a _Outliers_.
 
 #outliers
-Aquí se visualizan los valores atípicos, y permite al investigador tomar desiciones como realizar una transfomación de datos o suprimer valores atípicos. Además de buscar la
+Aquí se visualizan los valores atípicos, y permite al investigador tomar desiciones, como realizar una transfomación de datos o suprimir valores atípicos.
 
+Para nuestro ejemplo, en **Response** seleccionamos la variable respuesta del desplegable y al pie **Ylabel** escribiremos el rótulo del eje de la ordenadas. 
 
-![**outliers**  ](imagen/006_outliers.png)
+    Aquí se coloca el rotulo de las ordenas en cual permite  notacion cientifica y  simbología no permitida siempre y cuando, vaya entre comillas (""). Ver ejemplo: Damage ("%")     escribirá      Damage (%)
 
-![**outliers**  ](imagen/006_0outliers.png)
+Con el mismo criterio escogeremos uno de los factores (_Treatment_) en **Axis X**. Para nuestro ejemplo deseamos mostrar en el eje de las abscisas los Huespedes de la enfermedad y sobre el plano cartesiano **(Grouped)** el _patogeno_ con sus dos subfactores: _inoculado_ y _noinoculado_.
 
-![**outliers**  ](imagen/006_1outliers.png)
+![**outliers. Selector de tratamientos, rótulos y escala **  ](imagen/006_outliers.png)
 
-H[2] O  km^{-1} "[" SO[4] H[2] "]"
+    Amarillo: Elegir la varaible respuesta que desea visulizar y su rótulo.
+    verde: Elegir el Tratamiento  a mostrar en el eje de la abscisas
+    rojo: Elegir el Tratamiento  a mostrar en el plano cartesiano.  
+    Azul: Elegir la escala de los ejes y el tamaño de letra.  
+
+Además en **Ylabel** y **Xlabel** permite:
+
+    Si desea escribir: 
+    La fórmula del agua: H[2] O  
+    La fórmula de kilómetros por hora: km. Hr^{-1} 
+    La concentración de ácido sulfúrico:"[" SO[4] .H[2] "]"
+    *IMPORTANTE: Terminado de escribir el rotulo NO dejar espacio en blanco.
+
+Ahora, elegimos otra variable respuesta:
+
+Del desplegable **response** elegimos _LengthRootKm_, **Axis X** elegimos _patogeno_ y finalmente **Grouped**, _huesped_, del mismo modo debemos de cambiar los _labels_ puesto que el la imagen aún no las hemos cambiado.
+
+![**outliers. Response: LengthRootKm.  AxisX: patogeno**  ](imagen/006_0outliers.png)
+
+Otro forma de presentar la misma variable es la siguiente:
+
+![**outliers. Response: LengthRootKm.  AxisX: huesped**   ](imagen/006_1outliers.png)
+
+Quedá a criterio del invesigador la mejor manera de presentar sus datos, siempre procuparando que esta sea la más legible de la formas.
+
+Finalmente debemos precisar que para estas imagenes, hay tres puntos rojos (flecha azul) estos son los datos fuera de tipo _(outliers)_ que aumentan el promedio.
 
 #Multivariate
 
