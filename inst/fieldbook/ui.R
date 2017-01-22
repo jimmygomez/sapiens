@@ -830,7 +830,7 @@ shinyUI(dashboardPage(skin = "green",
           box( width = 10,
 
 
-            box(width = 5, title = NULL, background = "blue",
+            box(width = 4, title = NULL, background = "blue",
 
 
               column(width = 12,
@@ -861,7 +861,7 @@ shinyUI(dashboardPage(skin = "green",
             ),
 
 
-            box(width = 3, background = "red",
+            box(width = 4, background = "red",
 
               column(width = 12,
 

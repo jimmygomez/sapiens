@@ -953,6 +953,14 @@ output$lrg_grouped <- renderUI({
 
 plot_lr <- reactive({
 
+  validate(
+
+    need( input$lrg_var1, "Select your numeric variable"),
+    need( input$lrg_var2, "Select your numeric variable" )
+
+  )
+
+
   file <- fb()
   xvr <- input$lrg_var1
   yvr <- input$lrg_var2
