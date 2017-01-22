@@ -16,7 +16,7 @@ shinyServer(function(input, output) {
 
 # import data -----------------------------------------------------------
 
-fb <-  eventReactive(input$reload, {
+data_fb <-  eventReactive(input$reload, {
 
 
   validate(
@@ -55,6 +55,144 @@ output$fbook <- renderUI({
     style="height:450px; width:100%; scrolling=no")
 
   print(gss)
+
+})
+
+
+# Filter ------------------------------------------------------------------
+
+output$filter_01 <- renderUI({
+
+  file <- data_fb()
+  fbn <- names(file)
+
+  selectInput(
+    inputId = "filter_nm01",
+    label = "Factor",
+    choices = c("choose" = "", fbn)
+  )
+
+})
+
+output$filter_fact01 <- renderUI({
+
+  validate(
+
+    need( input$filter_nm01, "Select your levels")
+
+  )
+
+  file <- data_fb()
+  fl <- file[, input$filter_nm01]
+
+  selectInput(
+    inputId = "filter_ft01",
+    label = "Levels",
+    choices = c("choose" = "", fl),
+    multiple = TRUE
+  )
+
+})
+
+output$filter_02 <- renderUI({
+
+  file <- data_fb()
+  fbn <- names(file)
+
+  selectInput(
+    inputId = "filter_nm02",
+    label = "Factor",
+    choices = c("choose" = "", fbn)
+  )
+
+})
+
+output$filter_fact02 <- renderUI({
+
+  validate(
+
+    need( input$filter_nm02, "Select your levels")
+
+  )
+
+  file <- data_fb()
+  fl <- file[, input$filter_nm02]
+
+  selectInput(
+    inputId = "filter_ft02",
+    label = "Levels",
+    choices = c("choose" = "", fl),
+    multiple = TRUE
+  )
+
+})
+
+
+# Data analisys -----------------------------------------------------------
+
+
+fb <- reactive({
+
+
+  file <- data_fb()
+
+  fc1 <- input$filter_nm01
+  lv1 <- input$filter_ft01
+
+  fc2 <- input$filter_nm02
+  lv2 <- input$filter_ft02
+
+
+  if( fc1 == "" && fc2 == "" ){
+
+
+  dt <- file
+
+
+  } else if (fc1 != "" && fc2 != ""){
+
+    dt <- file %>%
+      subset( eval(parse(text = fc1)) == lv1 & eval(parse(text = fc2)) == lv2 )
+
+
+        if ( length(lv1) == 1){
+
+          dt[, fc1] <- NULL
+        }
+
+        if ( length(lv2) == 1){
+
+          dt[, fc2] <- NULL
+        }
+
+  } else if (fc1 != "" && fc2 == "" ){
+
+
+    dt <- file %>%
+      subset( eval(parse(text = fc1)) == lv1 )
+
+
+          if ( length(lv1) == 1){
+
+            dt[, fc1] <- NULL
+          }
+
+  } else if (fc1 == "" && fc2 != "" ){
+
+    dt <- file %>%
+      subset( eval(parse(text = fc2)) == lv2 )
+
+
+          if ( length(lv2) == 1){
+
+            dt[, fc2] <- NULL
+          }
+
+  }
+
+
+  dt
+
 
 })
 
@@ -117,25 +255,53 @@ output$boxplot <- renderPlot({
 
   file <- fb()
 
-  if(is.na(input$bpbrk)){
+
+  variable <- input$ybp
+  fx <-  input$xbp
+  fz <-  input$zbp
+  gply <- input$bply
+  gplx <- input$bplx
+  gplz <- input$bplz
+  brk <- input$bpbrk
+
+  # Title axis --------------------------------------------------------------
+
+  if ( gply == ""){
+
+    gply <- NULL
+
+  }
+
+  if ( gplx == ""){
+
+    gplx <- NULL
+
+  }
+
+
+  if ( gplz == ""){
+
+    gplz <- NULL
+
+  }
+
+
+  if(is.na(brk)){
 
     brks <- NULL
 
-  } else {
+  } else { brks <- brk}
 
-    brks <- input$bpbrk
-
-  }
 
   boxp <- sapiens::plot_box(
 
     data = file,
-    x = input$xbp,
-    y = input$ybp,
-    z = input$zbp,
-    xlab = input$bplx,
-    ylab = input$bply,
-    lgl =  input$bplz,
+    y = variable,
+    x = fx,
+    z = fz,
+    xlab = gplx,
+    ylab = gply,
+    lgl =  gplz,
     lgd = "top",
     font = input$bpsize,
     brk = brks
@@ -740,6 +906,97 @@ DT::datatable(file,
 
 })
 
+
+
+# Lineal regression -------------------------------------------------------
+
+output$lrg_variable1 <- renderUI({
+
+  file <- fb()
+  fbn <- names(file)
+
+  selectInput(
+    inputId = "lrg_var1",
+    label = "Variable",
+    choices = c("choose" = "", fbn)
+  )
+
+})
+
+output$lrg_variable2 <- renderUI({
+
+  file <- fb()
+  fbn <- names(file)
+
+  selectInput(
+    inputId = "lrg_var2",
+    label = "Variable",
+    choices = c("choose" = "", fbn)
+  )
+
+})
+
+
+output$lrg_grouped <- renderUI({
+
+  file <- fb()
+  fbn <- names(file)
+
+  selectInput(
+    inputId = "lrg_group",
+    label = "Grouped",
+    choices = c("choose" = "", fbn)
+  )
+
+})
+
+
+plot_lr <- reactive({
+
+  file <- fb()
+  xvr <- input$lrg_var1
+  yvr <- input$lrg_var2
+  zvr <- input$lrg_group
+  sfn <- input$lr_font
+  col <- input$lr_color
+  lgp <- input$lr_label
+
+  if ( col == "yes" ){
+
+    col <- TRUE
+
+  } else {
+
+    col <- FALSE
+
+  }
+
+  if ( zvr == "" ){
+
+    zvr <- NULL
+
+  }
+
+
+  sapiens::plot_linereg(
+    data = file,
+    x = xvr,
+    y = yvr,
+    z = zvr,
+    lgd = lgp,
+    color = col,
+    font = sfn
+  )
+})
+
+
+
+output$plot_regression <- renderPlot({
+
+  plot <-  plot_lr()
+  plot
+
+})
 
 
 

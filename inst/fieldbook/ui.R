@@ -21,12 +21,14 @@ shinyUI(dashboardPage(skin = "green",
 
       sidebarMenu(
         menuItem("Presentacion", tabName = "intro", icon = icon("home")),
+        menuItem("Tools", tabName = "tools", icon = icon("wrench")),
         menuItem("Fieldbook", tabName = "fieldbook", icon = icon("leaf")),
         menuItem("Outliers", tabName = "outlier", icon = icon("search")),
+        menuItem("Distribution", tabName = "distribution", icon = icon("wrench")),
         menuItem("Multivariate", tabName = "multv", icon = icon("paperclip")),
         menuItem("Statistics", tabName = "stat", icon = icon("signal")),
         menuItem("Graphics", tabName = "graph", icon = icon("tint")),
-        menuItem("Tools", tabName = "tools", icon = icon("wrench")),
+        menuItem("Regression", tabName = "regression", icon = icon("wrench")),
         menuItem("About", tabName = "info", icon = icon("book"))
       )
 
@@ -188,10 +190,34 @@ shinyUI(dashboardPage(skin = "green",
 
           status = "danger",
           solidHeader = T,
-          width = 12,
+          width = 10,
 
         # DT::dataTableOutput('fbook')
         htmlOutput("fbook")
+
+
+        ),
+
+
+# filter ------------------------------------------------------------------
+
+
+        box(
+
+          status = "danger",
+          solidHeader = T,
+          width = 2,
+          title = 'Filter',
+
+          uiOutput("filter_01"),
+
+          uiOutput("filter_fact01"),
+
+          br(),
+
+          uiOutput("filter_02"),
+
+          uiOutput("filter_fact02")
 
 
         )
@@ -795,6 +821,149 @@ shinyUI(dashboardPage(skin = "green",
 
 
           ),
+
+
+# Lineal Regression -------------------------------------------------------
+
+        tabItem(tabName = "regression",
+
+          box( width = 10,
+
+
+            box(width = 5, title = NULL, background = "blue",
+
+
+              column(width = 12,
+
+                uiOutput("lrg_variable1")
+
+
+              )
+
+
+            ),
+
+
+
+            box(width = 4, title = NULL, background = "green",
+
+
+
+
+              column(width = 12,
+
+                uiOutput("lrg_variable2")
+
+
+              )
+
+
+            ),
+
+
+            box(width = 3, background = "red",
+
+              column(width = 12,
+
+                uiOutput("lrg_grouped")
+
+
+              )
+
+
+            ),
+
+
+            box(width = 12,
+
+
+              plotOutput("plot_regression")
+
+
+
+            )
+
+
+          ),
+
+          box(width = 2,
+
+            column(width = 12,
+
+
+              numericInput(
+                inputId ="lr_font",
+                label = "Size",
+                value = 2,
+                min = 0,
+                step = 0.1
+              )
+
+            ),
+
+
+            column(width = 12,
+
+
+              radioButtons(
+                inputId ="lr_color",
+                label = "Color",
+                choices = c("yes", "no"),
+                selected = "yes",
+                inline = TRUE)
+            ),
+
+
+            column(width = 12,
+
+
+              radioButtons(
+                inputId ="lr_label",
+                label = "Legend",
+                choices = c("none", "left", "right", "top", "bottom"),
+                selected = "top",
+                inline = TRUE)
+            ),
+
+
+
+            column(width = 12,
+
+              numericInput('lr_plot_H', 'Height (mm)',
+                value = 75,
+                min = 0,
+                step = 5)
+
+            ),
+
+
+            column(width = 12,
+
+
+              numericInput('lr_plot_W', 'Width (mm)',
+                value = 105,
+                min = 0,
+                step = 5)
+
+
+            ),
+
+
+            column(width = 12,
+
+              downloadButton('download_plot_lr', ' TIFF (300 dpi)')
+
+            )
+
+
+
+
+
+          )
+
+
+
+        ),
 
 
 # information -------------------------------------------------------------

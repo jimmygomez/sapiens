@@ -5,7 +5,7 @@
 \title{Plot line or bar graphic}
 \usage{
 plot_brln(data, type = "bar", x, y, z, ylab = NULL, xlab = NULL,
-  lgl = NULL, lgd = "right", sig = NULL, erb = FALSE, lmt = NULL,
+  lgl = NULL, lgd = "top", sig = NULL, erb = FALSE, lmt = NULL,
   brk = NULL, xbl = NULL, zbl = NULL, color = TRUE, font = 1)
 }
 \arguments{

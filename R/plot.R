@@ -25,7 +25,7 @@
 #' @importFrom gtools mixedsort
 #' @export
 
-plot_brln <- function(data, type= "bar", x, y, z, ylab = NULL, xlab = NULL, lgl = NULL,lgd = "right", sig = NULL, erb = FALSE, lmt = NULL, brk = NULL, xbl = NULL, zbl = NULL, color = TRUE, font = 1){
+plot_brln <- function(data, type= "bar", x, y, z, ylab = NULL, xlab = NULL, lgl = NULL,lgd = "top", sig = NULL, erb = FALSE, lmt = NULL, brk = NULL, xbl = NULL, zbl = NULL, color = TRUE, font = 1){
 
   ste <- NULL #To avoid this NOTE: fplot: no visible binding for global variable 'ste'
 
@@ -294,31 +294,55 @@ plot_brln <- function(data, type= "bar", x, y, z, ylab = NULL, xlab = NULL, lgl 
 #' @export
 
 
-plot_box <- function(data, x, y, z, ylab = "", xlab = "", lgl = "",lgd = "right", brk = NULL, font = 1){
+plot_box <- function(data, x, y, z, ylab = NULL, xlab = NULL, lgl = NULL, lgd = "top", brk = NULL, font = 1){
 
 
   data[,x] <- factor(data[,x], levels = gtools::mixedsort(data[,x]))
   data[,z] <- factor(data[,z], levels = gtools::mixedsort(data[,z]))
 
 
-  yl <- gsub(pattern = " ",replacement = "~", ylab)
-  ylab <- eval(expression(parse(text = yl)))
+  if( !is.null(xlab) ){
 
-  xl <- gsub(pattern = " ",replacement = "~", xlab)
-  xlab <- eval(expression(parse(text = xl)))
+    xl <- gsub(pattern = " ",replacement = "~", xlab)
+    xlab <- eval(expression(parse(text = xl)))
 
-  ll <- gsub(pattern = " ",replacement = "~", lgl)
-  lgl  <- eval(expression(parse(text = ll)))
+  } else {
 
+    xlab <- x
+
+  }
+
+  if( !is.null(ylab) ){
+
+    yl <- gsub(pattern = " ",replacement = "~", ylab)
+    ylab <- eval(expression(parse(text = yl)))
+
+
+  } else {
+
+    ylab <- y
+
+  }
+
+
+  if( !is.null(lgl) ){
+
+    ll <- gsub(pattern = " ",replacement = "~", lgl)
+    lgl  <- eval(expression(parse(text = ll)))
+
+  } else {
+
+    lgl <- z
+
+  }
 
 
   if(is.null(brk)){
 
     brks <- ggplot2::waiver() } else {
 
-      brks <- (((round(min(data[,y]), 0))*(-20)):((round(min(data[,y]), 0))*(+20))) * brk
+      brks <- (((round(mean(data[,y]), 0))*(-20)):((round(mean(data[,y]), 0))*(+20))) * brk
 
-      # brks <-  scales::pretty_breaks(n = brk)
 
     }
 
@@ -519,12 +543,161 @@ plot_PCA <- function(data, type = "biplot", quali.sup = NULL, lgl = NULL){
 
 
 
+#' Plot line regression
+#'
+#' @description Function plot linea regression
+#' @param data Output dtsm fuction
+#' @param x Axis x variable
+#' @param y Axis y variable
+#' @param z Group variable
+#' @param ylab Title for the axis y
+#' @param xlab Title for the axis x
+#' @param lgl Title for the legend
+#' @param lgd the position of legends ("none", "left", "right", "bottom", "top", or two-element numeric vector)
+#' @param lmt limits of the y axis
+#' @param brk break of the y axis
+#' @param xbl axis brakes labels in strign with doble space
+#' @param zbl legend label in strign with doble space
+#' @param color colored figure (TRUE), otherwise black & white (FALSE)
+#' @param font letter size in plot
+#' @return Line regression plot
+#' @importFrom dplyr mutate
+#' @importFrom ggplot2 aes aes_string element_blank element_rect element_text geom_bar geom_errorbar geom_line geom_point geom_text ggplot position_dodge scale_color_discrete scale_fill_hue scale_shape_discrete scale_x_discrete scale_y_continuous theme theme_bw unit scale_fill_discrete
+#' @importFrom gtools mixedsort
+#' @export
+
+
+plot_linereg <- function(data, x, y, z, ylab = NULL, xlab = NULL, lgl = NULL,lgd = "top", xbrk = NULL, ybrk = NULL, zbl = NULL, color = TRUE, font = 1){
+
+
+  if( !is.null(xlab) ){
+
+    xl <- gsub(pattern = " ",replacement = "~", xlab)
+    xlab <- eval(expression(parse(text = xl)))
+
+  } else {
+
+    xlab <- x
+
+  }
+
+  if( !is.null(ylab) ){
+
+    yl <- gsub(pattern = " ",replacement = "~", ylab)
+    ylab <- eval(expression(parse(text = yl)))
+
+
+  } else {
+
+    ylab <- y
+
+  }
+
+
+  if( !is.null(lgl) ){
+
+    ll <- gsub(pattern = " ",replacement = "~", lgl)
+    lgl  <- eval(expression(parse(text = ll)))
+
+  } else {
+
+    lgl <- z
+
+  }
+
+
+  if( !is.null(zbl) ){
+
+    zbl <- unlist(strsplit(zbl, split = "  "))
+    zbl <- factor(unique( zbl[ zbl != "  "]))
+    zbl <- as.character(zbl)
+
+  } else {
+
+    zbl <- ggplot2::waiver()
+
+  }
+
+
+
+
+  if(is.null(xbrk)){
+
+    xbrks <- ggplot2::waiver() } else {
+
+      xbrks <- (((round(mean(data[,x]), 0))*(-20)):((round(mean(data[,x]), 0))*(+20))) * xbrk
+
+
+    }
+
+
+  if(is.null(ybrk)){
+
+    ybrks <- ggplot2::waiver() } else {
+
+      ybrks <- (((round(mean(data[,y]), 0))*(-20)):((round(mean(data[,y]), 0))*(+20))) * ybrk
+
+
+    }
+
+
+
+  p <- ggplot(data, aes_string( x = x , y = y, group = z, shape= z, color= z))+
+    geom_smooth(method = lm, se = FALSE, fullrange = TRUE)+
+    geom_point(size = 1.2*font)+
+    scale_x_continuous( xlab, expand = c(0,0), breaks = xbrks)+
+    scale_y_continuous( ylab, expand = c(0,0), breaks = ybrks )+
+    scale_shape_discrete(lgl, labels = zbl)
+
+
+  if ( color == TRUE ){
+
+    p <- p +
+      scale_color_discrete(lgl, labels = zbl)
+
+
+
+  } else if (color == FALSE ){
+
+    p <- p +
+      scale_color_grey(lgl, labels = zbl, start = 0, end = 0)
+
+
+  }
+
+
+  # if (is.null(lmt)){
+  #
+  #   gr <- bsp + scale_y_continuous(ylab, breaks = brks)
+  #
+  # }
+  #
+  # if ( !is.null(lmt)){
+  #
+  #   gr <- bsp + scale_y_continuous(ylab, expand = c(0,0), limits = lmt, breaks = brks)
+  #
+  # }
 
 
 
 
 
 
+    p + theme_bw()+
+    theme(
+      axis.title.x = element_text(size= 8*font),
+      axis.title.y = element_text(size= 8*font, angle=90),
+      panel.grid.major = element_blank(),
+      panel.grid.minor = element_blank(),
+      legend.position = lgd,
+      legend.title = element_text(size= 8*font),
+      legend.text = element_text(size= 8*font),
+      legend.key.size = unit(0.8*font, "lines"),
+      legend.key = element_blank(),
+      legend.background = element_rect(fill= "transparent"),
+      text = element_text(size = 8*font)
+    )
+}
 
 
 
