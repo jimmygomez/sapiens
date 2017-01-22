@@ -152,7 +152,7 @@ fb <- reactive({
   } else if (fc1 != "" && fc2 != ""){
 
     dt <- file %>%
-      subset( eval(parse(text = fc1)) == lv1 & eval(parse(text = fc2)) == lv2 )
+      subset( eval(parse(text = fc1)) %in% lv1 & eval(parse(text = fc2)) %in% lv2 )
 
 
         if ( length(lv1) == 1){
@@ -169,7 +169,7 @@ fb <- reactive({
 
 
     dt <- file %>%
-      subset( eval(parse(text = fc1)) == lv1 )
+      subset( eval(parse(text = fc1)) %in% lv1 )
 
 
           if ( length(lv1) == 1){
@@ -180,7 +180,7 @@ fb <- reactive({
   } else if (fc1 == "" && fc2 != "" ){
 
     dt <- file %>%
-      subset( eval(parse(text = fc2)) == lv2 )
+      subset( eval(parse(text = fc2)) %in% lv2 )
 
 
           if ( length(lv2) == 1){
