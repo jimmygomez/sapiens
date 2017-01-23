@@ -24,11 +24,11 @@ shinyUI(dashboardPage(skin = "green",
         menuItem("Tools", tabName = "tools", icon = icon("wrench")),
         menuItem("Fieldbook", tabName = "fieldbook", icon = icon("leaf")),
         menuItem("Outliers", tabName = "outlier", icon = icon("search")),
-        menuItem("Distribution", tabName = "distribution", icon = icon("wrench")),
+        menuItem("Distribution", tabName = "distribution", icon = icon("signal")),
         menuItem("Multivariate", tabName = "multv", icon = icon("paperclip")),
-        menuItem("Statistics", tabName = "stat", icon = icon("signal")),
+        menuItem("Statistics", tabName = "stat", icon = icon("pie-chart")),
         menuItem("Graphics", tabName = "graph", icon = icon("tint")),
-        menuItem("Regression", tabName = "regression", icon = icon("wrench")),
+        menuItem("Regression", tabName = "regression", icon = icon("random")),
         menuItem("About", tabName = "info", icon = icon("book"))
       )
 
@@ -810,7 +810,7 @@ shinyUI(dashboardPage(skin = "green",
                   ),
 
 
-                  box(title = "Table", width = 6,
+                  box(width = 6,
 
 
                     DT::dataTableOutput("fbdsg")
