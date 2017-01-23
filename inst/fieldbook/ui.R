@@ -835,7 +835,22 @@ shinyUI(dashboardPage(skin = "green",
 
               column(width = 12,
 
-                uiOutput("lrg_variable1")
+                uiOutput("lrg_variable2")
+
+
+              ),
+
+              column(width = 8,
+
+                textInput("lr_lbv2", label = "Label", value = "")
+
+
+              ),
+
+
+              column(width = 4,
+
+                numericInput("lr_brk2", label = "Brakes", value = NA, min = 0)
 
 
               )
@@ -852,8 +867,21 @@ shinyUI(dashboardPage(skin = "green",
 
               column(width = 12,
 
-                uiOutput("lrg_variable2")
+                uiOutput("lrg_variable1")
 
+
+              ),
+
+              column(width = 8,
+
+                textInput("lr_lbv1", label = "Label", value = "")
+
+
+              ),
+
+              column(width = 4,
+
+                numericInput("lr_brk1", label = "Brakes", value = NA, min = 0)
 
               )
 
@@ -866,6 +894,22 @@ shinyUI(dashboardPage(skin = "green",
               column(width = 12,
 
                 uiOutput("lrg_grouped")
+
+
+              ),
+
+
+              column(width = 6,
+
+                textInput("lr_lbgp", label = "Legend", value = "")
+
+
+              ),
+
+
+              column(width = 6,
+
+                textInput("lr_lglv", label = "Levels", value = "")
 
 
               )

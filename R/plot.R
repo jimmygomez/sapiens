@@ -642,8 +642,8 @@ plot_linereg <- function(data, x, y, z, ylab = NULL, xlab = NULL, lgl = NULL,lgd
 
 
 
-  p <- ggplot(data, aes_string( x = x , y = y, group = z, shape= z, color= z))+
-    geom_smooth(method = lm, se = FALSE, fullrange = TRUE)+
+  p <- ggplot(data, aes_string(  x = x , y = y, group = z, shape= z, color= z))+
+    geom_smooth(method = lm, se = FALSE, fullrange = TRUE, size = 0.3)+
     geom_point(size = 1.2*font)+
     scale_x_continuous( xlab, expand = c(0,0), breaks = xbrks)+
     scale_y_continuous( ylab, expand = c(0,0), breaks = ybrks )+
@@ -664,24 +664,6 @@ plot_linereg <- function(data, x, y, z, ylab = NULL, xlab = NULL, lgl = NULL,lgd
 
 
   }
-
-
-  # if (is.null(lmt)){
-  #
-  #   gr <- bsp + scale_y_continuous(ylab, breaks = brks)
-  #
-  # }
-  #
-  # if ( !is.null(lmt)){
-  #
-  #   gr <- bsp + scale_y_continuous(ylab, expand = c(0,0), limits = lmt, breaks = brks)
-  #
-  # }
-
-
-
-
-
 
     p + theme_bw()+
     theme(

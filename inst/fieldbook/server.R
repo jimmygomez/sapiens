@@ -923,6 +923,7 @@ output$lrg_variable1 <- renderUI({
 
 })
 
+
 output$lrg_variable2 <- renderUI({
 
   file <- fb()
@@ -935,6 +936,7 @@ output$lrg_variable2 <- renderUI({
   )
 
 })
+
 
 
 output$lrg_grouped <- renderUI({
@@ -968,6 +970,13 @@ plot_lr <- reactive({
   sfn <- input$lr_font
   col <- input$lr_color
   lgp <- input$lr_label
+  xlab <- input$lr_lbv1
+  ylab <- input$lr_lbv2
+  lgl <- input$lr_lbgp
+  xbk  <- input$lr_brk1
+  ybk <- input$lr_brk2
+  lvl <- input$lr_lglv
+
 
   if ( col == "yes" ){
 
@@ -985,14 +994,57 @@ plot_lr <- reactive({
 
   }
 
+  if ( ylab == "" ){
+
+    ylab <- NULL
+
+  }
+
+  if ( xlab == "" ){
+
+    xlab <- NULL
+
+  }
+
+
+  if ( lgl == "" ){
+
+    lgl <- NULL
+
+  }
+
+  if ( lvl == "" ){
+
+    lvl <- NULL
+
+  }
+
+  if ( is.na(ybk) ){
+
+    ybk <- NULL
+
+  }
+
+  if ( is.na(xbk) ){
+
+    xbk <- NULL
+
+  }
+
 
   sapiens::plot_linereg(
     data = file,
-    x = xvr,
     y = yvr,
+    x = xvr,
     z = zvr,
     lgd = lgp,
     color = col,
+    ylab = ylab,
+    xlab =  xlab,
+    lgl = lgl,
+    xbrk = xbk,
+    ybrk = ybk,
+    zbl = lvl,
     font = sfn
   )
 })
@@ -1007,6 +1059,14 @@ output$plot_regression <- renderPlot({
 })
 
 
+# download reg plot -----------------------------------------------------------
 
+output$download_plot_lr <- downloadHandler(
+  file = function(){ paste( "plot_", input$lrg_var2, "_" ,  input$lrg_var1, '.tiff', sep = '')},
+  content = function(file){
+    ggplot2::ggsave(file, plot = plot_lr(), device = "tiff", dpi = 300, width = input$lr_plot_W, height = input$lr_plot_H, units = "mm" )
+
+  }
+)
 
 })
