@@ -572,6 +572,7 @@ df <- comp()
 
 factor <- input$stat_fact
 variable <- input$stat_rsp
+
 gtype <- input$gtype
 gcolor <- input$gcolor
 
@@ -710,24 +711,48 @@ if (gsig == "no"){
 
 if( length(factor) == 1 && !(variable == '') ){
 
+      if ( length(factor[1]) >= 2 ){
 
-  pt <- sapiens::plot_brln(data = df, type = gtype,
-    x = factor[1],
-    y = "mean",
-    z = factor[1],
-    ylab = gply,
-    xlab = gplx,
-    lgl = gplz,
-    lgd = glabel,
-    erb = gerbr,
-    sig = gsig,
-    font = gfont,
-    lmt = glimits,
-    brk = gbrakes,
-    xbl = xbl,
-    zbl = zbl,
-    color = gcolor
-  )
+        pt <- sapiens::plot_brln(data = df, type = gtype,
+                                 x = factor[1],
+                                 y = "mean",
+                                 z = factor[2],
+                                 ylab = gply,
+                                 xlab = gplx,
+                                 lgl = gplz,
+                                 lgd = glabel,
+                                 erb = gerbr,
+                                 sig = gsig,
+                                 font = gfont,
+                                 lmt = glimits,
+                                 brk = gbrakes,
+                                 xbl = xbl,
+                                 zbl = zbl,
+                                 color = gcolor)
+
+      } else if (length(factor[1]) == 1){
+
+        pt <- sapiens::plot_brln(data = df, type = gtype,
+                                 x = factor[1],
+                                 y = "mean",
+                                 z = NULL,
+                                 ylab = gply,
+                                 xlab = gplx,
+                                 lgl = gplz,
+                                 lgd = glabel,
+                                 erb = gerbr,
+                                 sig = gsig,
+                                 font = gfont,
+                                 lmt = glimits,
+                                 brk = gbrakes,
+                                 xbl = xbl,
+                                 zbl = zbl,
+                                 color = gcolor)
+
+
+      }
+
+
 
 
 }
