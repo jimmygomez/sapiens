@@ -2,7 +2,7 @@
 title: "Field Book Manual"
 ---
 #Objective of FieldBook
-_FieldBook_ es una aplicacion _online_ que busca ser una herramienta de ayuda a toda persona que este interesado en utilizar las estadísticas como herramientas cotidianas en su vida académica, comercial y personal. Si esta herramienta te ayuda a reducir el tiempo en operaciones monotonas y entrar directamente al análisis, la discusión e interpretación de tus pruebas, nuestro esfuerzo no habrá sido en vano.
+_FieldBook_ es una aplicacion _online_ que busca ser una herramienta de ayuda a toda persona que este interesado en utilizar las estad?sticas como herramientas cotidianas en su vida acad?mica, comercial y personal. Si esta herramienta te ayuda a reducir el tiempo en operaciones monotonas y entrar directamente al an?lisis, la discusi?n e interpretaci?n de tus pruebas, nuestro esfuerzo no habr? sido en vano.
 
 #Description scream
 
@@ -10,39 +10,39 @@ _FieldBook_ es una aplicacion _online_ que busca ser una herramienta de ayuda a 
 
 ![**In Black:** applications.  **In Green:** FielBook application](imagen/001_fieldbook.png)
 
-En la barra de direcciones se muestran las aplicaciones con las que cuenta _quipo.org_ en el cual puedes ingresar a la aplicación de su interés pulsando directamente sobre él: ¡Bienvenido a FieldBook! para visualizar pantalla completa pulse el boton adjunto: ![Bottom FullScream](imagen/002_fullscream.png) 
+En la barra de direcciones se muestran las aplicaciones con las que cuenta _quipo.org_ en el cual puedes ingresar a la aplicaci?n de su inter?s pulsando directamente sobre ?l: ?Bienvenido a FieldBook! para visualizar pantalla completa pulse el boton adjunto: ![Bottom FullScream](imagen/002_fullscream.png) 
 
-Aqui podrás encontrar heramientas que te permitirán  desarrollar de manera sencilla, rápida y rigurosa tus pruebas  paramétricas y comparación de medias. 
+Aqui podr?s encontrar heramientas que te permitir?n  desarrollar de manera sencilla, r?pida y rigurosa tus pruebas  param?tricas y comparaci?n de medias. 
 
 
 
 #Tools
-Una de las primeras dificultades con la que uno se encuentra cuando pretende desarrollar una investigación, luego de escoger el diseño estadistico más apropiado es: ¿Cómo colectar mis datos?, ¿Cómo roturalo? todo esto ayudará a la hora de ingresar los datos a un programa estadístico.
+Una de las primeras dificultades con la que uno se encuentra cuando pretende desarrollar una investigaci?n, luego de escoger el dise?o estadistico m?s apropiado es: ?C?mo colectar mis datos?, ?C?mo roturalo? todo esto ayudar? a la hora de ingresar los datos a un programa estad?stico.
 
-Si esta es tu primera investigación _Tools_ te será de mucha utilidad.
+Si esta es tu primera investigaci?n _Tools_ te sera de mucha utilidad.
 
-##Caso práctico
-Supongamos que deseamos realizar la siguiente investigación: Tenemos cuatro individuos de la misma especie de palto (**Treatment1**):
+##Caso pr?ctico
+Supongamos que deseamos realizar la siguiente investigaci?n: Tenemos cuatro individuos de la misma especie de palto (**Treatment1**):
 
 _Antillano_, 
 _Mexicano_, 
 _Nabal_, y 
 _zutano_
 
-queremos saber como se comportan a la  enfermedad  " pudrición de raíz"" causado por _P. cinnamomi_. Por tanto, para este factor tenemos dos condiciones (**Treatment2**):
+queremos saber como se comportan a la  enfermedad  " pudrici?n de ra?z"" causado por _P. cinnamomi_. Por tanto, para este factor tenemos dos condiciones (**Treatment2**):
 
 _inoculado_ y 
 _noinoculado_
 
-Los hospederos de dicha enfermedad tendrán la mismas condiciones ambientales y patógeno virulante, el único factor de variación será la genética del hospedero. Por tal razón el diseño estadístico será un 
+Los hospederos de dicha enfermedad tendr?n la mismas condiciones ambientales y pat?geno virulante, el ?nico factor de variaci?n ser? la gen?tica del hospedero. Por tal raz?n el dise?o estad?stico ser? un 
 
-**diseño ramdomizado completamente al azar**
+**dise?o ramdomizado completamente al azar**
 
     cdr: Completely random design.
     rcdb: Completely randomized block design.
     lsd: Least significant difference
 
-de dos factores: hospedero y patógeno. Además, deberá de evaluarse en el tiempo (**8 evaluaciones**) para conocer el progreso de la enfermedad, tendrá **6 repeticiones** en cada evaluación (*6 plantas de palto*) y las variables respuesta serán:
+de dos factores: hospedero y pat?geno. Adem?s, deber? de evaluarse en el tiempo (**8 evaluaciones**) para conocer el progreso de la enfermedad, tendr? **6 repeticiones** en cada evaluaci?n (*6 plantas de palto*) y las variables respuesta ser?n:
 
 
       Weight fresh root (kg), .........FreshRootKg
@@ -55,38 +55,38 @@ de dos factores: hospedero y patógeno. Además, deberá de evaluarse en el tiempo 
       Damage root (%)..................Damage
       
 ##Tools
-Con el planteamiento señalado procedemos a llenar _Tools_ 
+Con el planteamiento se?alado procedemos a llenar _Tools_ 
 ![**intelligent tools**](imagen/003_tools.png)
 
-Adicionalmente tenemos funciones como *label* el cual son los rótulos de la columna _Treatment1_ y  _Treatment2_ respectivamente.
+Adicionalmente tenemos funciones como *label* el cual son los r?tulos de la columna _Treatment1_ y  _Treatment2_ respectivamente.
 
-###Buenas prácticas
-Al ser esta una plataforma de soporte computacional estadístico no deja de ser riguroso con la nomenclatura y simbolos extraños. Evitar ingresar simbologia extraña que **No pertenezca** al alfabeto inglés salgo en **label** pues ahí el programa reconoce que haces referencia a un titulo.
+###Buenas pr?cticas
+Al ser esta una plataforma de soporte computacional estad?stico no deja de ser riguroso con la nomenclatura y simbolos extra?os. Evitar ingresar simbologia extra?a que **No pertenezca** al alfabeto ingl?s salgo en **label** pues ah? el programa reconoce que haces referencia a un titulo.
 
-Como se aprecia, para señalar tratamientos diferentes, se separa con espacio. En ocasiones juntamos palabras como
+Como se aprecia, para se?alar tratamientos diferentes, se separa con espacio. En ocasiones juntamos palabras como
 
-__noinoculado__ si por accidente separamos ambas palabras:  __no__  __inoculado__ el programa reconocerá  como dos tratamientos diferentes, _no_ e _inoculado_, otros errores comunes:
+__noinoculado__ si por accidente separamos ambas palabras:  __no__  __inoculado__ el programa reconocer?  como dos tratamientos diferentes, _no_ e _inoculado_, otros errores comunes:
 
 palto001      correcto   (un tratamiento)
 
 ~~palto~~~~001~~     incorrecto (dos tratamientos)
 
-~~pal?to%6""~~    incorrecto (evitar términos extraños, ´´°!"#$%&/()=?¡][{}[^)
+~~pal?to%6""~~    incorrecto (evitar t?rminos extra?os, ???!"#$%&/()=??][{}[^)
 
 palto_001     correcto    (un tratamiento)
 
-~~p4lñtó_001~~    incorrecto  (evitar tildes y ñ)
+~~p4l?t?_001~~    incorrecto  (evitar tildes y ?)
 
 
-una vez terminado de ingresar los componentes de nuestro diseño mostrará en **table** la libreta de campo donde podrás _Copy_  ó imprimir en _csv_, adicionalmente _search_ perimte ingresar y ubicar un  grupos de celdas en la plantilla. Los datos serán ingresados a una hoja xlsx, de acuerdo a la plantilla.
+una vez terminado de ingresar los componentes de nuestro dise?o mostrar? en **table** la libreta de campo donde podr?s _Copy_  ? imprimir en _csv_, adicionalmente _search_ perimte ingresar y ubicar un  grupos de celdas en la plantilla. Los datos ser?n ingresados a una hoja xlsx, de acuerdo a la plantilla.
 
-    Aunque el programa soporta un mínimo de dos repeticiones, se recomienda al menos tener más de tres repeticiones. Siempre existe la posibilidad de pérdida de datos. En caso de ocurrir, mantener la plantilla tal cual y en la casilla donde corresponde el dato pérdido, dejar en blanco (nulo). No cero (0), puesto que es un valor diferente a nulo.
+    Aunque el programa soporta un m?nimo de dos repeticiones, se recomienda al menos tener m?s de tres repeticiones. Siempre existe la posibilidad de p?rdida de datos. En caso de ocurrir, mantener la plantilla tal cual y en la casilla donde corresponde el dato p?rdido, dejar en blanco (nulo). No cero (0), puesto que es un valor diferente a nulo.
 
-![**Table**, Flecha amarilla: Desplegables para escoger itms de intéres.     Flecha roja: Muestra la ubicación y la cantidad de unidades experimentales para tu ensayo.](imagen/004_table.png)
+![**Table**, Flecha amarilla: Desplegables para escoger itms de int?res.     Flecha roja: Muestra la ubicaci?n y la cantidad de unidades experimentales para tu ensayo.](imagen/004_table.png)
 
 
 #FieldBook
-Cuando hayas digitalizado tus datos recogidos de campo, de acuerdo a la plantilla diseñada en _Tools_ cargaras en **FieldBook** como url ó como xlsx.
+Cuando hayas digitalizado tus datos recogidos de campo, de acuerdo a la plantilla dise?ada en _Tools_ cargaras en **FieldBook** como url ? como xlsx.
 
 ![**FieldBook**, **En amarillo**: Hoja en la que se encuentra tu base de datos que deseas subir. **En verde**: Actualizar  modificaciones  ](imagen/005_fieldbook.png)
 
@@ -94,32 +94,32 @@ Cuando hayas digitalizado tus datos recogidos de campo, de acuerdo a la plantill
 Una subido y actualizado el archivo, pasamos a _Outliers_.
 
 #outliers
-Aquí se visualizan los valores atípicos, y permite al investigador tomar desiciones, como realizar una transfomación de datos o suprimir valores atípicos.
+Aqu? se visualizan los valores at?picos, y permite al investigador tomar desiciones, como realizar una transfomaci?n de datos o suprimir valores at?picos.
 
-Para nuestro ejemplo, en **Response** seleccionamos la variable respuesta del desplegable y al pie **Ylabel** escribiremos el rótulo del eje de la ordenadas. 
+Para nuestro ejemplo, en **Response** seleccionamos la variable respuesta del desplegable y al pie **Ylabel** escribiremos el r?tulo del eje de la ordenadas. 
 
-    Aquí se coloca el rotulo de las ordenas en cual permite  notacion cientifica y  simbología no permitida siempre y cuando, vaya entre comillas (""). Ver ejemplo: Damage ("%")     escribirá      Damage (%)
+    Aqu? se coloca el rotulo de las ordenas en cual permite  notacion cientifica y  simbolog?a no permitida siempre y cuando, vaya entre comillas (""). Ver ejemplo: Damage ("%")     escribir?      Damage (%)
 
 Con el mismo criterio escogeremos uno de los factores (_Treatment_) en **Axis X**. Para nuestro ejemplo deseamos mostrar en el eje de las abscisas los Huespedes de la enfermedad y sobre el plano cartesiano **(Grouped)** el _patogeno_ con sus dos subfactores: _inoculado_ y _noinoculado_.
 
-![**outliers. Selector de tratamientos, rótulos y escala **  ](imagen/006_outliers.png)
+![**outliers. Selector de tratamientos, r?tulos y escala **  ](imagen/006_outliers.png)
 
-    Amarillo: Elegir la varaible respuesta que desea visulizar y su rótulo.
+    Amarillo: Elegir la varaible respuesta que desea visulizar y su r?tulo.
     verde: Elegir el Tratamiento  a mostrar en el eje de la abscisas
     rojo: Elegir el Tratamiento  a mostrar en el plano cartesiano.  
-    Azul: Elegir la escala de los ejes y el tamaño de letra.  
+    Azul: Elegir la escala de los ejes y el tama?o de letra.  
 
-Además en **Ylabel** y **Xlabel** permite:
+Adem?s en **Ylabel** y **Xlabel** permite:
 
     Si desea escribir: 
-    La fórmula del agua: H[2] O  
-    La fórmula de kilómetros por hora: km. Hr^{-1} 
-    La concentración de ácido sulfúrico:"[" SO[4] .H[2] "]"
+    La f?rmula del agua: H[2] O  
+    La f?rmula de kil?metros por hora: km. Hr^{-1} 
+    La concentraci?n de ?cido sulf?rico:"[" SO[4] .H[2] "]"
     *IMPORTANTE: Terminado de escribir el rotulo NO dejar espacio en blanco.
 
 Ahora, elegimos otra variable respuesta:
 
-Del desplegable **response** elegimos _LengthRootKm_, **Axis X** elegimos _patogeno_ y finalmente **Grouped**, _huesped_, del mismo modo debemos de cambiar los _labels_ puesto que el la imagen aún no las hemos cambiado.
+Del desplegable **response** elegimos _LengthRootKm_, **Axis X** elegimos _patogeno_ y finalmente **Grouped**, _huesped_, del mismo modo debemos de cambiar los _labels_ puesto que el la imagen a?n no las hemos cambiado.
 
 ![**outliers. Response: LengthRootKm.  AxisX: patogeno**  ](imagen/006_0outliers.png)
 
@@ -127,11 +127,55 @@ Otro forma de presentar la misma variable es la siguiente:
 
 ![**outliers. Response: LengthRootKm.  AxisX: huesped**   ](imagen/006_1outliers.png)
 
-Quedá a criterio del invesigador la mejor manera de presentar sus datos, siempre procuparando que esta sea la más legible de la formas.
+Qued? a criterio del invesigador la mejor manera de presentar sus datos, siempre procuparando que esta sea la m?s legible de la formas.
 
 Finalmente debemos precisar que para estas imagenes, hay tres puntos rojos (flecha azul) estos son los datos fuera de tipo _(outliers)_ que aumentan el promedio.
 
 #Multivariate
+
+En  **Multivariate** tenemos dos presentaciones de las variables evaluadas. **Correlation** y **analisis de componentes principales** (pca) ambos con sus respectivos graficos. estos nos permitira reconocer la correlacion de las variables y simplificar un problema complejo.
+
+![correlation      y     pca](imagen/007_0multivariante.png)
+
+##correlation
+
+En el cuadro de la izquierda **correlation**  muestra  el grado de **significance** con el que se esta trabajando, la **font** para escoger el tamaÃ±o de fuente, y por Ãºltimo **color** en este se se colocaran los colores de su preferencia par arefresentar dicha correlacion, notar que el orden como se ingresan (dejando un espacio), es importante NO dejar espacio terminado de introducir los colores HTML.
+
+La correlacion permite conocer el grado de relacion que tiene cada variable respuesta respecto a la otra, en un rango de -1 a +1, si el valor absoluto de la correlacion es cercano a 1 indica que existe entre ellos una fuerte relaciÃ³n, y el signo negativo o positivo indica si es una relaciÃ³n directa u opuesta.
+
+###colors HTML
+Aqui se debera colocar los **colores HTML** pues solo permite ingresar los colores mÃ¡s primarios y otros mas polulares como: _yellow_  _red_  _green_  _blue_  _orange_ _black_ _gray_ _white_. A continuaciÃ³n se adjunta una lista de los colores mÃ¡s utilizados, si desea algun color en particular buscar codigo en una paleta de color en el navegador de su preferencia.
+
+![colores HTML](imagen/007_05multivariante.png)
+
+
+![correlation y PCA](imagen/007_07multivariante.png)
+
+
+##Analisis de componentes principales
+
+En el analisis de los componentes principales (PCA), se tiene el desplegable **Type** donde se presenta _biplot_, _var_ e _ind_ por defecto se presenta **biplot**; junto a **Variable** se puede escoger el plano que mejor grafique el proposito del investigador, con la combinacion de estas.
+
+**PCA- Type** permite encoger _var_  el que representa la correlacion de la variables respuestas en una grafica simple  de radio = **1** donde se aprecia relacion inversa de _Damage_ y _LengthRootKm_  y es criterio del investigador desarrollar su atencion en estas dos variables porque ademas de tener un alto grado de correlacion opuesta po
+
+![c](imagen/007_02multivariante.png)
+
+Hay que recordar que la herramienta  **Tools** permite construir la libreta de campo y que el orden como se contruye la columna: reptecion, bloque, factores y variable repuesta, sera importante a la hora de escoger en   **Multivariate - PCA - Variable**,la columna que vas a rpresentar.
+
+Para el ejemplo la columna **2** representa a las evaluaciones por lo que en la leyenda iran las evaluaciones con su respectivo color, y en **label** si deseas comabiar _eva_ por _Evaluacion_.
+
+
+
+
+En **variable**, por defecto, la casilla se encuentra vacia, para este ejemplo se escoge en varible **3** el que representa  al **patogeno**  por consecuencia aparece como rotulo en la leyenda, y se puede apreciar que en la grafica se separa la columna **patogeno** en _inoculado_ y _noinoculado_ de manera clara y elegante. Si deseamos cambir el rotulo de la leyenda, escribir en **label** el nombre de su preferencia.  
+
+Es criterio del investigador tomar la columna que mejor se ajuste a sus necesidades.
+
+![c](imagen/007_multivariante.png)
+
+
+El eje de las componentes principales representan el porcentaje de variabilidad de la varianza y no tiene otro significado del que le da el investigador. Para mÃ¡s imformacio revisar literatura referida analisis de componentes principales.
+
 
 
 #Stadistic
