@@ -3,38 +3,6 @@
 dplyr::`%>%`
 
 
-#' Mean Comparison Table Summary
-#'
-#' @description Function using resulting output from mean comparison test from agricolae package optimized for graphs.
-#' @param meanComp Object list with the result from mean comparison test
-#' @return Table with complete data for graphics
-#' @importFrom dplyr mutate select rename group_by_ summarise full_join
-#' @importFrom tidyr separate
-#' @export
-
-data_summary <- function(meanComp){
-
-  #to avoid no bisible global variable function
-  std <- r <- trt <- means <- Min <- Max <- ste <- M <- NULL
-
-  fct <- as.character(meanComp$parameters$name.t)
-  fcts <- as.expression(strsplit(fct, split = ":"))
-
-  dtmn <- meanComp$means
-  dtgr <- meanComp$groups
-
-  dtgr$trt <- gsub("\\s", "", as.character(dtgr$trt))
-
-  dta <- dtmn %>%
-    dplyr::mutate(ste = std/sqrt(r), trt = as.character(row.names(dtmn)))
-
-  sm <- dplyr::full_join(dta[2:7], dtgr, by = "trt") %>%
-    dplyr::select(trt, means, Min, Max, r, std, ste, M) %>%
-    tidyr::separate("trt", sep = ":", into = eval(fcts)) %>%
-    dplyr::rename(mean = means, min = Min, max = Max, sg = M) %>%
-    dplyr::mutate_each_(funs(factor(.)), fct) %>% as.data.frame()
-
-}
 
 
 
@@ -245,6 +213,38 @@ design_fieldbook <- function( treat1 = NULL, treat2 = NULL, rep = NULL, intime =
 
 
 
+#' Mean Comparison Table Summary
+#'
+#' @description Function using resulting output from mean comparison test from agricolae package optimized for graphs.
+#' @param meanComp Object list with the result from mean comparison test
+#' @return Table with complete data for graphics
+#' @importFrom dplyr mutate select rename group_by_ summarise full_join
+#' @importFrom tidyr separate
+#' @export
+
+data_summary <- function(meanComp){
+
+  #to avoid no bisible global variable function
+  std <- r <- trt <- means <- Min <- Max <- ste <- M <- NULL
+
+  fct <- as.character(meanComp$parameters$name.t)
+  fcts <- as.expression(strsplit(fct, split = ":"))
+
+  dtmn <- meanComp$means
+  dtgr <- meanComp$groups
+
+  dtgr$trt <- gsub("\\s", "", as.character(dtgr$trt))
+
+  dta <- dtmn %>%
+    dplyr::mutate(ste = std/sqrt(r), trt = as.character(row.names(dtmn)))
+
+  sm <- dplyr::full_join(dta[2:7], dtgr, by = "trt") %>%
+    dplyr::select(trt, means, Min, Max, r, std, ste, M) %>%
+    tidyr::separate("trt", sep = ":", into = eval(fcts)) %>%
+    dplyr::rename(mean = means, min = Min, max = Max, sg = M) %>%
+    dplyr::mutate_each_(funs(factor(.)), fct) %>% as.data.frame()
+
+}
 
 
 

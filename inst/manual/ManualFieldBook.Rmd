@@ -17,32 +17,32 @@ Aqui podr?s encontrar heramientas que te permitir?n  desarrollar de manera senci
 
 
 #Tools
-Una de las primeras dificultades con la que uno se encuentra cuando pretende desarrollar una investigaci?n, luego de escoger el dise?o estadistico m?s apropiado es: ?C?mo colectar mis datos?, ?C?mo roturalo? todo esto ayudar? a la hora de ingresar los datos a un programa estad?stico.
+Una de las primeras dificultades con la que uno se encuentra cuando pretende desarrollar una investigaci?n, luego de escoger el dise?o estadistico m?s apropiado es: ?C?mo colectar mis datos?, ?C?mo roturalo? todo esto ayudara a la hora de ingresar los datos a un programa estadistico.
 
 Si esta es tu primera investigaci?n _Tools_ te sera de mucha utilidad.
 
-##Caso pr?ctico
-Supongamos que deseamos realizar la siguiente investigaci?n: Tenemos cuatro individuos de la misma especie de palto (**Treatment1**):
+##Caso practico
+Supongamos que deseamos realizar la siguiente investigacion: Tenemos cuatro individuos de la misma especie de palto (**Treatment1**):
 
 _Antillano_, 
 _Mexicano_, 
 _Nabal_, y 
 _zutano_
 
-queremos saber como se comportan a la  enfermedad  " pudrici?n de ra?z"" causado por _P. cinnamomi_. Por tanto, para este factor tenemos dos condiciones (**Treatment2**):
+queremos saber como se comportan a la  enfermedad  "pudricion de raiz" causado por _P. cinnamomi_. Por tanto, para este factor tenemos dos condiciones (**Treatment2**):
 
 _inoculado_ y 
 _noinoculado_
 
-Los hospederos de dicha enfermedad tendr?n la mismas condiciones ambientales y pat?geno virulante, el ?nico factor de variaci?n ser? la gen?tica del hospedero. Por tal raz?n el dise?o estad?stico ser? un 
+Los hospederos de dicha enfermedad tendran la mismas condiciones ambientales y pat?geno virulante. El unico factor de variacion sera la genetica del hospedero. Por tal razon el diseño estadistico sera un: 
 
-**dise?o ramdomizado completamente al azar**
+  **diseño ramdomizado completamente al azar**
 
     cdr: Completely random design.
     rcdb: Completely randomized block design.
     lsd: Least significant difference
 
-de dos factores: hospedero y pat?geno. Adem?s, deber? de evaluarse en el tiempo (**8 evaluaciones**) para conocer el progreso de la enfermedad, tendr? **6 repeticiones** en cada evaluaci?n (*6 plantas de palto*) y las variables respuesta ser?n:
+De dos factores: hospedero y patogeno. Ademas, debera de evaluarse en el tiempo (**8 evaluaciones**) para conocer el progreso de la enfermedad, tendra **6 repeticiones** en cada evaluacion (*6 plantas de palto*) y la variable respuesta sera:
 
 
       Weight fresh root (kg), .........FreshRootKg
@@ -55,19 +55,18 @@ de dos factores: hospedero y pat?geno. Adem?s, deber? de evaluarse en el tiempo 
       Damage root (%)..................Damage
       
 ##Tools
-Con el planteamiento se?alado procedemos a llenar _Tools_ 
+Con el planteamiento señalado procedemos a llenar _Tools_ 
 ![**intelligent tools**](imagen/003_tools.png)
 
 Adicionalmente tenemos funciones como *label* el cual son los r?tulos de la columna _Treatment1_ y  _Treatment2_ respectivamente.
 
 ###Buenas pr?cticas
-Al ser esta una plataforma de soporte computacional estad?stico no deja de ser riguroso con la nomenclatura y simbolos extra?os. Evitar ingresar simbologia extra?a que **No pertenezca** al alfabeto ingl?s salgo en **label** pues ah? el programa reconoce que haces referencia a un titulo.
+Al ser esta una plataforma de soporte estadistico no deja de ser riguroso con la nomenclatura y simbolos raros. Evitar ingresar simbologia extraña que **No pertenezca** al alfabeto ingles. Salvo en **label**,  el programa reconoce que haces referencia a un titulo, entonces los carateres raros solo los imprimira, mas no los analizara.
 
 Como se aprecia, para se?alar tratamientos diferentes, se separa con espacio. En ocasiones juntamos palabras como
 
 __noinoculado__ si por accidente separamos ambas palabras:  __no__  __inoculado__ el programa reconocer?  como dos tratamientos diferentes, _no_ e _inoculado_, otros errores comunes:
 
-palto001      correcto   (un tratamiento)
 
 ~~palto~~~~001~~     incorrecto (dos tratamientos)
 
@@ -75,12 +74,13 @@ palto001      correcto   (un tratamiento)
 
 palto_001     correcto    (un tratamiento)
 
-~~p4l?t?_001~~    incorrecto  (evitar tildes y ?)
+Palto001      correcto   (un tratamiento)
 
+**evitar tildes y "ñ"**
 
-una vez terminado de ingresar los componentes de nuestro dise?o mostrar? en **table** la libreta de campo donde podr?s _Copy_  ? imprimir en _csv_, adicionalmente _search_ perimte ingresar y ubicar un  grupos de celdas en la plantilla. Los datos ser?n ingresados a una hoja xlsx, de acuerdo a la plantilla.
+Una vez terminado de ingresar los componentes de nuestro dise?o mostrar? en **table** la libreta de campo donde podr?s _Copy_  ? imprimir en _csv_ o _xlsx_. Adicionalmente _search_ permite ingresar y ubicar un  grupos de celdas en la plantilla. Los datos seran ingresados a una hoja xlsx, de acuerdo a la plantilla.
 
-    Aunque el programa soporta un m?nimo de dos repeticiones, se recomienda al menos tener m?s de tres repeticiones. Siempre existe la posibilidad de p?rdida de datos. En caso de ocurrir, mantener la plantilla tal cual y en la casilla donde corresponde el dato p?rdido, dejar en blanco (nulo). No cero (0), puesto que es un valor diferente a nulo.
+    Aunque el programa soporta un m?nimo de dos repeticiones, se recomienda al menos tener más de tres repeticiones. Siempre existe la posibilidad de p?rdida de datos. En caso de ocurrir, mantener la plantilla tal cual y en la casilla donde corresponde el dato pérdido, dejar en blanco (nulo). No cero (0), puesto que es un valor diferente a nulo.
 
 ![**Table**, Flecha amarilla: Desplegables para escoger itms de int?res.     Flecha roja: Muestra la ubicaci?n y la cantidad de unidades experimentales para tu ensayo.](imagen/004_table.png)
 
@@ -91,7 +91,13 @@ Cuando hayas digitalizado tus datos recogidos de campo, de acuerdo a la plantill
 ![**FieldBook**, **En amarillo**: Hoja en la que se encuentra tu base de datos que deseas subir. **En verde**: Actualizar  modificaciones  ](imagen/005_fieldbook.png)
 
 
-Una subido y actualizado el archivo, pasamos a _Outliers_.
+Una vez subido y actualizado el archivo. En la herramienta **Filter** podrás filtrar la base de dato de acuerdo al criterio del investigador, tomando los factores que mejor los acerquen a sus propositos. Puede filtrar por evalucación  y algun tratamiento que sea de su particular interes.
+
+
+![**FieldBook - Filter** ](imagen/filter.png)
+
+
+De no escoger ningun filtro, cargara toda la base de datos a  _Outliers_.
 
 #outliers
 Aqu? se visualizan los valores at?picos, y permite al investigador tomar desiciones, como realizar una transfomaci?n de datos o suprimir valores at?picos.
@@ -139,14 +145,23 @@ En  **Multivariate** tenemos dos presentaciones de las variables evaluadas. **Co
 
 ##correlation
 
-En el cuadro de la izquierda **correlation**  muestra  el grado de **significance** con el que se esta trabajando, la **font** para escoger el tamaño de fuente, y por último **color** en este se se colocaran los colores de su preferencia par arefresentar dicha correlacion, notar que el orden como se ingresan (dejando un espacio), es importante NO dejar espacio terminado de introducir los colores HTML.
+En el cuadro de la izquierda **Correlation**  muestra  el grado de **Significance**, por defecto se trabaja con un grado de significanci igual al 5%, en el desplegable se puede cambiar el nivel de significancia. 
 
-La correlacion permite conocer el grado de relacion que tiene cada variable respuesta respecto a la otra, en un rango de -1 a +1, si el valor absoluto de la correlacion es cercano a 1 indica que existe entre ellos una fuerte relación, y el signo negativo o positivo indica si es una relación directa u opuesta.
+En **Font** se puede escoger el tamaño de fuente, el cual por defecto es **1** es el tamaño de fuente más aporpiado si se desea copiar la imagen para imprimir. Por último, **color**, en este se colocaran los colores de su preferencia para representar dicha correlacion, notar que el orden como se ingresan los codigos de colores HTML es importante. 
+
+Para separar los codigo de  colores HTML, se usa un espacio, es importante NO dejar espacio terminado de introducir los colores HTML.
+
+**Correlation**  permite conocer el grado de relacion que tiene cada variable respuesta respecto a la otra, en un rango de **-1 a +1**, si el valor absoluto de la correlacion es cercano a **1** indica que existe entre ellos una fuerte relación, y el signo positivo o negtivo indica si es una relación directa u opuesta, respectivamente.
 
 ###colors HTML
-Aqui se debera colocar los **colores HTML** pues solo permite ingresar los colores más primarios y otros mas polulares como: _yellow_  _red_  _green_  _blue_  _orange_ _black_ _gray_ _white_. A continuación se adjunta una lista de los colores más utilizados, si desea algun color en particular buscar codigo en una paleta de color en el navegador de su preferencia.
+Para un mejor empleo de los colores HTML en **Multivariate**, se debera colocar los **colores HTML** o llamar a los  colores primarios por su nombre, como: _yellow_  _red_  _green_  _blue_  _orange_ _black_ _gray_ _white_. 
 
-![colores HTML](imagen/007_05multivariante.png)
+Una forma practica de obtener el codigo es usando un **eyes dropper**, una vez instalado en su navegador, ingresar al **color picker**. Copiar el codigo del color y pegar sobre **Multivariate - correlation - color**, como se muestran en los circulos y flechas.
+
+![colors HTML, eyes dropper. En rojo: cuenta gotas. En verde: copiar codigo de  color](imagen/colors picker.png)
+
+
+Copiado el codigo de color HTML, pegar en **Multivariate - correlation - color**, es asi como realizamos una mejor presentacion de la **Correlation** de las variables. A continuación pasamos la analisis de PCA.
 
 
 ![correlation y PCA](imagen/007_07multivariante.png)
@@ -154,9 +169,12 @@ Aqui se debera colocar los **colores HTML** pues solo permite ingresar los color
 
 ##Analisis de componentes principales
 
-En el analisis de los componentes principales (PCA), se tiene el desplegable **Type** donde se presenta _biplot_, _var_ e _ind_ por defecto se presenta **biplot**; junto a **Variable** se puede escoger el plano que mejor grafique el proposito del investigador, con la combinacion de estas.
+En el analisis de los componentes principales (PCA), se tiene el desplegable **Type** donde se presenta _biplot_, _var_ e _ind_. Por defecto se presenta **biplot**, y junto a **Variable**, se puede escoger el plano que mejor grafique el proposito del investigador, con la combinacion de estas.
 
-**PCA- Type** permite encoger _var_  el que representa la correlacion de la variables respuestas en una grafica simple  de radio = **1** donde se aprecia relacion inversa de _Damage_ y _LengthRootKm_  y es criterio del investigador desarrollar su atencion en estas dos variables porque ademas de tener un alto grado de correlacion opuesta po
+**PCA- Type** permite encoger _var_  el que representa la correlacion de las variables respuestas en una grafica simple  de radio = **1**.
+
+La variable respuestas poseen una _magnitud_ y _direccion_ respecto a los cuadrantes del plano cartesiano.
+donde se aprecia relacion inversa de _Damage_ y _LengthRootKm_  y es criterio del investigador desarrollar su atencion en estas dos variables porque ademas de tener un alto grado de correlacion opuesta po
 
 ![c](imagen/007_02multivariante.png)
 
