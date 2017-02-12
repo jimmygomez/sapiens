@@ -25,10 +25,11 @@ shinyUI(dashboardPage(skin = "green",
         menuItem("Fieldbook", tabName = "fieldbook", icon = icon("leaf")),
         menuItem("Outliers", tabName = "outlier", icon = icon("search")),
         menuItem("Multivariate", tabName = "multv", icon = icon("paperclip")),
+        menuItem("Regression", tabName = "regression", icon = icon("random")),
         menuItem("Statistics", tabName = "stat", icon = icon("pie-chart")),
-        menuItem("Graphics", tabName = "graph", icon = icon("tint")),
-        menuItem("Regression", tabName = "regression", icon = icon("random"))#,
-        #menuItem("About", tabName = "info", icon = icon("book"))
+        menuItem("Graphics", tabName = "graph", icon = icon("tint"))#,
+        # menuItem("Report", tabName = "report", icon = icon("book")),
+        # menuItem("About", tabName = "info", icon = icon("book"))
       )
 
 
