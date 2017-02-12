@@ -8,7 +8,7 @@ Description: sapiens is package develop to deploy interactive applicaction based
 Imports:
     agricolae,
     corrplot,
-    plyr,
+    data.table,
     dplyr,
     DT,
     ggplot2,

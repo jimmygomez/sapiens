@@ -51,7 +51,7 @@ test_comparison <- function( aov, comp, type = "snk", sig = 0.05){
 #' @param variables name of the variable evaluated in string with only space
 #' @return Table with the experimental design
 #' @importFrom agricolae design.ab
-#' @importFrom plyr rename
+#' @importFrom data.table setnames
 #' @export
 
 
@@ -144,7 +144,7 @@ design_fieldbook <- function( treat1 = NULL, treat2 = NULL, rep = NULL, intime =
   book[,"B"] <- factor(book[,"B"], levels = lv2, labels = trt2)
 
 
-  fb <- plyr::rename(x = book, replace = c("plots" = "ID", "A" = lbt1, "B" = lbt2))
+  fb <- data.table::setnames(x = book, old = c("plots", "A", "B"), new = c("ID", lbt1, lbt2))
 
   if( tr2 == "1"){
 
@@ -162,7 +162,7 @@ design_fieldbook <- function( treat1 = NULL, treat2 = NULL, rep = NULL, intime =
   if (design == "crd"){
 
     fb[,"r"] <- paste("r", fb[,"r"], sep = "")
-    fb <- plyr::rename(x = fb, replace= c("r" = "rep"))
+    fb <- data.table::setnames(x = fb, "r", "rep")
     fb[,"rep"] <- as.factor(fb[,"rep"])
     fb
 
