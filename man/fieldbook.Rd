@@ -12,4 +12,3 @@ Data analisys app for experiments.
 \seealso{
 Other sapiens: \code{\link{elisios}}, \code{\link{wanuy}}
 }
-

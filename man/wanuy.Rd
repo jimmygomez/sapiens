@@ -13,4 +13,3 @@ Fertilization management app.
 Other sapiens: \code{\link{elisios}},
   \code{\link{fieldbook}}
 }
-

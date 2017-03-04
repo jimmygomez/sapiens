@@ -4,11 +4,6 @@ library(shiny)
 library(shinydashboard)
 library(dplyr)
 library(DT)
-library(leaps)
-library(scatterplot3d)
-library(flashClust)
-library(lubridate)
-
 
 shinyUI(dashboardPage(skin = "green",
 
@@ -28,8 +23,7 @@ shinyUI(dashboardPage(skin = "green",
         menuItem("unidades", tabName = "und", icon = icon("cog")),
         menuItem("cultivo", tabName = "req", icon = icon("leaf")),
         menuItem("fertilizantes", tabName = "fert", icon = icon("tint")),
-        menuItem("resumen", tabName = "res", icon = icon("book")),
-        menuItem("informacion", tabName = "info", icon = icon("heart"))
+        menuItem("resumen", tabName = "res", icon = icon("book"))
       )
 
 
@@ -47,33 +41,75 @@ shinyUI(dashboardPage(skin = "green",
 
         # presentacion
 
-        tabItem(tabName = "intro", width = 8,
+        tabItem(tabName = "intro",
 
 
-                box(title = "Presentacion", height = 150, status = "primary", solidHeader = T,
+                box(
+                  title = "Presentacion",
+                  width = 4,
+                  status = "primary",
+                  solidHeader = T,
 
-                p( strong(em("wanuy")),"es una aplicacion interactiva para calcular y costear de forma
-                       eficiente el manejo y uso de fertilizantes")
-                  ),
+                  p( strong(em("wanuy")),"es una aplicacion web gratuita para el calculo y manejo de fertilizacion, de manera facil y precisa, garantizando cubrir los
+                  requerimientos de tus cultivos. Cuenta tambien con una base de datos de los fertilizantes mas usado y realiza las recomendaciones para
+                     tu cultivo de acuerdo a la informacion ingresada"),
 
-                box(height = 150, width = 4,
 
                   img(src = "agrinka.jpg",  width = "100%")
 
                 ),
 
-                box(title = "caracteristicas", status = "danger", solidHeader = T,
 
-                p("- calculo de los costos por aplicacion de fertilizante"),
+                box(
+                  title = "Characteristics",
+                  width = 4,
+                  status = "danger",
+                  solidHeader = T,
 
-                p("- posibilidad de adicionar tu propio fertilizante"),
+                  p("- calculo de los costos por aplicacion de fertilizante"),
 
-                p("- posiblidad de adicionar tu analisis de suelo")
+                  p("- posibilidad de adicionar tu propio fertilizante"),
+
+                  p("- posiblidad de adicionar tu analisis de suelo")
 
 
-                )
+                ),
 
+                box(
+                  title = "Contributors",
+                  width = 4,
+                  status = "success",
+                  solidHeader = T,
 
+                  p(
+                    strong("Flavio Lozano Isla "),
+                    br(),
+                    a("< flavjack@gmail.com >"),
+                    br(),
+                    code("Universidad Nacional Agraria la Molina, Lima, Perú")
+                  ),
+
+                  p(
+                    strong("Jimmy R. Gomez Carrion"),
+                    br(),
+                    a("< purmacana@gmail.com >"),
+                    br(),
+                    code("Universidad Nacional Agraria la Molina, Lima, Perú")
+                  ),
+
+                  p(
+                    strong("Omar Benites Alfaro"),
+                    br(),
+                    a("< obacc07@gmail.com >"),
+                    br(),
+                    code("Centro Internacional de la Papa (CIP)")
+                  ),
+
+                  hr(),
+
+                  p(strong("If you have any question, commment or sugestion you can write a email for us, enjoy WANUY!!"))
+
+                  )
 
         ),
 
@@ -417,37 +453,7 @@ shinyUI(dashboardPage(skin = "green",
 
                 h2("resultados, comentarios, sugerencias")
 
-        ),
-
-        # informacion
-
-        tabItem(tabName = "info",
-
-                h4(strong("wanuy")),
-
-                p("wanuy es una aplicacion web gratuita para el calculo y manejo de fertilizacion, de manera facil y precisa, garantizando cubrir los
-                  requerimientos de tus cultivos. Cuenta tambien con una base de datos de los fertilizantes mas usado y realiza las recomendaciones para
-                  tu cultivo de acuerdo a la informacion ingresada"),
-
-                hr(),
-
-                p(strong("Si tiene alguna pregunta, comentario o sugerencia, puede escribir un email a los autores, gracias!!, y disfruta de 'wanuy'.")),
-
-                hr(),
-
-                h4(strong("Autores")),
-
-                p(strong("Jimmy R. Gomez Carrion "), "(",a("purmacana@gmail.com"), "). Universidad Nacional Agraria la Molina, Lima, Perú"),
-
-                p(strong("Flavio Lozano Isla "), "(", a("flavjack@gmail.com"), "). Universidad Nacional Agraria la Molina, Lima, Perú"),
-                p(strong("Omar Benites Alfaro "), "(", a("obacc07@gmail.com"), "). Centro Internacional de la Papa"),
-
-
-                br(),
-                br()
-
         )
-
 
 
 

@@ -12,4 +12,3 @@ Irrigation management app.
 \seealso{
 Other sapiens: \code{\link{fieldbook}}, \code{\link{wanuy}}
 }
-

@@ -6,10 +6,10 @@
 #' @return data frame
 #' @importFrom gsheet gsheet2tbl
 #' @importFrom readxl read_excel
-#' @importFrom dplyr  '%>%'
+#' @importFrom dplyr '%>%'
 #' @export
 
-getData <- function(dir, sheet = 1) {
+wanuy_getData <- function(dir, sheet = 1) {
 
 
   if (file.exists(dir) == TRUE) {
@@ -24,5 +24,4 @@ getData <- function(dir, sheet = 1) {
 
 
 }
-
 
